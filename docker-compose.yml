@@ -1,0 +1,27 @@
+version: "3"
+services:
+  mariadb:
+    container_name: mariadb-kw13-api-container
+    image: mariadb
+    restart: always
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kw13-api
+    ports:
+      - "3306:3306"
+  api:
+    container_name: api-container
+    image: node:12
+    working_dir: /usr/src/kw13-api
+    restart: always
+    command: bash -c "yarn install --production && yarn debug"
+    volumes:
+      - ./dist/:/usr/src/kw13-api/dist/
+      - ./package.json:/usr/src/kw13-api/package.json
+    ports:
+      - "1313:1313"
+      - "9222:9222"
+    links:
+      - mariadb
