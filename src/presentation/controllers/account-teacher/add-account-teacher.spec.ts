@@ -1,8 +1,20 @@
+import { DuplicatedFieldError } from '@/presentation/errors/duplicated-field-error'
+
 import { InvalidParamError } from '../../errors/invalid-param-error'
 import { MissingParamError } from '../../errors/missing-param-error'
+import { DuplicatedField } from '../../protocols/duplicated-field'
 import { HttpRequest } from '../../protocols/http'
 import { Validation } from '../../protocols/validation'
 import { AddAccountTeacherController } from './add-account-teacher'
+
+const mockDuplicatedField = (): DuplicatedField => {
+  class DuplicatedFieldStub implements DuplicatedField {
+    async isDuplicated (field: string): Promise<boolean> {
+      return Promise.resolve(false)
+    }
+  }
+  return new DuplicatedFieldStub()
+}
 
 const mockHttpRequest = (): HttpRequest => ({
   body: {
@@ -44,16 +56,19 @@ type SutTypes = {
   sut: AddAccountTeacherController
   validationEmailStub: Validation
   validationCpfStub: Validation
+  duplicatedFieldStub: DuplicatedField
 
 }
 const makeSut = (): SutTypes => {
   const validationEmailStub = mockValidationEmail()
   const validationCpfStub = mockValidationCpf()
-  const sut = new AddAccountTeacherController(validationEmailStub, validationCpfStub)
+  const duplicatedFieldStub = mockDuplicatedField()
+  const sut = new AddAccountTeacherController(validationEmailStub, validationCpfStub, duplicatedFieldStub)
   return {
     sut,
     validationEmailStub,
-    validationCpfStub
+    validationCpfStub,
+    duplicatedFieldStub
   }
 }
 
@@ -183,5 +198,16 @@ describe('AddAccountTeacher Controller', () => {
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('cpf'))
+  })
+
+  test('Espero que retorne 400 se o email já estiver em uso', async () => {
+    const { sut, duplicatedFieldStub } = makeSut()
+
+    jest.spyOn(duplicatedFieldStub, 'isDuplicated').mockReturnValueOnce(Promise.resolve(true))
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new DuplicatedFieldError('email'))
   })
 }) // Final teste
