@@ -12,6 +12,9 @@ export class AddAccountTeacherController implements Controller {
     if (!httpRequest.body.cpf) {
       return badRequest(new MissingParamError('cpf'))
     }
+    if (!httpRequest.body.email) {
+      return badRequest(new MissingParamError('email'))
+    }
     // sucesso
     return {
       statusCode: 200
