@@ -7,7 +7,7 @@ import { Validation } from '../../protocols/validation'
 
 export class AddAccountTeacherController implements Controller {
   constructor (
-    private readonly validation: Validation
+    private readonly validationEmail: Validation
   ) {}
 
   handle (httpRequest: HttpRequest): HttpResponse {
@@ -27,8 +27,8 @@ export class AddAccountTeacherController implements Controller {
       return badRequest(new MissingParamError('cv'))
     }
 
-    const isValid = this.validation.validate(httpRequest.body.email)
-    if (!isValid) {
+    const isValidEmail = this.validationEmail.validate(httpRequest.body.email)
+    if (!isValidEmail) {
       return badRequest(new InvalidParamError('email'))
     }
     // sucesso
