@@ -91,4 +91,25 @@ describe('AddAccountTeacher Controller', () => {
     expect(httpResponse.statusCode).toEqual(400)
     expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
+
+  test('Espero que retorne 400 o campo lattes esteja em branco', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        birthDate: 'any_birthDate',
+        email: 'any_email@mail.com',
+        cpf: 'any_cpf',
+        cellphone: 'any_cellphone',
+        whatsApp: 'any_whatsApp',
+        photo: 'any_photo',
+        cv: 'any_cv',
+        about: 'any_about',
+        password: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toEqual(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('lattes'))
+  })
 }) // Final teste
