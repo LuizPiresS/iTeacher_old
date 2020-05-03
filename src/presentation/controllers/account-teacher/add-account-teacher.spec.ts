@@ -1,30 +1,46 @@
+import { InvalidParamError } from '../../errors/invalid-param-error'
 import { MissingParamError } from '../../errors/missing-param-error'
-// import { HttpRequest } from '../../protocols/http'
+import { HttpRequest } from '../../protocols/http'
+import { Validation } from '../../protocols/validation'
 import { AddAccountTeacherController } from './add-account-teacher'
 
-// const makeHttpRequest = (): HttpRequest => ({
-//   body: {
-//     name: 'any_name',
-//     cpf: 'any_cpf',
-//     birthDate: 'any_birthDate',
-//     email: 'any_mail@mail.com',
-//     cellphone: 'any_cellphone',
-//     whatsApp: 'any_whatsApp',
-//     photo: 'any_photo',
-//     lattes: 'any_lattes',
-// cv: 'any_cv',
-//     about: 'any_about',
-//     password: 'any_password'
-//   }
-// })
+const mockHttpRequest = (): HttpRequest => ({
+  body: {
+    name: 'any_name',
+    cpf: 'any_cpf',
+    birthDate: 'any_birthDate',
+    email: 'any_mail@mail.com',
+    cellphone: 'any_cellphone',
+    whatsApp: 'any_whatsApp',
+    photo: 'any_photo',
+    lattes: 'any_lattes',
+    cv: 'any_cv',
+    about: 'any_about',
+    password: 'any_password'
+  }
+})
+
+const mockValidationEmail = (): Validation => {
+  class ValidationEmailStub implements Validation {
+    public validate (input: string): boolean {
+      return null
+    }
+  }
+
+  return new ValidationEmailStub()
+}
 
 type SutTypes = {
   sut: AddAccountTeacherController
+  validationEmailStub: Validation
+
 }
 const makeSut = (): SutTypes => {
-  const sut = new AddAccountTeacherController()
+  const validationEmailStub = mockValidationEmail()
+  const sut = new AddAccountTeacherController(validationEmailStub)
   return {
-    sut
+    sut,
+    validationEmailStub
   }
 }
 
@@ -132,5 +148,14 @@ describe('AddAccountTeacher Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toEqual(400)
     expect(httpResponse.body).toEqual(new MissingParamError('cv'))
+  })
+
+  test('Espero que retorne 400 se  o email for invalido', async () => {
+    const { sut, validationEmailStub } = makeSut()
+    jest.spyOn(validationEmailStub, 'validate').mockReturnValueOnce(false)
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toEqual(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('email'))
   })
 }) // Final teste
