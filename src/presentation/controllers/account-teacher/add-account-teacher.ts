@@ -15,6 +15,9 @@ export class AddAccountTeacherController implements Controller {
     if (!httpRequest.body.email) {
       return badRequest(new MissingParamError('email'))
     }
+    if (!httpRequest.body.lattes) {
+      return badRequest(new MissingParamError('lattes'))
+    }
     // sucesso
     return {
       statusCode: 200
