@@ -1,17 +1,20 @@
-import { badRequest } from '../../adapters/http-error'
+import { badRequest, duplicatedFieldError } from '../../adapters/http-error'
+import { DuplicatedFieldError } from '../../errors/duplicated-field-error'
 import { InvalidParamError } from '../../errors/invalid-param-error'
 import { MissingParamError } from '../../errors/missing-param-error'
 import { Controller } from '../../protocols/controller'
+import { DuplicatedField } from '../../protocols/duplicated-field'
 import { HttpResponse, HttpRequest } from '../../protocols/http'
 import { Validation } from '../../protocols/validation'
 
 export class AddAccountTeacherController implements Controller {
   constructor (
     private readonly validationEmail: Validation,
-    private readonly validationCpf: Validation
+    private readonly validationCpf: Validation,
+    private readonly duplicatedField: DuplicatedField
   ) {}
 
-  handle (httpRequest: HttpRequest): HttpResponse {
+  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     if (!httpRequest.body.name) {
       return badRequest(new MissingParamError('name'))
     }
@@ -37,9 +40,12 @@ export class AddAccountTeacherController implements Controller {
     if (!isValidCpf) {
       return badRequest(new InvalidParamError('cpf'))
     }
-    // sucesso
-    return {
-      statusCode: 200
+
+    const isDuplicated = await this.duplicatedField.isDuplicated('email')
+    if (isDuplicated) {
+      return duplicatedFieldError(new DuplicatedFieldError('email'))
     }
+    // sucesso
+    return Promise.resolve(null)
   }
 }
