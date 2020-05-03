@@ -23,24 +23,37 @@ const mockHttpRequest = (): HttpRequest => ({
 const mockValidationEmail = (): Validation => {
   class ValidationEmailStub implements Validation {
     public validate (input: string): boolean {
-      return null
+      return true
     }
   }
 
   return new ValidationEmailStub()
 }
 
+const mockValidationCpf = (): Validation => {
+  class ValidationCpfStub implements Validation {
+    public validate (input: string): boolean {
+      return true
+    }
+  }
+
+  return new ValidationCpfStub()
+}
+
 type SutTypes = {
   sut: AddAccountTeacherController
   validationEmailStub: Validation
+  validationCpfStub: Validation
 
 }
 const makeSut = (): SutTypes => {
   const validationEmailStub = mockValidationEmail()
-  const sut = new AddAccountTeacherController(validationEmailStub)
+  const validationCpfStub = mockValidationCpf()
+  const sut = new AddAccountTeacherController(validationEmailStub, validationCpfStub)
   return {
     sut,
-    validationEmailStub
+    validationEmailStub,
+    validationCpfStub
   }
 }
 
@@ -152,10 +165,23 @@ describe('AddAccountTeacher Controller', () => {
 
   test('Espero que retorne 400 se  o email for invalido', async () => {
     const { sut, validationEmailStub } = makeSut()
+
     jest.spyOn(validationEmailStub, 'validate').mockReturnValueOnce(false)
     const httpRequest = mockHttpRequest()
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toEqual(400)
+
+    expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
+  })
+
+  test('Espero que retorne 400 se o cpf for invalido', async () => {
+    const { sut, validationCpfStub } = makeSut()
+
+    jest.spyOn(validationCpfStub, 'validate').mockReturnValueOnce(false)
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new InvalidParamError('cpf'))
   })
 }) // Final teste
