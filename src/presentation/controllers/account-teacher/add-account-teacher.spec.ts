@@ -47,4 +47,24 @@ describe('AddAccountTeacher Controller', () => {
     expect(httpResponse.statusCode).toEqual(400)
     expect(httpResponse.body).toEqual(new MissingParamError('name'))
   })
+
+  test('Espero que retorne 400 o campo cpf esteja em branco', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        birthDate: 'any_birthDate',
+        email: 'any_mail@mail.com',
+        cellphone: 'any_cellphone',
+        whatsApp: 'any_whatsApp',
+        photo: 'any_photo',
+        lattes: 'any_lattes',
+        about: 'any_about',
+        password: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toEqual(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('cpf'))
+  })
 })
