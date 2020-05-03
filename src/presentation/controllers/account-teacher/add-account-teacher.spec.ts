@@ -12,6 +12,7 @@ import { AddAccountTeacherController } from './add-account-teacher'
 //     whatsApp: 'any_whatsApp',
 //     photo: 'any_photo',
 //     lattes: 'any_lattes',
+// cv: 'any_cv',
 //     about: 'any_about',
 //     password: 'any_password'
 //   }
@@ -39,6 +40,7 @@ describe('AddAccountTeacher Controller', () => {
         whatsApp: 'any_whatsApp',
         photo: 'any_photo',
         lattes: 'any_lattes',
+        cv: 'any_cv',
         about: 'any_about',
         password: 'any_password'
       }
@@ -59,6 +61,7 @@ describe('AddAccountTeacher Controller', () => {
         whatsApp: 'any_whatsApp',
         photo: 'any_photo',
         lattes: 'any_lattes',
+        cv: 'any_cv',
         about: 'any_about',
         password: 'any_password'
       }
@@ -67,4 +70,25 @@ describe('AddAccountTeacher Controller', () => {
     expect(httpResponse.statusCode).toEqual(400)
     expect(httpResponse.body).toEqual(new MissingParamError('cpf'))
   })
-})
+
+  test('Espero que retorne 400 o campo email esteja em branco', async () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        birthDate: 'any_birthDate',
+        cpf: 'any_cpf',
+        cellphone: 'any_cellphone',
+        whatsApp: 'any_whatsApp',
+        photo: 'any_photo',
+        lattes: 'any_lattes',
+        cv: 'any_cv',
+        about: 'any_about',
+        password: 'any_password'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toEqual(400)
+    expect(httpResponse.body).toEqual(new MissingParamError('email'))
+  })
+}) // Final teste
