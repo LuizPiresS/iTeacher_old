@@ -8,7 +8,6 @@ export class AddAccountTeacherController implements Controller {
     if (!httpRequest.body.name) {
       return badRequest(new MissingParamError('name'))
     }
-
     if (!httpRequest.body.cpf) {
       return badRequest(new MissingParamError('cpf'))
     }
@@ -17,6 +16,9 @@ export class AddAccountTeacherController implements Controller {
     }
     if (!httpRequest.body.lattes) {
       return badRequest(new MissingParamError('lattes'))
+    }
+    if (!httpRequest.body.cv) {
+      return badRequest(new MissingParamError('cv'))
     }
     // sucesso
     return {
