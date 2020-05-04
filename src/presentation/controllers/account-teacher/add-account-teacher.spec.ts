@@ -1,3 +1,7 @@
+import { AddAccountTeacherModel } from '@/domain/models/account-teacher/add-account-teacher-model'
+import { AddAccountTeacherParams } from '@/domain/usecases/account-teacher/add-account'
+
+import { AddAccountTeacherRepository } from '../../../data/protocols/add-account-teacher-repository'
 import {
   DuplicatedField,
   HttpRequest,
@@ -5,7 +9,8 @@ import {
   AddAccountTeacherController,
   MissingParamError,
   InvalidParamError,
-  DuplicatedFieldError
+  DuplicatedFieldError,
+  ok
 } from './add-account-protocols'
 
 const mockDuplicatedField = (): DuplicatedField => {
@@ -33,6 +38,23 @@ const mockHttpRequest = (): HttpRequest => ({
   }
 })
 
+const mockAddAcountModel = (): AddAccountTeacherModel => (
+  {
+    id: 1,
+    name: 'any_name',
+    cpf: 'any_cpf',
+    birthDate: 'any_birthDate',
+    email: 'any_mail@mail.com',
+    cellphone: 'any_cellphone',
+    whatsApp: 'any_whatsApp',
+    photo: 'any_photo',
+    lattes: 'any_lattes',
+    cv: 'any_cv',
+    about: 'any_about',
+    password: 'any_password'
+  }
+)
+
 const mockValidationEmail = (): Validation => {
   class ValidationEmailStub implements Validation {
     public validate (input: string): boolean {
@@ -53,23 +75,39 @@ const mockValidationCpf = (): Validation => {
   return new ValidationCpfStub()
 }
 
+const mockAddAccount = (): AddAccountTeacherRepository => {
+  class AddAccountTeacher implements AddAccountTeacherRepository {
+    async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
+      return Promise.resolve(mockAddAcountModel())
+    }
+  }
+  return new AddAccountTeacher()
+}
 type SutTypes = {
   sut: AddAccountTeacherController
   validationEmailStub: Validation
   validationCpfStub: Validation
   duplicatedFieldStub: DuplicatedField
+  addAccountTeacherStub: AddAccountTeacherRepository
 
 }
 const makeSut = (): SutTypes => {
   const validationEmailStub = mockValidationEmail()
   const validationCpfStub = mockValidationCpf()
   const duplicatedFieldStub = mockDuplicatedField()
-  const sut = new AddAccountTeacherController(validationEmailStub, validationCpfStub, duplicatedFieldStub)
+  const addAccountTeacherStub = mockAddAccount()
+  const sut = new AddAccountTeacherController(
+    validationEmailStub,
+    validationCpfStub,
+    duplicatedFieldStub,
+    addAccountTeacherStub
+  )
   return {
     sut,
     validationEmailStub,
     validationCpfStub,
-    duplicatedFieldStub
+    duplicatedFieldStub,
+    addAccountTeacherStub
   }
 }
 
@@ -210,5 +248,14 @@ describe('AddAccountTeacher Controller', () => {
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new DuplicatedFieldError('cpf'))
+  })
+
+  test('Espero que retorne 200 se todos os dados forem validos', async () => {
+    const { sut } = makeSut()
+
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(ok(httpResponse.body))
   })
 }) // Final teste
