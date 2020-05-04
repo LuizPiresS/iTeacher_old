@@ -1,4 +1,5 @@
-import { badRequest, duplicatedFieldError, serverError } from '../../adapters/http-error'
+import { AddAccountTeacherRepository } from '../../../data/protocols/add-account-teacher-repository'
+import { badRequest, duplicatedFieldError, serverError, ok } from '../../adapters/http-error'
 import {
   Validation,
   DuplicatedField,
@@ -14,7 +15,8 @@ export class AddAccountTeacherController implements Controller {
   constructor (
     private readonly validationEmail: Validation,
     private readonly validationCpf: Validation,
-    private readonly duplicatedField: DuplicatedField
+    private readonly duplicatedField: DuplicatedField,
+    private readonly addAccount: AddAccountTeacherRepository
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -43,8 +45,10 @@ export class AddAccountTeacherController implements Controller {
       }
 
       // sucesso
-      return Promise.resolve(null)
+      // const httpResponse =
+      return ok(await this.addAccount.add(httpRequest.body))
     } catch (error) {
+      console.error(error)
       return serverError(error)
     }
   }

@@ -8,6 +8,7 @@ export interface AddAccountTeacherModel {
   whatsApp: string
   photo: string
   lattes: string
+  cv: string
   about: string
   password: string
 }
