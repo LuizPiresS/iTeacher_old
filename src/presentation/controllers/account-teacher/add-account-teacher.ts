@@ -34,10 +34,11 @@ export class AddAccountTeacherController implements Controller {
         return badRequest(new InvalidParamError('cpf'))
       }
 
-      const isDuplicated = await this.duplicatedField.isDuplicated('email')
+      const isDuplicated = await this.duplicatedField.isDuplicated('cpf')
       if (isDuplicated) {
-        return duplicatedFieldError(new DuplicatedFieldError('email'))
+        return duplicatedFieldError(new DuplicatedFieldError('cpf'))
       }
+
       // sucesso
       return Promise.resolve(null)
     } catch (error) {

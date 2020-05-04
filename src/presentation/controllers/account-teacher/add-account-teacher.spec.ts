@@ -208,6 +208,6 @@ describe('AddAccountTeacher Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new DuplicatedFieldError('email'))
+    expect(httpResponse.body).toEqual(new DuplicatedFieldError('cpf'))
   })
 }) // Final teste
