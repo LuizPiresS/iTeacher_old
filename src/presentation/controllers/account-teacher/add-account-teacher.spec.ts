@@ -1,11 +1,12 @@
-import { DuplicatedFieldError } from '@/presentation/errors/duplicated-field-error'
-
-import { InvalidParamError } from '../../errors/invalid-param-error'
-import { MissingParamError } from '../../errors/missing-param-error'
-import { DuplicatedField } from '../../protocols/duplicated-field'
-import { HttpRequest } from '../../protocols/http'
-import { Validation } from '../../protocols/validation'
-import { AddAccountTeacherController } from './add-account-teacher'
+import {
+  DuplicatedField,
+  HttpRequest,
+  Validation,
+  AddAccountTeacherController,
+  MissingParamError,
+  InvalidParamError,
+  DuplicatedFieldError
+} from './add-account-protocols'
 
 const mockDuplicatedField = (): DuplicatedField => {
   class DuplicatedFieldStub implements DuplicatedField {

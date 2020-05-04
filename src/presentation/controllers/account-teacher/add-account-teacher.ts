@@ -1,11 +1,14 @@
 import { badRequest, duplicatedFieldError, serverError } from '../../adapters/http-error'
-import { DuplicatedFieldError } from '../../errors/duplicated-field-error'
-import { InvalidParamError } from '../../errors/invalid-param-error'
-import { MissingParamError } from '../../errors/missing-param-error'
-import { Controller } from '../../protocols/controller'
-import { DuplicatedField } from '../../protocols/duplicated-field'
-import { HttpResponse, HttpRequest } from '../../protocols/http'
-import { Validation } from '../../protocols/validation'
+import {
+  Validation,
+  DuplicatedField,
+  HttpRequest,
+  HttpResponse,
+  MissingParamError,
+  InvalidParamError,
+  DuplicatedFieldError,
+  Controller
+} from './add-account-protocols'
 
 export class AddAccountTeacherController implements Controller {
   constructor (
