@@ -1,7 +1,6 @@
 import { AddAccountTeacherModel } from '@/domain/models/account-teacher/add-account-teacher-model'
 import { AddAccountTeacherParams } from '@/domain/usecases/account-teacher/add-account'
 
-import { AddAccountTeacherRepository } from '../../../data/protocols/add-account-teacher-repository'
 import {
   DuplicatedField,
   HttpRequest,
@@ -10,7 +9,8 @@ import {
   MissingParamError,
   InvalidParamError,
   DuplicatedFieldError,
-  ok
+  ok,
+  AddAccountTeacherRepository
 } from './add-account-protocols'
 
 const mockDuplicatedField = (): DuplicatedField => {
