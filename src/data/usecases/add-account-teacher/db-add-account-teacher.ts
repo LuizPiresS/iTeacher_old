@@ -11,8 +11,9 @@ export class DbAddAccountTeacher implements AddAccountTeacher {
   ) {}
 
   async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
-    await this.encrypter.hash(account.password)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const hashedPassword = await this.encrypter.hash(account.password)
     // sucesso
-    return Promise.resolve(null)
+    return null
   }
 }
