@@ -42,16 +42,8 @@ const mockHttpRequest = (): HttpRequest => ({
 const mockAddAcountModel = (): AddAccountTeacherModel => (
   {
     id: 1,
-    name: 'any_name',
-    cpf: 'any_cpf',
-    birthDate: 'any_birthDate',
+    uuid: 'any_uuid',
     email: 'any_mail@mail.com',
-    cellphone: 'any_cellphone',
-    whatsApp: 'any_whatsApp',
-    photo: 'any_photo',
-    lattes: 'any_lattes',
-    cv: 'any_cv',
-    about: 'any_about',
     password: 'any_password',
     token: 'any_token'
   }
@@ -67,15 +59,6 @@ const mockValidationEmail = (): Validation => {
   return new ValidationEmailStub()
 }
 
-const mockValidationCpf = (): Validation => {
-  class ValidationCpfStub implements Validation {
-    public validate (input: string): boolean {
-      return true
-    }
-  }
-
-  return new ValidationCpfStub()
-}
 const mockAddAccount = (): AddAccountTeacher => {
   class AddAccountTeacher implements AddAccountTeacher {
     async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
@@ -87,86 +70,31 @@ const mockAddAccount = (): AddAccountTeacher => {
 type SutTypes = {
   sut: AddAccountTeacherController
   validationEmailStub: Validation
-  validationCpfStub: Validation
   duplicatedFieldStub: DuplicatedField
   addAccountTeacherStub: AddAccountTeacher
 }
 const makeSut = (): SutTypes => {
   const validationEmailStub = mockValidationEmail()
-  const validationCpfStub = mockValidationCpf()
   const duplicatedFieldStub = mockDuplicatedField()
   const addAccountTeacherStub = mockAddAccount()
   const sut = new AddAccountTeacherController(
     validationEmailStub,
-    validationCpfStub,
     duplicatedFieldStub,
     addAccountTeacherStub
   )
   return {
     sut,
     validationEmailStub,
-    validationCpfStub,
     duplicatedFieldStub,
     addAccountTeacherStub
   }
 }
 
 describe('AddAccountTeacher Controller', () => {
-  test('Espero que retorne 400 o campo name esteja em branco', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        cpf: 'any_cpf',
-        birthDate: 'any_birthDate',
-        email: 'any_mail@mail.com',
-        cellphone: 'any_cellphone',
-        whatsApp: 'any_whatsApp',
-        photo: 'any_photo',
-        lattes: 'any_lattes',
-        cv: 'any_cv',
-        about: 'any_about',
-        password: 'any_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toEqual(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('name'))
-  })
-
-  test('Espero que retorne 400 o campo cpf esteja em branco', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        name: 'any_name',
-        birthDate: 'any_birthDate',
-        email: 'any_mail@mail.com',
-        cellphone: 'any_cellphone',
-        whatsApp: 'any_whatsApp',
-        photo: 'any_photo',
-        lattes: 'any_lattes',
-        cv: 'any_cv',
-        about: 'any_about',
-        password: 'any_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toEqual(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('cpf'))
-  })
-
   test('Espero que retorne 400 o campo email estiver em branco', async () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
-        name: 'any_name',
-        birthDate: 'any_birthDate',
-        cpf: 'any_cpf',
-        cellphone: 'any_cellphone',
-        whatsApp: 'any_whatsApp',
-        photo: 'any_photo',
-        lattes: 'any_lattes',
-        cv: 'any_cv',
-        about: 'any_about',
         password: 'any_password'
       }
     }
@@ -179,63 +107,12 @@ describe('AddAccountTeacher Controller', () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
-        name: 'any_name',
-        birthDate: 'any_birthDate',
-        cpf: 'any_cpf',
-        email: 'any_email@mail.com',
-        cellphone: 'any_cellphone',
-        whatsApp: 'any_whatsApp',
-        photo: 'any_photo',
-        lattes: 'any_lattes',
-        cv: 'any_cv',
-        about: 'any_about'
+        email: 'any_email@mail.com'
       }
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse.statusCode).toEqual(400)
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
-  })
-
-  test('Espero que retorne 400 o campo lattes estiver em branco', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        name: 'any_name',
-        birthDate: 'any_birthDate',
-        email: 'any_email@mail.com',
-        cpf: 'any_cpf',
-        cellphone: 'any_cellphone',
-        whatsApp: 'any_whatsApp',
-        photo: 'any_photo',
-        cv: 'any_cv',
-        about: 'any_about',
-        password: 'any_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toEqual(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('lattes'))
-  })
-
-  test('Espero que retorne 400 o campo cv estiver em branco', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        name: 'any_name',
-        birthDate: 'any_birthDate',
-        email: 'any_email@mail.com',
-        cpf: 'any_cpf',
-        cellphone: 'any_cellphone',
-        whatsApp: 'any_whatsApp',
-        photo: 'any_photo',
-        lattes: 'any_lattes',
-        about: 'any_about',
-        password: 'any_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse.statusCode).toEqual(400)
-    expect(httpResponse.body).toEqual(new MissingParamError('cv'))
   })
 
   test('Espero que retorne 400 se  o email for invalido', async () => {
@@ -260,7 +137,7 @@ describe('AddAccountTeacher Controller', () => {
       return new ValidationEmailStub()
     }
 
-    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCpf(), mockDuplicatedField(), mockAddAccount())
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockDuplicatedField(), mockAddAccount())
 
     jest.spyOn(mockValidationEmail(), 'validate')
     const httpRequest = mockHttpRequest()
@@ -279,47 +156,6 @@ describe('AddAccountTeacher Controller', () => {
     expect(emailValidatorSpy).toHaveBeenCalledWith(httpRequest.body.email)
   })
 
-  test('Espero que CPFValidator seja chamado com o cpf correto', async () => {
-    const { sut, validationCpfStub } = makeSut()
-
-    const emailValidatorSpy = jest.spyOn(validationCpfStub, 'validate')
-    const httpRequest = mockHttpRequest()
-    await sut.handle(httpRequest)
-
-    expect(emailValidatorSpy).toHaveBeenCalledWith(httpRequest.body.cpf)
-  })
-
-  test('Espero que retorne 500 caso CPFValidator retorne uma excpetion', async () => {
-    const mockValidationCPF = (): Validation => {
-      class ValidationCPFStub implements Validation {
-        public validate (input: string): boolean {
-          throw new Error()
-        }
-      }
-
-      return new ValidationCPFStub()
-    }
-
-    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCPF(), mockDuplicatedField(), mockAddAccount())
-
-    jest.spyOn(mockValidationEmail(), 'validate')
-    const httpRequest = mockHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
-
-    expect(httpResponse).toEqual(serverError(new Error()))
-  })
-
-  test('Espero que retorne 400 se o cpf for invalido', async () => {
-    const { sut, validationCpfStub } = makeSut()
-
-    jest.spyOn(validationCpfStub, 'validate').mockReturnValueOnce(false)
-    const httpRequest = mockHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
-
-    expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new InvalidParamError('cpf'))
-  })
-
   test('Espero que retorne 400 se o email já estiver em uso', async () => {
     const { sut, duplicatedFieldStub } = makeSut()
 
@@ -328,7 +164,7 @@ describe('AddAccountTeacher Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new DuplicatedFieldError('cpf'))
+    expect(httpResponse.body).toEqual(new DuplicatedFieldError('email'))
   })
 
   test('Espero que retorne 500 caso DuplicatedFieldStub retorne uma excpetion', async () => {
@@ -342,7 +178,7 @@ describe('AddAccountTeacher Controller', () => {
       return new DuplicatedFieldStub()
     }
 
-    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCpf(), mockDuplicatedField(), mockAddAccount())
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockDuplicatedField(), mockAddAccount())
 
     jest.spyOn(mockValidationEmail(), 'validate')
     const httpRequest = mockHttpRequest()
@@ -361,7 +197,7 @@ describe('AddAccountTeacher Controller', () => {
       return new AddAccountTeacher()
     }
 
-    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCpf(), mockDuplicatedField(), mockAddAccount())
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockDuplicatedField(), mockAddAccount())
 
     jest.spyOn(mockValidationEmail(), 'validate')
     const httpRequest = mockHttpRequest()

@@ -14,14 +14,13 @@ import {
 export class AddAccountTeacherController implements Controller {
   constructor (
     private readonly validationEmail: Validation,
-    private readonly validationCpf: Validation,
     private readonly duplicatedField: DuplicatedField,
     private readonly addAccount: AddAccountTeacher
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const requiredFields = ['name', 'cpf', 'email', 'lattes', 'cv', 'password']
+      const requiredFields = ['email', 'password']
 
       for (const fieldName of requiredFields) {
         if (!httpRequest.body[fieldName]) {
@@ -29,21 +28,16 @@ export class AddAccountTeacherController implements Controller {
         }
       }
 
-      const { email, cpf } = httpRequest.body
+      const { email } = httpRequest.body
 
       const isValidEmail = this.validationEmail.validate(email)
       if (!isValidEmail) {
         return badRequest(new InvalidParamError('email'))
       }
 
-      const isValidCpf = this.validationCpf.validate(cpf)
-      if (!isValidCpf) {
-        return badRequest(new InvalidParamError('cpf'))
-      }
-
-      const isDuplicated = await this.duplicatedField.isDuplicated('cpf')
+      const isDuplicated = await this.duplicatedField.isDuplicated('email')
       if (isDuplicated) {
-        return duplicatedFieldError(new DuplicatedFieldError('cpf'))
+        return duplicatedFieldError(new DuplicatedFieldError('email'))
       }
 
       // Sucesso

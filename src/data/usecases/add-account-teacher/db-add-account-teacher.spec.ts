@@ -3,19 +3,10 @@ import { DbAddAccountTeacher, AddAccountTeacherParams } from './db-add-account-p
 
 const mockAccount = (): AddAccountTeacherParams => (
   {
-    name: 'any_name',
-    cpf: 'any_cpf',
-    birthDate: 'any_birthDate',
+    uuid: 'any_uuid',
     email: 'any_mail@mail.com',
-    cellphone: 'any_cellphone',
-    whatsApp: 'any_whatsApp',
-    photo: 'any_photo',
-    lattes: 'any_lattes',
-    cv: 'any_cv',
-    about: 'any_about',
     password: 'any_password',
     token: 'any_token'
-
   })
 
 const mockHasher = (): Hasher => {
