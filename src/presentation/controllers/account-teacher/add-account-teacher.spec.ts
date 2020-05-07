@@ -351,6 +351,25 @@ describe('AddAccountTeacher Controller', () => {
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
+  test('Espero que retorne 500 caso AddAccountTeacher retorne uma excpetion', async () => {
+    const mockAddAccount = (): AddAccountTeacher => {
+      class AddAccountTeacher implements AddAccountTeacher {
+        async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
+          return Promise.reject(Error())
+        }
+      }
+      return new AddAccountTeacher()
+    }
+
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCpf(), mockDuplicatedField(), mockAddAccount())
+
+    jest.spyOn(mockValidationEmail(), 'validate')
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
   test('Espero que retorne 200 se todos os dados forem validos', async () => {
     const { sut } = makeSut()
 
