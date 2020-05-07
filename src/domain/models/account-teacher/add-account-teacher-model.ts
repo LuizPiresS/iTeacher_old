@@ -11,4 +11,5 @@ export interface AddAccountTeacherModel {
   cv: string
   about: string
   password: string
+  token: string
 }
