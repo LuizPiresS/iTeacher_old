@@ -1,5 +1,6 @@
 import { AddAccountTeacherModel } from '@/domain/models/account-teacher/add-account-teacher-model'
 
+import { serverError } from '../../adapters/http-error'
 import {
   DuplicatedField,
   HttpRequest,
@@ -246,6 +247,26 @@ describe('AddAccountTeacher Controller', () => {
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
+  })
+
+  test('Espero que retorne 500 caso EmailValidator retorne uma excpetion', async () => {
+    const mockValidationEmail = (): Validation => {
+      class ValidationEmailStub implements Validation {
+        public validate (input: string): boolean {
+          throw new Error()
+        }
+      }
+
+      return new ValidationEmailStub()
+    }
+
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCpf(), mockDuplicatedField(), mockAddAccount())
+
+    jest.spyOn(mockValidationEmail(), 'validate')
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Espero que EmailValidator seja chamado com o email correto', async () => {
