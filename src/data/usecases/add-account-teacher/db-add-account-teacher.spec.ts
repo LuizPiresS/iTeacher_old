@@ -41,4 +41,12 @@ describe('AddAccountTeacher', () => {
     await sut.add(account)
     expect(encrypterSpy).toHaveBeenCalledWith(account.password)
   })
+
+  test('Espero que retorne 500 caso Hasher retorne uma excpetion', async () => {
+    const { sut, hasherStub } = makeSut()
+    jest.spyOn(hasherStub, 'hash').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.add(mockAccount())
+
+    await expect(promise).rejects.toThrow()
+  })
 })
