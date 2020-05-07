@@ -2,6 +2,6 @@ import { AddAccountTeacherModel } from '../../models/account-teacher/add-account
 
 export type AddAccountTeacherParams = Omit<AddAccountTeacherModel, 'id'>
 
-export interface AddAccountTeacherController {
+export interface AddAccountTeacher {
   add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel>
 }
