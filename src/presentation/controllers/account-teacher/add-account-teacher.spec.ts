@@ -16,8 +16,8 @@ import {
 
 const mockDuplicatedField = (): DuplicatedField => {
   class DuplicatedFieldStub implements DuplicatedField {
-    async isDuplicated (field: string): Promise<boolean> {
-      return Promise.resolve(false)
+    isDuplicated (field: string): boolean {
+      return false
     }
   }
   return new DuplicatedFieldStub()
@@ -323,12 +323,32 @@ describe('AddAccountTeacher Controller', () => {
   test('Espero que retorne 400 se o email já estiver em uso', async () => {
     const { sut, duplicatedFieldStub } = makeSut()
 
-    jest.spyOn(duplicatedFieldStub, 'isDuplicated').mockReturnValueOnce(Promise.resolve(true))
+    jest.spyOn(duplicatedFieldStub, 'isDuplicated').mockReturnValueOnce(true)
     const httpRequest = mockHttpRequest()
     const httpResponse = await sut.handle(httpRequest)
 
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new DuplicatedFieldError('cpf'))
+  })
+
+  test('Espero que retorne 500 caso DuplicatedFieldStub retorne uma excpetion', async () => {
+    const mockDuplicatedField = (): DuplicatedField => {
+      class DuplicatedFieldStub implements DuplicatedField {
+        isDuplicated (fied: string): boolean {
+          throw new Error()
+        }
+      }
+
+      return new DuplicatedFieldStub()
+    }
+
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCpf(), mockDuplicatedField(), mockAddAccount())
+
+    jest.spyOn(mockValidationEmail(), 'validate')
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Espero que retorne 200 se todos os dados forem validos', async () => {
