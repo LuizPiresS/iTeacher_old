@@ -1,4 +1,3 @@
-import { AddAccountTeacherRepository } from '../../../data/protocols/add-account-teacher-repository'
 import { badRequest, duplicatedFieldError, serverError, ok } from '../../adapters/http-error'
 import {
   Validation,
@@ -8,7 +7,8 @@ import {
   MissingParamError,
   InvalidParamError,
   DuplicatedFieldError,
-  Controller
+  Controller,
+  AddAccountTeacher
 } from './add-account-protocols'
 
 export class AddAccountTeacherController implements Controller {
@@ -16,12 +16,12 @@ export class AddAccountTeacherController implements Controller {
     private readonly validationEmail: Validation,
     private readonly validationCpf: Validation,
     private readonly duplicatedField: DuplicatedField,
-    private readonly addAccount: AddAccountTeacherRepository
+    private readonly addAccount: AddAccountTeacher
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const requiredFields = ['name', 'cpf', 'email', 'lattes', 'cv']
+      const requiredFields = ['name', 'cpf', 'email', 'lattes', 'cv', 'password']
 
       for (const fieldName of requiredFields) {
         if (!httpRequest.body[fieldName]) {
@@ -29,12 +29,14 @@ export class AddAccountTeacherController implements Controller {
         }
       }
 
-      const isValidEmail = this.validationEmail.validate(httpRequest.body.email)
+      const { email, cpf } = httpRequest.body
+
+      const isValidEmail = this.validationEmail.validate(email)
       if (!isValidEmail) {
         return badRequest(new InvalidParamError('email'))
       }
 
-      const isValidCpf = this.validationCpf.validate(httpRequest.body.cpf)
+      const isValidCpf = this.validationCpf.validate(cpf)
       if (!isValidCpf) {
         return badRequest(new InvalidParamError('cpf'))
       }
@@ -44,8 +46,7 @@ export class AddAccountTeacherController implements Controller {
         return duplicatedFieldError(new DuplicatedFieldError('cpf'))
       }
 
-      // sucesso
-      // const httpResponse =
+      // Sucesso
       return ok(await this.addAccount.add(httpRequest.body))
     } catch (error) {
       console.error(error)
