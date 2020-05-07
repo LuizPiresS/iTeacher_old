@@ -1,4 +1,4 @@
-import { Encrypter } from '../../protocols/criptograpy/encrypter'
+import { Hasher } from '../../protocols/criptograpy/hasher'
 import { DbAddAccountTeacher, AddAccountTeacherParams } from './db-add-account-protocols'
 
 const mockAccount = (): AddAccountTeacherParams => (
@@ -18,33 +18,33 @@ const mockAccount = (): AddAccountTeacherParams => (
 
   })
 
-const mockEncrypter = (): Encrypter => {
-  class EncrypterStub implements Encrypter {
-    async encrypt (value: string): Promise<string> {
-      return Promise.resolve('encrypted_password')
+const mockHasher = (): Hasher => {
+  class HasherStub implements Hasher {
+    async hash (value: string): Promise<string> {
+      return Promise.resolve('hashed_password')
     }
   }
-  return new EncrypterStub()
+  return new HasherStub()
 }
 
 type SutTypes = {
   sut: DbAddAccountTeacher
-  encrypterStub: Encrypter
+  hasherStub: Hasher
 }
 const makeSut = (): SutTypes => {
-  const encrypterStub = mockEncrypter()
+  const hasherStub = mockHasher()
 
-  const sut = new DbAddAccountTeacher(encrypterStub)
+  const sut = new DbAddAccountTeacher(hasherStub)
   return {
     sut,
-    encrypterStub
+    hasherStub
   }
 }
 describe('AddAccountTeacher', () => {
   test('Espero que o Encryper seja chamado apenas com o valor correto', async () => {
-    const { sut, encrypterStub } = makeSut()
+    const { sut, hasherStub } = makeSut()
 
-    const encrypterSpy = jest.spyOn(encrypterStub, 'encrypt')
+    const encrypterSpy = jest.spyOn(hasherStub, 'hash')
     const account = mockAccount()
 
     await sut.add(account)

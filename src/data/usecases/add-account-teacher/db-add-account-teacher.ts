@@ -1,4 +1,4 @@
-import { Encrypter } from '../../protocols/criptograpy/encrypter'
+import { Hasher } from '../../protocols/criptograpy/hasher'
 import {
   AddAccountTeacherModel,
   AddAccountTeacher,
@@ -7,11 +7,11 @@ import {
 
 export class DbAddAccountTeacher implements AddAccountTeacher {
   constructor (
-    private readonly encrypter: Encrypter
+    private readonly encrypter: Hasher
   ) {}
 
   async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
-    await this.encrypter.encrypt(account.password)
+    await this.encrypter.hash(account.password)
     // sucesso
     return Promise.resolve(null)
   }
