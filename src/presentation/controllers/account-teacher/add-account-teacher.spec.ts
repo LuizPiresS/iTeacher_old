@@ -289,6 +289,26 @@ describe('AddAccountTeacher Controller', () => {
     expect(emailValidatorSpy).toHaveBeenCalledWith(httpRequest.body.cpf)
   })
 
+  test('Espero que retorne 500 caso CPFValidator retorne uma excpetion', async () => {
+    const mockValidationCPF = (): Validation => {
+      class ValidationCPFStub implements Validation {
+        public validate (input: string): boolean {
+          throw new Error()
+        }
+      }
+
+      return new ValidationCPFStub()
+    }
+
+    const sut = new AddAccountTeacherController(mockValidationEmail(), mockValidationCPF(), mockDuplicatedField(), mockAddAccount())
+
+    jest.spyOn(mockValidationEmail(), 'validate')
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
   test('Espero que retorne 400 se o cpf for invalido', async () => {
     const { sut, validationCpfStub } = makeSut()
 
