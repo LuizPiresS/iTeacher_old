@@ -17,8 +17,10 @@ export class DbAddAccountTeacher implements AddAccountTeacher {
     const hashedPassword = await this.hasher.hash(account.password)
     account.password = hashedPassword
 
+    const result = await this.addAccountTeacherRepository.add(account)
     // sucesso
-    await this.addAccountTeacherRepository.add(account)
-    return this.sendEmail.send(account.email, account.name)
+    if (result) {
+      return this.sendEmail.send(account.email, account.name, account.uuid)
+    }
   }
 }
