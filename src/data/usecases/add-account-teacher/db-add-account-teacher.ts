@@ -1,4 +1,5 @@
 import { Hasher } from '../../protocols/criptograpy/hasher'
+import { AddAccountTeacherRepository } from '../../protocols/database/add-account-teacher/add-account-teacher-repository'
 import {
   AddAccountTeacherModel,
   AddAccountTeacher,
@@ -7,13 +8,15 @@ import {
 
 export class DbAddAccountTeacher implements AddAccountTeacher {
   constructor (
-    private readonly encrypter: Hasher
+    private readonly hasher: Hasher,
+    private readonly addAccountTeacherRepository: AddAccountTeacherRepository
   ) {}
 
   async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const hashedPassword = await this.encrypter.hash(account.password)
+    const hashedPassword = await this.hasher.hash(account.password)
+    account.password = hashedPassword
+
     // sucesso
-    return null
+    return await this.addAccountTeacherRepository.add(account)
   }
 }

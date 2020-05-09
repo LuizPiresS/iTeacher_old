@@ -11,3 +11,4 @@ export interface PersonalDataTeacherModel {
   cv: string
   about: string
 }
+// Quando o campo da ficha corriga for implementado o mesmo ficará oculdo dos alunos
