@@ -85,4 +85,12 @@ describe('AddAccountTeacher', () => {
 
     await expect(promise).rejects.toThrow()
   })
+
+  test('Espero que retorne 500 caso AddAccountTeacherRepository retorne uma excpetion', async () => {
+    const { sut, addAccountTeacherRepositoryStub } = makeSut()
+    jest.spyOn(addAccountTeacherRepositoryStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.add(mockAccount())
+
+    await expect(promise).rejects.toThrow()
+  })
 })
