@@ -1,5 +1,3 @@
-import { AddAccountTeacherModel } from '@/domain/models/account-teacher/add-account-teacher-model'
-
 import { serverError } from '../../adapters/http-error'
 import {
   DuplicatedField,
@@ -39,16 +37,6 @@ const mockHttpRequest = (): HttpRequest => ({
   }
 })
 
-const mockAddAcountModel = (): AddAccountTeacherModel => (
-  {
-    id: 1,
-    uuid: 'any_uuid',
-    email: 'any_mail@mail.com',
-    password: 'any_password',
-    token: 'any_token'
-  }
-)
-
 const mockValidationEmail = (): Validation => {
   class ValidationEmailStub implements Validation {
     public validate (input: string): boolean {
@@ -61,8 +49,8 @@ const mockValidationEmail = (): Validation => {
 
 const mockAddAccount = (): AddAccountTeacher => {
   class AddAccountTeacher implements AddAccountTeacher {
-    async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
-      return Promise.resolve(mockAddAcountModel())
+    async add (account: AddAccountTeacherParams): Promise<boolean> {
+      return Promise.resolve(true)
     }
   }
   return new AddAccountTeacher()
@@ -190,7 +178,7 @@ describe('AddAccountTeacher Controller', () => {
   test('Espero que retorne 500 caso AddAccountTeacher retorne uma excpetion', async () => {
     const mockAddAccount = (): AddAccountTeacher => {
       class AddAccountTeacher implements AddAccountTeacher {
-        async add (account: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
+        async add (account: AddAccountTeacherParams): Promise<boolean> {
           return Promise.reject(Error())
         }
       }

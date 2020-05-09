@@ -20,7 +20,7 @@ export class AddAccountTeacherController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const requiredFields = ['email', 'password']
+      const requiredFields = ['email', 'password', 'name']
 
       for (const fieldName of requiredFields) {
         if (!httpRequest.body[fieldName]) {

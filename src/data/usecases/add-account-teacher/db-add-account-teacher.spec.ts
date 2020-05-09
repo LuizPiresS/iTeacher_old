@@ -2,20 +2,32 @@ import { AddAccountTeacherModel } from '@/domain/models/account-teacher/add-acco
 
 import { Hasher } from '../../protocols/criptograpy/hasher'
 import { AddAccountTeacherRepository } from '../../protocols/database/add-account-teacher/add-account-teacher-repository'
+import { SendEmail } from '../../protocols/email/send-email'
 import { DbAddAccountTeacher, AddAccountTeacherParams } from './db-add-account-protocols'
 
 //  Mock do retorno final da classe
 const mockAccountModel = (): AddAccountTeacherModel => ({
   id: 1,
   uuid: 'any_uuid',
+  name: 'any_name',
   email: 'any_mail@mail.com',
   password: 'hashed_password',
   token: 'any_token'
 })
 
+const mockSendEmail = (): SendEmail => {
+  class SendEmailStub implements SendEmail {
+    async send (email: string, name: string): Promise<boolean> {
+      return Promise.resolve(true)
+    }
+  }
+  return new SendEmailStub()
+}
+
 const mockAccount = (): AddAccountTeacherParams => (
   {
     uuid: 'any_uuid',
+    name: 'any_name',
     email: 'any_mail@mail.com',
     password: 'any_password',
     token: 'any_token'
@@ -44,15 +56,18 @@ type SutTypes = {
   sut: DbAddAccountTeacher
   hasherStub: Hasher
   addAccountTeacherRepositoryStub: AddAccountTeacherRepository
+  sendEmailStub: SendEmail
 }
 const makeSut = (): SutTypes => {
   const hasherStub = mockHasher()
   const addAccountTeacherRepositoryStub = mockAddAccountTeacherRepository()
-  const sut = new DbAddAccountTeacher(hasherStub, addAccountTeacherRepositoryStub)
+  const sendEmailStub = mockSendEmail()
+  const sut = new DbAddAccountTeacher(hasherStub, addAccountTeacherRepositoryStub, sendEmailStub)
   return {
     sut,
     hasherStub,
-    addAccountTeacherRepositoryStub
+    addAccountTeacherRepositoryStub,
+    sendEmailStub
   }
 }
 describe('AddAccountTeacher', () => {
