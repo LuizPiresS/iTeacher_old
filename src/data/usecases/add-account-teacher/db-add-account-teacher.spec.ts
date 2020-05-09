@@ -1,5 +1,17 @@
+import { AddAccountTeacherModel } from '@/domain/models/account-teacher/add-account-teacher-model'
+
 import { Hasher } from '../../protocols/criptograpy/hasher'
+import { AddAccountTeacherRepository } from '../../protocols/database/add-account-teacher/add-account-teacher-repository'
 import { DbAddAccountTeacher, AddAccountTeacherParams } from './db-add-account-protocols'
+
+//  Mock do retorno final da classe
+const mockAccountModel = (): AddAccountTeacherModel => ({
+  id: 1,
+  uuid: 'any_uuid',
+  email: 'any_mail@mail.com',
+  password: 'hashed_password',
+  token: 'any_token'
+})
 
 const mockAccount = (): AddAccountTeacherParams => (
   {
@@ -8,6 +20,16 @@ const mockAccount = (): AddAccountTeacherParams => (
     password: 'any_password',
     token: 'any_token'
   })
+
+const mockAddAccountTeacherRepository = (): AddAccountTeacherRepository => {
+  class AddAccountTeacherRepositoryStub implements AddAccountTeacherRepository {
+    async add (accountData: AddAccountTeacherParams): Promise<AddAccountTeacherModel> {
+      return await mockAccountModel()
+    }
+  }
+
+  return new AddAccountTeacherRepositoryStub()
+}
 
 const mockHasher = (): Hasher => {
   class HasherStub implements Hasher {
@@ -21,14 +43,16 @@ const mockHasher = (): Hasher => {
 type SutTypes = {
   sut: DbAddAccountTeacher
   hasherStub: Hasher
+  addAccountTeacherRepositoryStub: AddAccountTeacherRepository
 }
 const makeSut = (): SutTypes => {
   const hasherStub = mockHasher()
-
-  const sut = new DbAddAccountTeacher(hasherStub)
+  const addAccountTeacherRepositoryStub = mockAddAccountTeacherRepository()
+  const sut = new DbAddAccountTeacher(hasherStub, addAccountTeacherRepositoryStub)
   return {
     sut,
-    hasherStub
+    hasherStub,
+    addAccountTeacherRepositoryStub
   }
 }
 describe('AddAccountTeacher', () => {
@@ -39,7 +63,19 @@ describe('AddAccountTeacher', () => {
     const account = mockAccount()
 
     await sut.add(account)
-    expect(encrypterSpy).toHaveBeenCalledWith(account.password)
+    expect(encrypterSpy).toHaveBeenCalledWith('any_password')
+    // expect(encrypterSpy).toReturnWith('hashed_password')
+  })
+
+  test('Espero que o AddAccountTeacherRepository seja chamado apenas com oo valores corretos', async () => {
+    const { sut, addAccountTeacherRepositoryStub } = makeSut()
+
+    const addAccountTeacherRepositorySpy = jest.spyOn(addAccountTeacherRepositoryStub, 'add')
+    const account = mockAccount()
+    await sut.add(account)
+    account.password = 'hashed_password'
+
+    expect(addAccountTeacherRepositorySpy).toHaveBeenCalledWith(account)
   })
 
   test('Espero que retorne 500 caso Hasher retorne uma excpetion', async () => {
