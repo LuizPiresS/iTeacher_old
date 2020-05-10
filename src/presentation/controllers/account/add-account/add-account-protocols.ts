@@ -1,11 +1,10 @@
 export * from '@/presentation/errors/duplicated-field-error'
-
 export * from '@/presentation/errors/invalid-param-error'
 export * from '@/presentation/errors/missing-param-error'
 export * from '@/presentation/protocols/duplicated-field'
 export * from '@/presentation/protocols/http'
 export * from '@/presentation/protocols/validation'
-export * from './add-account-teacher'
+export * from './add-account'
 export * from '@/presentation/protocols/controller'
 export * from '@/presentation/adapters/http-error'
-export * from '@/domain/usecases/account-teacher/add-account-teacher'
+export * from '@/domain/usecases/account/add-account'

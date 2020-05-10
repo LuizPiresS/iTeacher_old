@@ -1,4 +1,4 @@
-import { badRequest, duplicatedFieldError, serverError, ok } from '../../adapters/http-error'
+import { badRequest, duplicatedFieldError, serverError, ok } from '../../../adapters/http-error'
 import {
   Validation,
   DuplicatedField,
@@ -11,7 +11,7 @@ import {
   AddAccountTeacher
 } from './add-account-protocols'
 
-export class AddAccountTeacherController implements Controller {
+export class AddAccountController implements Controller {
   constructor (
     private readonly validationEmail: Validation,
     private readonly duplicatedField: DuplicatedField,
