@@ -1,21 +1,18 @@
-import { badRequest, duplicatedFieldError, serverError, ok } from '../../../adapters/http-error'
-import {
-  Validation,
-  DuplicatedField,
-  HttpRequest,
-  HttpResponse,
-  MissingParamError,
-  InvalidParamError,
-  DuplicatedFieldError,
-  Controller,
-  AddAccountTeacher
-} from './add-account-protocols'
+import { AddAccount } from '@/domain/usecases/account/add-account'
+import { badRequest, duplicatedFieldError, serverError, ok } from '@/presentation/adapters/http-error'
+import { DuplicatedFieldError } from '@/presentation/errors/duplicated-field-error'
+import { InvalidParamError } from '@/presentation/errors/invalid-param-error'
+import { MissingParamError } from '@/presentation/errors/missing-param-error'
+import { Controller } from '@/presentation/protocols/controller'
+import { DuplicatedField } from '@/presentation/protocols/duplicated-field'
+import { HttpRequest, HttpResponse } from '@/presentation/protocols/http'
+import { Validation } from '@/presentation/protocols/validation'
 
 export class AddAccountController implements Controller {
   constructor (
     private readonly validationEmail: Validation,
     private readonly duplicatedField: DuplicatedField,
-    private readonly addAccount: AddAccountTeacher
+    private readonly addAccount: AddAccount
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {

@@ -1,14 +1,14 @@
 version: "3"
 services:
   mariadb:
-    container_name: mariadb-kw13-api-container
+    container_name: mariadb-iteacher-api-container
     image: mariadb
     restart: always
     volumes:
       - ./mariadb:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: kw13-api
+      MYSQL_DATABASE: iteacher
     ports:
       - "3306:3306"
   api:

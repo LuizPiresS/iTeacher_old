@@ -1,14 +1,8 @@
-import { AddAccount } from './add-account'
-import { SendEmail, AddAccountRequest, AccountRepository, Account } from './add-account.protocols'
+import { Account } from '@/domain/models/account.model'
+import { AccountRepository } from '@/infra/database/repositories/account.repository'
 
-const mockSendEmail = (): SendEmail => {
-  class SendEmailStub implements SendEmail {
-    async send (email: string, name: string): Promise<boolean> {
-      return Promise.resolve(true)
-    }
-  }
-  return new SendEmailStub()
-}
+import { AddAccount } from './add-account'
+import { AddAccountRequest } from './add-account.request'
 
 const mockAccount = (): Account => ({
   id: 'any_uuid',
@@ -16,9 +10,13 @@ const mockAccount = (): Account => ({
   cpf: 'any_cpf',
   birthDate: 'any_birthDate',
   cellphone: 'any_cellphone',
-  email: 'any_email@mail.com',
-  password: 'hashed_password'
+  email: 'any_mail@mail.com',
+  password: 'any_password',
+  createdAt: 'any_timestamp',
+  updatedAt: 'any_timestamp',
+  deletedAt: 'any_timestamp'
 })
+
 const mockAddAccountRequest = (): AddAccountRequest => (
   {
     name: 'any_name',
@@ -41,16 +39,13 @@ const mockAccountRepository = (): AccountRepository => {
 type SutTypes = {
   sut: AddAccount
   accountRepositoryStub: AccountRepository
-  sendEmailStub: SendEmail
 }
 const makeSut = (): SutTypes => {
   const accountRepositoryStub = mockAccountRepository()
-  const sendEmailStub = mockSendEmail()
-  const sut = new AddAccount(accountRepositoryStub, sendEmailStub)
+  const sut = new AddAccount(accountRepositoryStub)
   return {
     sut,
-    accountRepositoryStub,
-    sendEmailStub
+    accountRepositoryStub
   }
 }
 describe('AddAccount', () => {
@@ -73,25 +68,9 @@ describe('AddAccount', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Espero que lance uma exception caso SendEmail retorne uma excpetion', async () => {
-    const { sut, sendEmailStub } = makeSut()
-    jest.spyOn(sendEmailStub, 'send').mockReturnValueOnce(Promise.reject(new Error()))
-    const promise = sut.add(mockAccount())
-
-    await expect(promise).rejects.toThrow()
-  })
-
   test('Espero que AccountRepository retorne false caso não seja possivel salvar a nova conta ', async () => {
     const { sut, accountRepositoryStub } = makeSut()
     jest.spyOn(accountRepositoryStub, 'save').mockReturnValueOnce(Promise.resolve(null))
-    const response = await sut.add(mockAccount())
-
-    expect(response).toBeFalsy()
-  })
-
-  test('Espero que SendEmail retorne false caso não seja possivel enviar o email ', async () => {
-    const { sut, sendEmailStub } = makeSut()
-    jest.spyOn(sendEmailStub, 'send').mockReturnValueOnce(Promise.resolve(false))
     const response = await sut.add(mockAccount())
 
     expect(response).toBeFalsy()

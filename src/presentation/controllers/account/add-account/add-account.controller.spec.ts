@@ -1,16 +1,14 @@
-import { serverError } from '../../../adapters/http-error'
-import {
-  DuplicatedField,
-  HttpRequest,
-  Validation,
-  AddAccount,
-  MissingParamError,
-  InvalidParamError,
-  DuplicatedFieldError,
-  ok,
-  AddAccountController,
-  AddAccountRequest
-} from './add-account-protocols'
+import { AddAccount } from '@/domain/usecases/account/add-account'
+import { AccountRepository } from '@/infra/database/repositories/account.repository'
+import { serverError, ok } from '@/presentation/adapters/http-error'
+import { DuplicatedFieldError } from '@/presentation/errors/duplicated-field-error'
+import { InvalidParamError } from '@/presentation/errors/invalid-param-error'
+import { MissingParamError } from '@/presentation/errors/missing-param-error'
+import { DuplicatedField } from '@/presentation/protocols/duplicated-field'
+import { HttpRequest } from '@/presentation/protocols/http'
+import { Validation } from '@/presentation/protocols/validation'
+
+import { AddAccountController } from './add-account.controller'
 
 const mockDuplicatedField = (): DuplicatedField => {
   class DuplicatedFieldStub implements DuplicatedField {
@@ -47,34 +45,29 @@ const mockValidationEmail = (): Validation => {
   return new ValidationEmailStub()
 }
 
-const mockAddAccount = (): AddAccount => {
-  class AddAccountTeacher implements AddAccountTeacher {
-    async add (account: AddAccountRequest): Promise<boolean> {
-      return Promise.resolve(true)
-    }
-  }
-  return new AddAccountTeacher()
-}
 type SutTypes = {
   sut: AddAccountController
   validationEmailStub: Validation
   duplicatedFieldStub: DuplicatedField
-  addAccountTeacherStub: AddAccount
+  addAccountStub: AddAccount
+  accountRepositoryStub: AccountRepository
 }
 const makeSut = (): SutTypes => {
   const validationEmailStub = mockValidationEmail()
   const duplicatedFieldStub = mockDuplicatedField()
-  const addAccountTeacherStub = mockAddAccount()
+  const accountRepositoryStub = new AccountRepository()
+  const addAccountStub = new AddAccount(accountRepositoryStub)
   const sut = new AddAccountController(
     validationEmailStub,
     duplicatedFieldStub,
-    addAccountTeacherStub
+    addAccountStub
   )
   return {
     sut,
     validationEmailStub,
     duplicatedFieldStub,
-    addAccountTeacherStub
+    addAccountStub,
+    accountRepositoryStub
   }
 }
 
@@ -115,6 +108,7 @@ describe('AddAccountTeacher Controller', () => {
   })
 
   test('Espero que retorne 500 caso EmailValidator retorne uma excpetion', async () => {
+    const { addAccountStub } = makeSut()
     const mockValidationEmail = (): Validation => {
       class ValidationEmailStub implements Validation {
         public validate (input: string): boolean {
@@ -125,7 +119,7 @@ describe('AddAccountTeacher Controller', () => {
       return new ValidationEmailStub()
     }
 
-    const sut = new AddAccountController(mockValidationEmail(), mockDuplicatedField(), mockAddAccount())
+    const sut = new AddAccountController(mockValidationEmail(), mockDuplicatedField(), addAccountStub)
 
     jest.spyOn(mockValidationEmail(), 'validate')
     const httpRequest = mockHttpRequest()
@@ -156,6 +150,7 @@ describe('AddAccountTeacher Controller', () => {
   })
 
   test('Espero que retorne 500 caso DuplicatedFieldStub retorne uma excpetion', async () => {
+    const { addAccountStub } = makeSut()
     const mockDuplicatedField = (): DuplicatedField => {
       class DuplicatedFieldStub implements DuplicatedField {
         isDuplicated (fied: string): boolean {
@@ -166,26 +161,7 @@ describe('AddAccountTeacher Controller', () => {
       return new DuplicatedFieldStub()
     }
 
-    const sut = new AddAccountController(mockValidationEmail(), mockDuplicatedField(), mockAddAccount())
-
-    jest.spyOn(mockValidationEmail(), 'validate')
-    const httpRequest = mockHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
-
-    expect(httpResponse).toEqual(serverError(new Error()))
-  })
-
-  test('Espero que retorne 500 caso AddAccountTeacher retorne uma excpetion', async () => {
-    const mockAddAccount = (): AddAccount => {
-      class AddAccountTeacher implements AddAccountTeacher {
-        async add (account: AddAccountRequest): Promise<boolean> {
-          return Promise.reject(Error())
-        }
-      }
-      return new AddAccountTeacher()
-    }
-
-    const sut = new AddAccountController(mockValidationEmail(), mockDuplicatedField(), mockAddAccount())
+    const sut = new AddAccountController(mockValidationEmail(), mockDuplicatedField(), addAccountStub)
 
     jest.spyOn(mockValidationEmail(), 'validate')
     const httpRequest = mockHttpRequest()

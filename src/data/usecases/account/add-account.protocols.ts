@@ -1,5 +1,0 @@
-export * from '@/domain/models/account/account'
-export * from '@/domain/usecases/account/add-account'
-export * from '../../protocols/email/send-email'
-export * from '../../protocols/database/account.repository'
-export * from '../../../domain/models/account/account'

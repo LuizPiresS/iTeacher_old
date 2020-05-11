@@ -1,11 +1,16 @@
-export interface AddAccountRequest {
-  name: string
-  cpf: string
-  cellphone: string
-  email: string
-  password: string
-}
+import { AccountRepository } from '@/infra/database/repositories/account.repository'
 
-export interface AddAccount {
-  add (account: AddAccountRequest): Promise<boolean>
+import { AddAccountRequest } from './add-account.request'
+
+export class AddAccount {
+  constructor (
+    private readonly accountRepository: AccountRepository
+  ) {}
+
+  async add (account: AddAccountRequest): Promise<boolean> {
+    const result = await this.accountRepository.save(account)
+    if (result) {
+      return true
+    }
+  }
 }
