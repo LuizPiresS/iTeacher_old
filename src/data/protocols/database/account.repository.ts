@@ -1,4 +1,5 @@
-import { Account } from '../../../domain/models/account/account'
+import { Account } from '@/domain/models/account.model'
+
 import { DeepPartial } from './deep-partial.type'
 
 export interface AccountRepository {
