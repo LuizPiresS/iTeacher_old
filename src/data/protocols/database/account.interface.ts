@@ -1,7 +1,6 @@
+import { DeepPartial } from '@/data/utils/deep-partial.type'
 import { Account } from '@/domain/models/account.model'
 
-import { DeepPartial } from './deep-partial.type'
-
-export interface AccountRepository {
+export interface RepositoryInterface {
   save (data: DeepPartial<Account>): Promise<Account>
 }
