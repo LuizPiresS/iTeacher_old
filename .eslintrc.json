@@ -7,6 +7,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "@typescript-eslint/require-await": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "import-helpers/order-imports": [
