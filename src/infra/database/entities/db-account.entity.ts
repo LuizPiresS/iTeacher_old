@@ -1,8 +1,8 @@
-import { Account } from '@/domain/models/account.model'
+import { AccountEntity } from '@/domain/entities/account.entity'
 import { BaseEntity, Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm'
 
 @Entity({ name: 'account' })
-export class AccountEntity extends BaseEntity implements Account {
+export class DbAccountEntity extends BaseEntity implements AccountEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
