@@ -23,7 +23,6 @@
     "husky": "^4.2.5",
     "jest": "^25.3.0",
     "lint-staged": "^10.1.5",
-    "rimraf": "^3.0.2",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
   },
@@ -44,9 +43,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "module-alias": "^2.2.2",
-    "nodemon": "^2.0.3",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.24"
+    "nodemon": "^2.0.3"
   },
   "engines": {
     "node": "12.x"
