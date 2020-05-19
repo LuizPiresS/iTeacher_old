@@ -1,0 +1,16 @@
+{
+  "name": "@clean/api",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "prebuild": "rm -rf build",
+    "build": "tsc",
+    "start": "nodemon -w build build/transports/api/main.js"
+  },
+  "dependencies": {
+    "fastify": "^2.14.1",
+    "nodemon": "^2.0.4",
+    "pino-pretty": "^4.0.0"
+  }
+}
