@@ -1,0 +1,15 @@
+{
+  "name": "@clean/core",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "test": "TZ=UTC jest",
+    "coverage": "TZ=UTC jest --coverage"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "jest": "^26.0.1",
+    "ts-jest": "^25.5.1"
+  }
+}
