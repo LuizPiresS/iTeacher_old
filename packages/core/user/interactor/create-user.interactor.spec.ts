@@ -1,13 +1,15 @@
 import {
-  CreateUserInteractor,
-  CreateUserResponse,
-  CreateUserRequest,
-  UserEmailInvalidError,
-  UserPasswordInvalidError,
   UserNamelInvalidError,
   UserCpfdInvalidError,
   UserBirthdateInvalidError,
   UserCellphoneInvalidError,
+  UserEmailInvalidError,
+  UserPasswordInvalidError,
+} from './errors';
+import {
+  CreateUserInteractor,
+  CreateUserResponse,
+  CreateUserRequest,
 } from './create-user.interactor';
 import { Presenter } from '../../presenter';
 import { UserRepository } from '../user.repository';

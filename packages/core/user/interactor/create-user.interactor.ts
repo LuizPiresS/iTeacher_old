@@ -1,14 +1,14 @@
 import type { UserRepository } from '../user.repository';
 import type { Presenter } from '../../presenter';
 import { CustomError } from '../../utils/custom.error';
-
-export class UserNamelInvalidError extends CustomError {}
-export class UserCpfdInvalidError extends CustomError {}
-export class UserBirthdateInvalidError extends CustomError {}
-export class UserCellphoneInvalidError extends CustomError {}
-export class UserEmailInvalidError extends CustomError {}
-export class UserPasswordInvalidError extends CustomError {}
-
+import {
+  UserNamelInvalidError,
+  UserCpfdInvalidError,
+  UserBirthdateInvalidError,
+  UserCellphoneInvalidError,
+  UserEmailInvalidError,
+  UserPasswordInvalidError,
+} from './errors';
 export interface CreateUserRequest {
   name: string;
   cpf: string;
