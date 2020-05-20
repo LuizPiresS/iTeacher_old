@@ -7,13 +7,7 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "tsc",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
-    "test:verbose": "jest --passWithNoTests --runInBand",
-    "test:unit": "yarn test --watch",
-    "test:integration": "yarn test --watch -c jest-integration-config.js",
-    "test:staged": "yarn test --findRelatedTests",
-    "test:ci": "yarn test --coverage",
-    "test:coveralls": "yarn test:ci && coveralls < coverage/lcov.info"
+    "core": "yarn workspace @clean/core"
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
