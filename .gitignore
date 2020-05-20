@@ -116,3 +116,4 @@ dist
 
 mariadb
 .vscode
+.jest-cache
