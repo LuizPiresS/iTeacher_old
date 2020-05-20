@@ -6,22 +6,22 @@ export class UserEmailInvalidError extends CustomError {}
 export class UserPasswordInvalidError extends CustomError {}
 
 export interface CreateUserRequest {
-  name: string,
-  cpf: string,
-  birthDate: string,
-  cellphone: string,
-  email: string,
-  password: string
+  name: string;
+  cpf: string;
+  birthDate: string;
+  cellphone: string;
+  email: string;
+  password: string;
 }
 
 export interface CreateUserResponse {
-  id: string,
-  name: string,
-  cpf: string,
-  birthdate: string,
-  cellphone: string,
-  email: string,
-  createdAt: string,
+  id: string;
+  name: string;
+  cpf: string;
+  birthdate: string;
+  cellphone: string;
+  email: string;
+  createdAt: string;
 }
 
 export class CreateUserInteractor {
@@ -41,8 +41,15 @@ export class CreateUserInteractor {
       }
 
       // Data persistence
-     const {id, name, cpf, birthdate, cellphone, email, createdAt } =  await this.userRepository.save(data);
-
+      const {
+        id,
+        name,
+        cpf,
+        birthdate,
+        cellphone,
+        email,
+        createdAt,
+      } = await this.userRepository.save(data);
 
       // Presenter success response
       await this.presenter.reply({
