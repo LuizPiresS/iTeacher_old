@@ -55,9 +55,6 @@ export class CreateUserInteractor {
       if (!this.validation.isEmail(data.email)) {
         throw new UserEmailInvalidError('invalid e-mail');
       }
-      if (!this.validation.isPassword(data.password)) {
-        throw new UserPasswordInvalidError('invalid password');
-      }
 
       // Data persistence
       const {

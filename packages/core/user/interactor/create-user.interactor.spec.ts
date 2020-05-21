@@ -50,7 +50,6 @@ describe('CreateUser Interactor', () => {
     validationMock.isCellphone.mockReturnValue(true);
     validationMock.isDate.mockReturnValue(true);
     validationMock.isEmail.mockReturnValue(true);
-    validationMock.isPassword.mockReturnValue(true);
   });
 
   test('Espero um throw caso o name seja invalido', async () => {
@@ -146,24 +145,6 @@ describe('CreateUser Interactor', () => {
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
       new UserEmailInvalidError('invalid e-mail'),
-    );
-  });
-
-  test('Espero um throw caso o password seja invalido', async () => {
-    const mockDataRequest: CreateUserRequest = {
-      name: 'any_name',
-      cpf: 'any_cpf',
-      birthdate: 'any_birthdate',
-      cellphone: 'any_cellphone',
-      email: 'any_mail@mail.com',
-      password: 'invalid_password',
-    };
-
-    validationMock.isPassword.mockReturnValue(false);
-    await interactor.execute(mockDataRequest);
-
-    expect(presenterMock.throw).toHaveBeenCalledWith(
-      new UserPasswordInvalidError('invalid password'),
     );
   });
 }); // Fim describe

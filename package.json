@@ -24,5 +24,7 @@
     "prettier": "^2.0.5",
     "typescript": "^3.9.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@brazilian-utils/brazilian-utils": "^1.0.0-rc.7"
+  }
 }

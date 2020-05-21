@@ -264,6 +264,11 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@brazilian-utils/brazilian-utils@^1.0.0-rc.7":
+  version "1.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/@brazilian-utils/brazilian-utils/-/brazilian-utils-1.0.0-rc.7.tgz#86a629ce55b8d353d1ff2f7b3566255b81b4d2b6"
+  integrity sha512-kPxRWfwvkhrgB5wdkeGM2uIMQx8kUFDeSQyC/QP7u04DI72URuHzSI2DaOQ/HQciqANgn6M5E18BzGk4GTk8GQ==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.4.tgz#f864ae85004d0fcab6f50be9141c4da368d1656a"
