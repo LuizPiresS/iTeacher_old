@@ -1,6 +1,6 @@
 import type { UserRepository } from '../user.repository';
 import type { Presenter } from '../../presenter';
-import { Validation } from '../../validation';
+import { Validator } from '../../validator';
 import {
   UserNamelInvalidError,
   UserCpfdInvalidError,
@@ -32,7 +32,7 @@ export class CreateUserInteractor {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly presenter: Presenter<CreateUserResponse>,
-    private readonly validation: Validation,
+    private readonly validation: Validator,
   ) {}
 
   async execute(data: CreateUserRequest): Promise<void> {

@@ -1,4 +1,4 @@
-export interface Validation {
+export interface Validator {
   isEmail(email: string): boolean;
   isCPF(cpf: string): boolean;
   isPassword(password: string): boolean;

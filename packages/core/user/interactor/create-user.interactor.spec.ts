@@ -13,7 +13,7 @@ import {
 } from './create-user.interactor';
 import { Presenter } from '../../presenter';
 import { UserRepository } from '../user.repository';
-import { Validation } from '../../validation';
+import { Validator } from '../../validator';
 
 const presenterMock = {
   reply: jest.fn(),
@@ -42,7 +42,7 @@ describe('CreateUser Interactor', () => {
     interactor = new CreateUserInteractor(
       userRepositoryMock as UserRepository,
       presenterMock as Presenter<CreateUserResponse>,
-      validationMock as Validation,
+      validationMock as Validator,
     );
   });
   beforeEach(() => {
@@ -74,7 +74,7 @@ describe('CreateUser Interactor', () => {
     const interactorStub = new CreateUserInteractor(
       userRepositoryMock as UserRepository,
       presenterMock as Presenter<CreateUserResponse>,
-      validationMock as Validation,
+      validationMock as Validator,
     );
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
