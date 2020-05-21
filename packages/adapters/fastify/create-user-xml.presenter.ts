@@ -5,7 +5,7 @@ import type { CreateUserResponse } from '../../core/user/interactor/create-user.
 import {
   UserEmailInvalidError,
   UserPasswordInvalidError,
-} from '../../core/user/interactor/create-user.interactor';
+} from '../../core/user/errors';
 
 export class CreateUserXMLPresenter implements Presenter<CreateUserResponse> {
   private parser = new xml.j2xParser({});

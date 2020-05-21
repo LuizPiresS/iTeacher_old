@@ -2,9 +2,9 @@ import type { FastifyReply } from 'fastify';
 import type { Presenter } from '../../core/presenter';
 import type { CreateUserResponse } from '../../core/user/interactor/create-user.interactor';
 import {
-   UserEmailInvalidError,
+  UserEmailInvalidError,
   UserPasswordInvalidError,
-} from '../../core/user/interactor/create-user.interactor';
+} from '../../core/user/errors';
 
 export class CreateUserJSONPresenter implements Presenter<CreateUserResponse> {
   constructor(private readonly res: FastifyReply<any>) {}
