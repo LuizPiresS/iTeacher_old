@@ -5,7 +5,7 @@ import {
   UserCellphoneInvalidError,
   UserEmailInvalidError,
   UserPasswordInvalidError,
-} from './errors';
+} from '../errors';
 import {
   CreateUserInteractor,
   CreateUserResponse,
@@ -13,6 +13,7 @@ import {
 } from './create-user.interactor';
 import { Presenter } from '../../presenter';
 import { UserRepository } from '../user.repository';
+import { Validation } from '../../validation';
 
 const presenterMock = {
   reply: jest.fn(),
@@ -26,13 +27,33 @@ const userRepositoryMock = {
   delete: jest.fn(),
 };
 
+const validationMock = {
+  isEmail: jest.fn(),
+  isCPF: jest.fn(),
+  isPassword: jest.fn(),
+  isDate: jest.fn(),
+  isCellphone: jest.fn(),
+};
+
 describe('CreateUser Interactor', () => {
-  test('Espero um throw caso o name seja invalido', async () => {
-    const interactor = new CreateUserInteractor(
+  let interactor: CreateUserInteractor;
+
+  beforeAll(() => {
+    interactor = new CreateUserInteractor(
       userRepositoryMock as UserRepository,
       presenterMock as Presenter<CreateUserResponse>,
+      validationMock as Validation,
     );
+  });
+  beforeEach(() => {
+    validationMock.isCPF.mockReturnValue(true);
+    validationMock.isCellphone.mockReturnValue(true);
+    validationMock.isDate.mockReturnValue(true);
+    validationMock.isEmail.mockReturnValue(true);
+    validationMock.isPassword.mockReturnValue(true);
+  });
 
+  test('Espero um throw caso o name seja invalido', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: '',
       cpf: 'any_cpf',
@@ -50,11 +71,11 @@ describe('CreateUser Interactor', () => {
   });
 
   test('Espero um throw caso o cpf seja invalido', async () => {
-    const interactor = new CreateUserInteractor(
+    const interactorStub = new CreateUserInteractor(
       userRepositoryMock as UserRepository,
       presenterMock as Presenter<CreateUserResponse>,
+      validationMock as Validation,
     );
-
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: '',
@@ -64,7 +85,9 @@ describe('CreateUser Interactor', () => {
       password: 'any_password',
     };
 
-    await interactor.execute(mockDataRequest);
+    validationMock.isCPF.mockReturnValue(false);
+
+    await interactorStub.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
       new UserCpfdInvalidError('invalid cpf'),
@@ -72,19 +95,16 @@ describe('CreateUser Interactor', () => {
   });
 
   test('Espero um throw caso o birthdate seja invalido', async () => {
-    const interactor = new CreateUserInteractor(
-      userRepositoryMock as UserRepository,
-      presenterMock as Presenter<CreateUserResponse>,
-    );
-
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
-      birthdate: '',
+      birthdate: 'invalid_date',
       cellphone: 'any_cellphone',
       email: 'any_mail@mail.com',
       password: 'any_password',
     };
+
+    validationMock.isDate.mockReturnValue(false);
 
     await interactor.execute(mockDataRequest);
 
@@ -94,20 +114,16 @@ describe('CreateUser Interactor', () => {
   });
 
   test('Espero um throw caso o cellphone seja invalido', async () => {
-    const interactor = new CreateUserInteractor(
-      userRepositoryMock as UserRepository,
-      presenterMock as Presenter<CreateUserResponse>,
-    );
-
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
       birthdate: 'any_birthdate',
-      cellphone: '',
+      cellphone: 'invalid_celphone',
       email: 'any_mail@mail.com',
       password: 'any_password',
     };
 
+    validationMock.isCellphone.mockReturnValue(false);
     await interactor.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
@@ -116,20 +132,16 @@ describe('CreateUser Interactor', () => {
   });
 
   test('Espero um throw caso o email seja invalido', async () => {
-    const interactor = new CreateUserInteractor(
-      userRepositoryMock as UserRepository,
-      presenterMock as Presenter<CreateUserResponse>,
-    );
-
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
       birthdate: 'any_birthdate',
       cellphone: 'any_cellphone',
-      email: '',
+      email: 'invalid_email',
       password: 'any_password',
     };
 
+    validationMock.isEmail.mockReturnValue(false);
     await interactor.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
@@ -138,20 +150,16 @@ describe('CreateUser Interactor', () => {
   });
 
   test('Espero um throw caso o password seja invalido', async () => {
-    const interactor = new CreateUserInteractor(
-      userRepositoryMock as UserRepository,
-      presenterMock as Presenter<CreateUserResponse>,
-    );
-
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
       birthdate: 'any_birthdate',
       cellphone: 'any_cellphone',
       email: 'any_mail@mail.com',
-      password: '',
+      password: 'invalid_password',
     };
 
+    validationMock.isPassword.mockReturnValue(false);
     await interactor.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(

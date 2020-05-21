@@ -1,6 +1,6 @@
 import type { UserRepository } from '../user.repository';
 import type { Presenter } from '../../presenter';
-import { CustomError } from '../../utils/custom.error';
+import { Validation } from '../../validation';
 import {
   UserNamelInvalidError,
   UserCpfdInvalidError,
@@ -8,7 +8,7 @@ import {
   UserCellphoneInvalidError,
   UserEmailInvalidError,
   UserPasswordInvalidError,
-} from './errors';
+} from '../errors';
 export interface CreateUserRequest {
   name: string;
   cpf: string;
@@ -32,6 +32,7 @@ export class CreateUserInteractor {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly presenter: Presenter<CreateUserResponse>,
+    private readonly validation: Validation,
   ) {}
 
   async execute(data: CreateUserRequest): Promise<void> {
@@ -40,19 +41,21 @@ export class CreateUserInteractor {
       if (!data.name) {
         throw new UserNamelInvalidError('invalid name');
       }
-      if (!data.cpf) {
+      // validar
+      if (!this.validation.isCPF(data.cpf)) {
         throw new UserCpfdInvalidError('invalid cpf');
       }
-      if (!data.birthdate) {
+      if (!this.validation.isDate(data.birthdate)) {
         throw new UserBirthdateInvalidError('invalid birthdate');
       }
-      if (!data.cellphone) {
+      if (!this.validation.isCellphone(data.cellphone)) {
         throw new UserCellphoneInvalidError('invalid cellphone');
       }
-      if (!data.email) {
+      // email
+      if (!this.validation.isEmail(data.email)) {
         throw new UserEmailInvalidError('invalid e-mail');
       }
-      if (!data.password) {
+      if (!this.validation.isPassword(data.password)) {
         throw new UserPasswordInvalidError('invalid password');
       }
 
