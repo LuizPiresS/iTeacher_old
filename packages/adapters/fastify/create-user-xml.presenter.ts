@@ -1,11 +1,12 @@
 import xml from 'fast-xml-parser';
 import type { FastifyReply } from 'fastify';
+
 import type { Presenter } from '../../core/presenter';
-import type { CreateUserResponse } from '../../core/user/interactor/create-user.interactor';
 import {
   UserEmailInvalidError,
   UserPasswordInvalidError,
 } from '../../core/user/errors';
+import type { CreateUserResponse } from '../../core/user/interactor/create-user.interactor';
 
 export class CreateUserXMLPresenter implements Presenter<CreateUserResponse> {
   private parser = new xml.j2xParser({});
