@@ -1,19 +1,18 @@
+import { Presenter } from '../../presenter';
+import { Validator } from '../../validator';
 import {
-  UserNamelInvalidError,
-  UserCpfdInvalidError,
+  UserNameInvalidError,
+  UserCPFInvalidError,
   UserBirthdateInvalidError,
   UserCellphoneInvalidError,
   UserEmailInvalidError,
-  UserPasswordInvalidError,
 } from '../errors';
+import { UserRepository } from '../user.repository';
 import {
   CreateUserInteractor,
   CreateUserResponse,
   CreateUserRequest,
 } from './create-user.interactor';
-import { Presenter } from '../../presenter';
-import { UserRepository } from '../user.repository';
-import { Validator } from '../../validator';
 
 const presenterMock = {
   reply: jest.fn(),
@@ -45,6 +44,7 @@ describe('CreateUser Interactor', () => {
       validationMock as Validator,
     );
   });
+
   beforeEach(() => {
     validationMock.isCPF.mockReturnValue(true);
     validationMock.isCellphone.mockReturnValue(true);
@@ -52,7 +52,7 @@ describe('CreateUser Interactor', () => {
     validationMock.isEmail.mockReturnValue(true);
   });
 
-  test('Espero um throw caso o name seja invalido', async () => {
+  test('Espero um throw caso o name seja inválido', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: '',
       cpf: 'any_cpf',
@@ -65,7 +65,7 @@ describe('CreateUser Interactor', () => {
     await interactor.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
-      new UserNamelInvalidError('invalid name'),
+      new UserNameInvalidError('invalid name'),
     );
   });
 
@@ -89,7 +89,7 @@ describe('CreateUser Interactor', () => {
     await interactorStub.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
-      new UserCpfdInvalidError('invalid cpf'),
+      new UserCPFInvalidError('invalid cpf'),
     );
   });
 
@@ -117,7 +117,7 @@ describe('CreateUser Interactor', () => {
       name: 'any_name',
       cpf: 'any_cpf',
       birthdate: 'any_birthdate',
-      cellphone: 'invalid_celphone',
+      cellphone: 'invalid_cellphone',
       email: 'any_mail@mail.com',
       password: 'any_password',
     };

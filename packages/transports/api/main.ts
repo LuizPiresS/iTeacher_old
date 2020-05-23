@@ -1,10 +1,16 @@
-import fastify from 'fastify';
+import 'reflect-metadata';
+
 import xml from 'fast-xml-parser';
+import fastify from 'fastify';
+
+import { CreateUserJSONPresenter } from '../../adapters/fastify/create-user-json.presenter';
+import { CreateUserXMLPresenter } from '../../adapters/fastify/create-user-xml.presenter';
 import type { CreateUserRequest } from '../../core/user/interactor/create-user.interactor';
 import { CreateUserInteractor } from '../../core/user/interactor/create-user.interactor';
 import { MemoryUserDataSource } from '../../data-sources/memory/user.datasource';
-import { CreateUserJSONPresenter } from '../../adapters/fastify/create-user-json.presenter';
-import { CreateUserXMLPresenter } from '../../adapters/fastify/create-user-xml.presenter';
+import createConnDatabase from '../../data-sources/utils/create-connection';
+
+createConnDatabase();
 
 const server = fastify({
   logger: {

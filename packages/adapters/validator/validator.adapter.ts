@@ -1,9 +1,10 @@
-import { Validator } from '../../core/validator';
 import {
   isValidCPF,
   isValidEmail,
   isValidPhone,
 } from '@brazilian-utils/brazilian-utils';
+
+import { Validator } from '../../core/validator';
 
 export class ValidatorAdapter implements Validator {
   isEmail(email: string): boolean {

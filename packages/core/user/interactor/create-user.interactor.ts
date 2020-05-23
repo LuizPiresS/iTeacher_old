@@ -1,14 +1,13 @@
-import type { UserRepository } from '../user.repository';
 import type { Presenter } from '../../presenter';
 import { Validator } from '../../validator';
 import {
-  UserNamelInvalidError,
-  UserCpfdInvalidError,
+  UserNameInvalidError,
+  UserCPFInvalidError,
   UserBirthdateInvalidError,
   UserCellphoneInvalidError,
   UserEmailInvalidError,
-  UserPasswordInvalidError,
 } from '../errors';
+import type { UserRepository } from '../user.repository';
 export interface CreateUserRequest {
   name: string;
   cpf: string;
@@ -39,11 +38,11 @@ export class CreateUserInteractor {
     try {
       // Input data validations
       if (!data.name) {
-        throw new UserNamelInvalidError('invalid name');
+        throw new UserNameInvalidError('invalid name');
       }
       // validar
       if (!this.validation.isCPF(data.cpf)) {
-        throw new UserCpfdInvalidError('invalid cpf');
+        throw new UserCPFInvalidError('invalid cpf');
       }
       if (!this.validation.isDate(data.birthdate)) {
         throw new UserBirthdateInvalidError('invalid birthdate');

@@ -6,14 +6,11 @@ declare type FindConditions<T> = {
 
 declare type FindOneOptions<T> = FindConditions<T> | FindConditions<T>[];
 
-declare type FindManyOptions<T> =
-  | FindConditions<T>
-  | FindConditions<T>[]
-  | {
-      where: FindConditions<T> | FindConditions<T>[];
-      skip?: number;
-      take?: number;
-    };
+declare type FindManyOptions<T> = {
+  where: FindConditions<T> | FindConditions<T>[];
+  skip?: number;
+  take?: number;
+};
 
 declare interface Repository<T> {
   find(conditions?: FindManyOptions<T>): Promise<T[]>;
