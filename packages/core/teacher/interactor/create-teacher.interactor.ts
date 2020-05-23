@@ -1,6 +1,6 @@
-import type { UserRepository } from '../user.repository';
 import type { Presenter } from '../../presenter';
 import { CustomError } from '../../utils/custom.error';
+import { UserRepository } from '../user.repository';
 
 export class UserUsernameInvalidError extends CustomError {}
 export class UserPasswordInvalidError extends CustomError {}

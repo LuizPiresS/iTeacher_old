@@ -1,4 +1,5 @@
 import type { Presenter } from '../../presenter';
+import { Hasher } from '../../utils/encrypter/hasher';
 import { Validator } from '../../validator';
 import {
   UserNameInvalidError,
@@ -32,6 +33,7 @@ export class CreateUserInteractor {
     private readonly userRepository: UserRepository,
     private readonly presenter: Presenter<CreateUserResponse>,
     private readonly validation: Validator,
+    private readonly hasher: Hasher,
   ) {}
 
   async execute(data: CreateUserRequest): Promise<void> {
@@ -54,6 +56,8 @@ export class CreateUserInteractor {
       if (!this.validation.isEmail(data.email)) {
         throw new UserEmailInvalidError('invalid e-mail');
       }
+
+      data.password = await this.hasher.hash(data.password);
 
       // Data persistence
       const {
