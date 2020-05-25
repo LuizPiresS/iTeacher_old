@@ -4,14 +4,14 @@
     "module": "CommonJS",
     "sourceMap": true,
     "strict": true,
-    "outDir": "dist/",
+    "outDir": "build/",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "Node",
+    "moduleResolution": "Node"
   },
-  "files": ["packages/core/core-env.d.ts"],
-  "exclude": ["node_modules", "build", ".jest-cache", "packages/**/*.spec.ts"],
-  "include": ["packages/**/*.ts", "packages/data-sources/database/ormconfig.js"]
+  "files": ["src/env.d.ts"],
+  "exclude": ["node_modules", "build", ".jest-cache", "src/**/*.spec.ts"],
+  "include": ["src/**/*.ts"]
 }
