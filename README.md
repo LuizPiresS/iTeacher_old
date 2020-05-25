@@ -1,8 +1,7 @@
 # **ITeacher**
 
 ---
-AQUI VÃO OS BADGES DE CI/CD
-
+[![codecov](https://codecov.io/gh/ProgramadorRanzinza/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/ProgramadorRanzinza/ITeacher)
 ---
 
 Plataforma multilateral que conecta alunos e professores.
