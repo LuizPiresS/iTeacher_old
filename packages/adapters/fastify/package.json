@@ -1,9 +1,0 @@
-{
-  "name": "@clean/fastify-adapters",
-  "version": "1.0.0",
-  "license": "UNLICENSED",
-  "private": true,
-  "dependencies": {
-    "fast-xml-parser": "^3.16.0"
-  }
-}
