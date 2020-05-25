@@ -1,4 +1,5 @@
 import { Presenter } from '../../presenter';
+import { Hasher } from '../../utils/encrypter/hasher';
 import { Validator } from '../../validator';
 import {
   UserNameInvalidError,
@@ -34,6 +35,10 @@ const validationMock = {
   isCellphone: jest.fn(),
 };
 
+const hasherMock = {
+  hash: jest.fn(),
+};
+
 describe('CreateUser Interactor', () => {
   let interactor: CreateUserInteractor;
 
@@ -42,6 +47,7 @@ describe('CreateUser Interactor', () => {
       userRepositoryMock as UserRepository,
       presenterMock as Presenter<CreateUserResponse>,
       validationMock as Validator,
+      hasherMock as Hasher,
     );
   });
 
@@ -70,11 +76,6 @@ describe('CreateUser Interactor', () => {
   });
 
   test('Espero um throw caso o cpf seja invalido', async () => {
-    const interactorStub = new CreateUserInteractor(
-      userRepositoryMock as UserRepository,
-      presenterMock as Presenter<CreateUserResponse>,
-      validationMock as Validator,
-    );
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: '',
@@ -86,7 +87,7 @@ describe('CreateUser Interactor', () => {
 
     validationMock.isCPF.mockReturnValue(false);
 
-    await interactorStub.execute(mockDataRequest);
+    await interactor.execute(mockDataRequest);
 
     expect(presenterMock.throw).toHaveBeenCalledWith(
       new UserCPFInvalidError('invalid cpf'),

@@ -4,6 +4,7 @@
     "module": "CommonJS",
     "sourceMap": true,
     "strict": true,
+    "outDir": "dist/",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -12,5 +13,5 @@
   },
   "files": ["packages/core/core-env.d.ts"],
   "exclude": ["node_modules", "build", ".jest-cache", "packages/**/*.spec.ts"],
-  "include": ["packages/**/*.ts"]
+  "include": ["packages/**/*.ts", "packages/data-sources/database/ormconfig.js"]
 }

@@ -1,77 +1,60 @@
 import 'reflect-metadata';
 
-import xml from 'fast-xml-parser';
 import fastify from 'fastify';
+import { createConnection } from 'typeorm';
 
+import { HasherAdapter } from '../../adapters/encrypter/hasher';
 import { CreateUserJSONPresenter } from '../../adapters/fastify/create-user-json.presenter';
-import { CreateUserXMLPresenter } from '../../adapters/fastify/create-user-xml.presenter';
+import { ValidatorAdapter } from '../../adapters/validator/validator.adapter';
 import type { CreateUserRequest } from '../../core/user/interactor/create-user.interactor';
 import { CreateUserInteractor } from '../../core/user/interactor/create-user.interactor';
-import { MemoryUserDataSource } from '../../data-sources/memory/user.datasource';
-import createConnDatabase from '../../data-sources/utils/create-connection';
+import { UserDataSource } from '../../data-sources/database/data-source/user.data-source';
 
-createConnDatabase();
-
-const server = fastify({
-  logger: {
-    level: 'info',
-    prettyPrint: {
-      levelFirst: true,
-      translateTime: true,
+async function bootstrap() {
+  await createConnection();
+  const server = fastify({
+    logger: {
+      level: 'info',
+      prettyPrint: {
+        levelFirst: true,
+        translateTime: true,
+      },
     },
-  },
-});
-
-// Enable server to receive XML content
-server.addContentTypeParser(['application/xml'], function (req, done) {
-  let data = '';
-  req.on('data', (chunk) => {
-    data += chunk;
   });
-  req.on('end', () => {
-    done(null, data);
+
+  // This route receive and response JSON
+  server.post('/add-user', async function (request, reply) {
+    const presenter = new CreateUserJSONPresenter(reply);
+    const repository = new UserDataSource();
+    const validator = new ValidatorAdapter();
+    const hasher = new HasherAdapter();
+    const interactor = new CreateUserInteractor(
+      repository,
+      presenter,
+      validator,
+      hasher,
+    );
+
+    // Create a Request DTO
+    const data: CreateUserRequest = {
+      name: request.body.name,
+      cpf: request.body.cpf,
+      birthdate: request.body.birthdate,
+      cellphone: request.body.cellphone,
+      email: request.body.email,
+      password: request.body.password,
+    };
+
+    // Execute Interactor and Presenter
+    await interactor.execute(data);
   });
-});
 
-// This route receive and response XML
-server.post('/xml', async function (request, reply) {
-  const presenter = new CreateUserXMLPresenter(reply);
-  const repository = new MemoryUserDataSource();
-  const interactor = new CreateUserInteractor(repository, presenter);
-
-  // Transform XML to JSON
-  const { user } = xml.parse(request.body);
-
-  // Create a Request DTO
-  const data: CreateUserRequest = {
-    username: user.username,
-    password: user.password,
-  };
-
-  // Execute Interactor and Presenter
-  await interactor.execute(data);
-});
-
-// This route receive and response JSON
-server.post('/json', async function (request, reply) {
-  const presenter = new CreateUserJSONPresenter(reply);
-  const repository = new MemoryUserDataSource();
-  const interactor = new CreateUserInteractor(repository, presenter);
-
-  // Create a Request DTO
-  const data: CreateUserRequest = {
-    username: request.body.username,
-    password: request.body.password,
-  };
-
-  // Execute Interactor and Presenter
-  await interactor.execute(data);
-});
-
-server.listen(8090, function (err, address) {
-  if (err) {
-    server.log.error(err);
-    process.exit(1);
-  }
-  server.log.info(`server listening on ${address}`);
-});
+  server.listen(Number(process.env.PORT), function (err, address) {
+    if (err) {
+      server.log.error(err);
+      process.exit(1);
+    }
+    server.log.info(`server listening on ${address}`);
+  });
+}
+bootstrap();

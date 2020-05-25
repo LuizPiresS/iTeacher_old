@@ -5,9 +5,11 @@
     "packages/**"
   ],
   "scripts": {
-    "start": "node dist/main/server.js",
-    "build": "tsc",
-    "core": "yarn workspace @clean/core"
+    "format": "prettier --write **/*.{json,ts}",
+    "lint": "eslint **/*.ts",
+    "core": "yarn workspace core",
+    "data-sources": "yarn workspace data-sources",
+    "api": "yarn workspace api"
   },
   "devDependencies": {
     "@types/node": "^14.0.5",
@@ -27,9 +29,6 @@
   },
   "dependencies": {
     "@brazilian-utils/brazilian-utils": "^1.0.0-rc.7",
-    "dotenv": "^8.2.0",
-    "pg": "^8.2.1",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.25"
+    "dotenv": "^8.2.0"
   }
 }
