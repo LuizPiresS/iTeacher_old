@@ -69,7 +69,9 @@ describe('CreateUser Interactor', () => {
 
     await interactor.execute(mockDataRequest);
 
-    expect(presenterMock.throw).toBeCalledWithInstanceOf(UserNameInvalidError);
+    expect(presenterMock.throw).toBeCalledWith(
+      expect.any(UserNameInvalidError),
+    );
   });
 
   test('Espero um throw caso o cpf seja invalido', async () => {
@@ -86,7 +88,7 @@ describe('CreateUser Interactor', () => {
 
     await interactor.execute(mockDataRequest);
 
-    expect(presenterMock.throw).toBeCalledWithInstanceOf(UserCPFInvalidError);
+    expect(presenterMock.throw).toBeCalledWith(expect.any(UserCPFInvalidError));
   });
 
   test('Espero um throw caso o birthdate seja invalido', async () => {
@@ -103,8 +105,8 @@ describe('CreateUser Interactor', () => {
 
     await interactor.execute(mockDataRequest);
 
-    expect(presenterMock.throw).toBeCalledWithInstanceOf(
-      UserBirthdateInvalidError,
+    expect(presenterMock.throw).toBeCalledWith(
+      expect.any(UserBirthdateInvalidError),
     );
   });
 
@@ -121,8 +123,8 @@ describe('CreateUser Interactor', () => {
     validationMock.isCellphone.mockReturnValue(false);
     await interactor.execute(mockDataRequest);
 
-    expect(presenterMock.throw).toBeCalledWithInstanceOf(
-      UserCellphoneInvalidError,
+    expect(presenterMock.throw).toBeCalledWith(
+      expect.any(UserCellphoneInvalidError),
     );
   });
 
@@ -139,6 +141,8 @@ describe('CreateUser Interactor', () => {
     validationMock.isEmail.mockReturnValue(false);
     await interactor.execute(mockDataRequest);
 
-    expect(presenterMock.throw).toBeCalledWithInstanceOf(UserEmailInvalidError);
+    expect(presenterMock.throw).toBeCalledWith(
+      expect.any(UserEmailInvalidError),
+    );
   });
 });
