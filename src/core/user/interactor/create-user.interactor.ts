@@ -41,6 +41,8 @@ export class CreateUserInteractor {
         throw new UserEmailInvalidError('invalid e-mail');
       }
 
+      data.cpf = data.cpf.replace(/\.|\-/g, '');
+
       data.password = await this.security.encryptPassword(data.password);
 
       // Data persistence
