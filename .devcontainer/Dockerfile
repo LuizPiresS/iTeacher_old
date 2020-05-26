@@ -7,8 +7,8 @@
 ARG VARIANT=12
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
 
-# The node image includes a non-root user with sudo access. Use the 
-# "remoteUser" property in devcontainer.json to use it. On Linux, update 
+# The node image includes a non-root user with sudo access. Use the
+# "remoteUser" property in devcontainer.json to use it. On Linux, update
 # these values to ensure the container user's UID/GID matches your local values.
 # See https://aka.ms/vscode-remote/containers/non-root-user for details.
 ARG USERNAME=node
@@ -25,6 +25,6 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
-# RUN apt-get update \
-#     && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends git-flow zsh
