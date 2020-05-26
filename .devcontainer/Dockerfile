@@ -25,6 +25,18 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
-RUN apt-get update \
-    && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends git-flow zsh
+RUN apt-get update && \
+    export DEBIAN_FRONTEND=noninteractive && \
+    apt-get -y install --no-install-recommends git-flow zsh nano
+
+USER $USERNAME
+
+RUN rm -rf /home/$USERNAME/.oh-my-zsh && \
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)" && \
+    sed -i -r 's/^plugins=\(.*?\)$/plugins=(git git-flow)/' /home/$USERNAME/.zshrc && \
+    npm install -g spaceship-prompt && \
+    echo "zinit light zsh-users/zsh-autosuggestions" >> /home/$USERNAME/.zshrc && \
+    echo "zinit light zdharma/fast-syntax-highlighting" >> /home/$USERNAME/.zshrc && \
+    echo "zinit light zsh-users/zsh-completions" >> /home/$USERNAME/.zshrc && \
+    echo '\n\'
