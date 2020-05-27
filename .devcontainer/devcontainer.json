@@ -8,33 +8,7 @@
   },
   "extensions": [
     "dbaeumer.vscode-eslint",
-    "prettier.prettier-vscode",
-    "vsls-contrib.codetour",
-    "naumovs.color-highlight",
-    "jzmstrjp.color-the-tag-name",
-    "editorconfig.editorconfig",
-    "usernamehw.errorlens",
-    "rubbersheep.gi",
-    "donjayamanne.git-extension-pack",
-    "psykosoldi3r.vscode-git-flow",
-    "donjayamanne.githistory",
-    "cschleiden.vscode-github-actions",
-    "formulahendry.github-actions",
-    "github.vscode-pull-request-github",
-    "codezombiech.gitignore",
-    "eamodio.gitlens",
-    "sainnhe.gruvbox-material",
-    "yzhang.markdown-all-in-one",
-    "christian-kohler.path-intellisense",
-    "natqe.reload",
-    "mutantdino.resourcemonitor",
-    "kisstkondoros.typelens",
-    "pmneo.tsimporter",
-    "visualstudioexptteam.vscodeintellicode",
-    "wakatime.vscode-wakatime",
-    "redhat.vscode-yaml"
-
-
+    "prettier.prettier-vscode"
   ],
   "remoteUser": "node"
 }
