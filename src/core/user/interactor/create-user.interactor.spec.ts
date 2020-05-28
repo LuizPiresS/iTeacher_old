@@ -1,9 +1,9 @@
 import { Email } from '../../../email/email.interface';
 import { RenderFile } from '../../../render-files/render.interface';
 import { defineNow, getNowISO } from '../../../utils/test.util';
-import type { IPresenter } from '../../common/presenter.interface';
-import type { ISecurity } from '../../common/security.interface';
-import type { IValidator } from '../../common/validator.interface';
+import type { Presenter } from '../../common/presenter.interface';
+import type { Security } from '../../common/security.interface';
+import type { Validator } from '../../common/validator.interface';
 import type { CreateUserRequest } from '../dto/create-user.request';
 import type { CreateUserResponse } from '../dto/create-user.response';
 import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error';
@@ -12,7 +12,7 @@ import { UserCPFInvalidError } from '../error/user-cpf-invalid-error';
 import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
 import { User } from '../user';
-import { IUserRepository } from '../user.repository.interface';
+import { UserRepository } from '../user.repository';
 import { CreateUserInteractor } from './create-user.interactor';
 const presenterMock = {
   reply: jest.fn(),
@@ -55,10 +55,10 @@ describe('CreateUser Interactor', () => {
 
   beforeAll(() => {
     interactor = new CreateUserInteractor(
-      userRepositoryMock as IUserRepository,
-      presenterMock as IPresenter<CreateUserResponse>,
-      validationMock as IValidator,
-      securityMock as ISecurity,
+      userRepositoryMock as UserRepository,
+      presenterMock as Presenter<CreateUserResponse>,
+      validationMock as Validator,
+      securityMock as Security,
       emailMock as Email,
       templateMock as RenderFile,
     );

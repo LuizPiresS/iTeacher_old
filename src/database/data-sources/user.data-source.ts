@@ -1,21 +1,19 @@
 import { getRepository } from 'typeorm';
 
-import { IUser } from '../../core/user/user';
-import { IUserRepository } from '../../core/user/user.repository.interface';
+import { User } from '../../core/user/user';
+import { UserRepository } from '../../core/user/user.repository';
 import { UserEntity } from '../entities/user.entity';
 
-export class UserDataSource implements IUserRepository {
+export class UserDataSource implements UserRepository {
   private repository = getRepository(UserEntity);
 
-  async find(conditions?: FindManyOptions<IUser>): Promise<IUser[]> {
+  async find(conditions?: FindManyOptions<User>): Promise<User[]> {
     return this.repository.find(conditions);
   }
-  async findOne(
-    conditions?: FindOneOptions<IUser>,
-  ): Promise<IUser | undefined> {
+  async findOne(conditions?: FindOneOptions<User>): Promise<User | undefined> {
     return this.repository.findOne({ where: conditions });
   }
-  async save(data: DeepPartial<IUser>): Promise<IUser> {
+  async save(data: DeepPartial<User>): Promise<User> {
     return this.repository.save(data);
   }
   async delete(id: string): Promise<void> {

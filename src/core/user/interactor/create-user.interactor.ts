@@ -2,9 +2,9 @@ import { EJSAdapter } from '../../../adapters/ejs.adapter';
 import { emailConfig } from '../../../config/email.config';
 import { Email } from '../../../email/email.interface';
 import { RenderFile } from '../../../render-files/render.interface';
-import type { IPresenter } from '../../common/presenter.interface';
-import type { ISecurity } from '../../common/security.interface';
-import type { IValidator } from '../../common/validator.interface';
+import type { Presenter } from '../../common/presenter.interface';
+import type { Security } from '../../common/security.interface';
+import type { Validator } from '../../common/validator.interface';
 import type { CreateUserRequest } from '../dto/create-user.request';
 import type { CreateUserResponse } from '../dto/create-user.response';
 import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error';
@@ -14,14 +14,14 @@ import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
 // import { UserSendEmailError } from '../error/user-send-email-error';
 import { UserSendEmailError } from '../error/user-send-email-error';
-import type { IUserRepository } from '../user.repository.interface';
+import type { UserRepository } from '../user.repository';
 //TODO! Criar validação para os campos repetidos email e o CPF já estão cadastrados no sistema
 export class CreateUserInteractor {
   constructor(
-    private readonly userRepository: IUserRepository,
-    private readonly presenter: IPresenter<CreateUserResponse>,
-    private readonly validation: IValidator,
-    private readonly security: ISecurity, // private readonly email: Email,
+    private readonly userRepository: UserRepository,
+    private readonly presenter: Presenter<CreateUserResponse>,
+    private readonly validation: Validator,
+    private readonly security: Security, // private readonly email: Email,
     private readonly email: Email,
     private readonly template: RenderFile,
   ) {}

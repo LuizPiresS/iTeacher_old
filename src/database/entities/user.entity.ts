@@ -7,10 +7,10 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 
-import { IUser } from '../../core/user/user';
+import { User } from '../../core/user/user';
 
 @Entity('user')
-export class UserEntity implements IUser {
+export class UserEntity implements User {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
