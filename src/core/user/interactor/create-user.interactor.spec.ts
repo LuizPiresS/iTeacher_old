@@ -1,4 +1,6 @@
-import { IEmail } from '../../common/email.interface';
+import { Email } from '../../../email/email.interface';
+import { RenderFile } from '../../../render-files/render.interface';
+import { defineNow, getNowISO } from '../../../utils/test.util';
 import type { IPresenter } from '../../common/presenter.interface';
 import type { ISecurity } from '../../common/security.interface';
 import type { IValidator } from '../../common/validator.interface';
@@ -9,6 +11,7 @@ import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error
 import { UserCPFInvalidError } from '../error/user-cpf-invalid-error';
 import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
+import { User } from '../user';
 import { IUserRepository } from '../user.repository.interface';
 import { CreateUserInteractor } from './create-user.interactor';
 const presenterMock = {
@@ -43,6 +46,10 @@ const emailMock = {
   generateEmailMessage: jest.fn(),
 };
 
+const templateMock = {
+  renderHtml: jest.fn(),
+};
+
 describe('CreateUser Interactor', () => {
   let interactor: CreateUserInteractor;
 
@@ -52,7 +59,8 @@ describe('CreateUser Interactor', () => {
       presenterMock as IPresenter<CreateUserResponse>,
       validationMock as IValidator,
       securityMock as ISecurity,
-      // emailMock as Email,
+      emailMock as Email,
+      templateMock as RenderFile,
     );
   });
 
@@ -152,34 +160,42 @@ describe('CreateUser Interactor', () => {
     );
   });
 
-  test('Espero que ', async () => {
-    const mockDataRequest: CreateUserRequest = {
-      name: 'any_name',
-      cpf: 'any_cpf',
-      birthdate: 'any_birthdate',
-      cellphone: 'any_cellphone',
-      email: 'invalid_email',
-      password: 'any_password',
-    };
+  test('Testa se o usuario foi cadastrado no sistema', async () => {
+    defineNow('2020-05-20T00:00:00.000Z');
 
-    validationMock.isEmail.mockReturnValue(false);
-    await interactor.execute(mockDataRequest);
-
-    expect(presenterMock.throw).toBeCalledWith(
-      expect.any(UserEmailInvalidError),
+    userRepositoryMock.save.mockImplementation(
+      (data: DeepPartial<User>): User => {
+        return {
+          ...data,
+          id: 'uuid',
+          name: 'any_name',
+          cpf: 'any_cpf',
+          birthdate: 'any_birthdate',
+          cellphone: 'any_cellphone',
+          email: 'any_mail@mail.com',
+          createdAt: getNowISO(),
+        } as User;
+      },
     );
-  });
 
-  test('Espero que CreateUser retorne um usuario caso o novo usuario seja salvo', async () => {
-    const mockDataRequest: CreateUserRequest = {
+    await interactor.execute({
       name: 'any_name',
       cpf: 'any_cpf',
       birthdate: 'any_birthdate',
       cellphone: 'any_cellphone',
       email: 'any_mail@mail.com',
       password: 'any_password',
-    };
+    });
 
-    const result = interactor.execute(mockDataRequest);
+    expect(presenterMock.throw).not.toBeCalled();
+    expect(presenterMock.reply).toHaveBeenCalledWith({
+      id: 'uuid',
+      name: 'any_name',
+      cpf: 'any_cpf',
+      birthdate: 'any_birthdate',
+      cellphone: 'any_cellphone',
+      email: 'any_mail@mail.com',
+      createdAt: getNowISO(),
+    });
   });
 });

@@ -1,3 +1,7 @@
+import { EJSAdapter } from '../../../adapters/ejs.adapter';
+import { emailConfig } from '../../../config/email.config';
+import { Email } from '../../../email/email.interface';
+import { RenderFile } from '../../../render-files/render.interface';
 import type { IPresenter } from '../../common/presenter.interface';
 import type { ISecurity } from '../../common/security.interface';
 import type { IValidator } from '../../common/validator.interface';
@@ -9,6 +13,7 @@ import { UserCPFInvalidError } from '../error/user-cpf-invalid-error';
 import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
 // import { UserSendEmailError } from '../error/user-send-email-error';
+import { UserSendEmailError } from '../error/user-send-email-error';
 import type { IUserRepository } from '../user.repository.interface';
 //TODO! Criar validação para os campos repetidos email e o CPF já estão cadastrados no sistema
 export class CreateUserInteractor {
@@ -17,6 +22,8 @@ export class CreateUserInteractor {
     private readonly presenter: IPresenter<CreateUserResponse>,
     private readonly validation: IValidator,
     private readonly security: ISecurity, // private readonly email: Email,
+    private readonly email: Email,
+    private readonly template: RenderFile,
   ) {}
 
   async execute(data: CreateUserRequest): Promise<void> {
@@ -56,16 +63,23 @@ export class CreateUserInteractor {
         email,
         createdAt,
       } = await this.userRepository.save(data);
+
+      // Envia email de verificação
       // const sendEmail = await this.email.sendEmail(
       //   emailConfig.emailFrom,
       //   email,
-      //   'verificação de email',
-      //   RenderFile.renderHtml(),
+      //   'Assunto',
+      //   this.template.renderHtml(emailConfig.pathEmailTemplate, {
+      //     email,
+      //     name,
+      //     id,
+      //   }),
       // );
 
       // if (!sendEmail) {
       //   throw new UserSendEmailError('invalid e-mail');
       // }
+
       // Presenter success response
       await this.presenter.reply({
         id,
