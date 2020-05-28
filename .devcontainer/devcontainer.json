@@ -6,9 +6,6 @@
   "settings": {
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
-  "extensions": [
-    "dbaeumer.vscode-eslint",
-    "prettier.prettier-vscode"
-  ],
+  "extensions": ["dbaeumer.vscode-eslint", "prettier.prettier-vscode"],
   "remoteUser": "node"
 }
