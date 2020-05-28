@@ -1,5 +1,3 @@
-import { Email } from '../../../email/email.interface';
-import { RenderFile } from '../../../render-files/render.interface';
 import { defineNow, getNowISO } from '../../../utils/test.util';
 import type { Presenter } from '../../common/presenter.interface';
 import type { Security } from '../../common/security.interface';
@@ -59,8 +57,6 @@ describe('CreateUser Interactor', () => {
       presenterMock as Presenter<CreateUserResponse>,
       validationMock as Validator,
       securityMock as Security,
-      emailMock as Email,
-      templateMock as RenderFile,
     );
   });
 

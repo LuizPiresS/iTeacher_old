@@ -11,6 +11,7 @@ export function UserRoute(server: FastifyInstance, options: any, done: any) {
   const repository = new UserDataSource();
   const validator = new ValidatorAdapter();
   const security = new SecurityAdapter();
+  // const email = new EmailAdapter();
 
   server.post('/', async function (request, reply) {
     const presenter = new CreateUserJSONPresenter(reply);

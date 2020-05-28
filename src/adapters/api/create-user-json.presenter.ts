@@ -1,12 +1,12 @@
 import type { FastifyReply } from 'fastify';
 
-import type { IPresenter } from '../../core/common/presenter.interface';
+import type { Presenter } from '../../core/common/presenter.interface';
 import type { CreateUserResponse } from '../../core/user/dto/create-user.response';
 import { UserEmailInvalidError } from '../../core/user/error/user-email-invalid.error';
 import { UserPasswordInvalidError } from '../../core/user/error/user-password-invalid.error';
 import { isInstanceOf } from '../../utils/instanceof.util';
 
-export class CreateUserJSONPresenter implements IPresenter<CreateUserResponse> {
+export class CreateUserJSONPresenter implements Presenter<CreateUserResponse> {
   constructor(private readonly res: FastifyReply<any>) {}
 
   async reply(data: CreateUserResponse): Promise<void> {
