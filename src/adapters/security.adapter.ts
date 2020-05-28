@@ -1,9 +1,9 @@
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 
-import { ISecurity } from '../core/common/security.interface';
+import { Security } from '../core/common/security.interface';
 
-export class SecurityAdapter implements ISecurity {
+export class SecurityAdapter implements Security {
   //TODO: Colocar no env
   private TOKEN_SECRET = 'YOUR_TOKEN_SECRET';
 
