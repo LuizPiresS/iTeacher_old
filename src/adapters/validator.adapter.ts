@@ -4,9 +4,9 @@ import {
   isValidPhone,
 } from '@brazilian-utils/brazilian-utils';
 
-import { Validator } from '../core/common/validator';
+import { IValidator } from '../core/common/validator.interface';
 
-export class ValidatorAdapter implements Validator {
+export class ValidatorAdapter implements IValidator {
   isUsername(value: string): boolean {
     if (!value || !value.trim()) {
       return false;

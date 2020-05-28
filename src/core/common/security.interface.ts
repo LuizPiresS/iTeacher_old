@@ -1,4 +1,4 @@
-export interface Security {
+export interface ISecurity {
   encryptPassword(value: string): string;
 
   validateToken(token: string): boolean;
