@@ -1,9 +1,10 @@
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 
-import { Security } from '../core/common/security';
+import { Security } from '../core/common/security.interface';
 
 export class SecurityAdapter implements Security {
+  //TODO: Colocar no env
   private TOKEN_SECRET = 'YOUR_TOKEN_SECRET';
 
   encryptPassword(value: string): string {

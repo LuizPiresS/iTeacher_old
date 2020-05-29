@@ -1,6 +1,6 @@
 import type { FastifyReply } from 'fastify';
 
-import type { Presenter } from '../../core/common/presenter';
+import type { Presenter } from '../../core/common/presenter.interface';
 import type { CreateUserResponse } from '../../core/user/dto/create-user.response';
 import { UserEmailInvalidError } from '../../core/user/error/user-email-invalid.error';
 import { UserPasswordInvalidError } from '../../core/user/error/user-password-invalid.error';
