@@ -1,5 +1,6 @@
-export interface Files {
+import { User } from '../auth/user';
+export interface Student {
   id: string;
-  fileName: string;
-  path: string;
+  data: User;
+  rating: number;
 }

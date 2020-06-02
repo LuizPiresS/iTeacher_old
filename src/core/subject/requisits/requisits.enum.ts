@@ -1,0 +1,6 @@
+export enum Requisits {
+  MASTER = 'MASTER',
+  DOCTORATE = 'DOCTORATE',
+  GRADUATED = 'GRADUATED',
+  SELF_TEACHING = 'SELF-TEACHING',
+}
