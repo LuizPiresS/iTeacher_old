@@ -3,8 +3,8 @@ import { FastifyInstance } from 'fastify';
 import { CreateUserJSONPresenter } from '../../adapters/api/create-user-json.presenter';
 import { SecurityAdapter } from '../../adapters/security.adapter';
 import { ValidatorAdapter } from '../../adapters/validator.adapter';
-import type { CreateUserRequest } from '../../core/user/dto/create-user.request';
-import { CreateUserInteractor } from '../../core/user/interactor/create-user.interactor';
+import type { CreateUserRequest } from '../../core/auth/dto/create-user.request';
+import { CreateUserInteractor } from '../../core/auth/interactor/create-user.interactor';
 import { UserDataSource } from '../../database/data-sources/user.data-source';
 
 export function UserRoute(server: FastifyInstance, options: any, done: any) {
