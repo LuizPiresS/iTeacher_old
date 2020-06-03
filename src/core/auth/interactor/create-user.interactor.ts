@@ -1,7 +1,3 @@
-import { EJSAdapter } from '../../../adapters/ejs.adapter';
-import { emailConfig } from '../../../config/email.config';
-import { Email } from '../../../email/email.interface';
-import { RenderFile } from '../../../render-files/render.interface';
 import type { Presenter } from '../../common/presenter.interface';
 import type { Security } from '../../common/security.interface';
 import type { Validator } from '../../common/validator.interface';
