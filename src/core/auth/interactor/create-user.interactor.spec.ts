@@ -87,7 +87,7 @@ describe('CreateUser Interactor', () => {
   test('Espero um throw caso o cpf seja invalido', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
-      cpf: '',
+      cpf: 'invalid_cpf',
       birthdate: 'any_birthdate',
       cellphone: 'any_cellphone',
       email: 'any_mail@mail.com',
