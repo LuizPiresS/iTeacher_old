@@ -7,4 +7,7 @@ export interface Documents {
   file: Files;
   teacher: Teacher;
   status: DocumentStatus;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
 }

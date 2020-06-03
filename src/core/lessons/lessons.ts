@@ -1,4 +1,4 @@
-import { Schedule } from '../schedule/schedule';
+import { Schedule } from '../common/schedule.interface';
 import { Student } from '../student/student';
 import { Subject } from '../subject/subject';
 import { Teacher } from '../teacher/teacher';

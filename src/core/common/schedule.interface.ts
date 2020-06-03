@@ -1,5 +1,11 @@
 import { Subject } from '../subject/subject';
-import { Compromise } from './types/compromise.type';
+
+export type Compromise = {
+  date: string;
+  startTime: string;
+  endTime: string;
+};
+
 export interface Schedule {
   id: string;
   name: string;

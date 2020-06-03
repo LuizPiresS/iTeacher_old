@@ -6,4 +6,7 @@ export interface RegisterValidation {
   document: Document;
   teacher: Teacher;
   status: ValidationStatus;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
 }

@@ -1,5 +1,5 @@
 import { User } from '../auth/user';
-import { Schedule } from '../schedule/schedule';
+import { Schedule } from '../common/schedule.interface';
 import { Subject } from '../subject/subject';
 import { RegisterValidation } from './register-validation';
 
@@ -10,4 +10,7 @@ export interface Teacher {
   subjects: Subject;
   schedule: Schedule;
   rating: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
 }
