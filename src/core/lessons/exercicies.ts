@@ -1,10 +1,10 @@
 import { Lessons } from '../lessons/lessons';
-import { Files } from '../storage/files';
+import { Archive } from '../storage/files';
 
 export interface Exercicies {
   id: string;
   name: string;
   description: string;
-  file: Files;
+  file: Archive;
   lesson: Lessons; // A qual lição pertence
 }
