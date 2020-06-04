@@ -1,4 +1,4 @@
-export enum Requisits {
+export enum SubjectRequisit {
   MASTER = 'MASTER',
   DOCTORATE = 'DOCTORATE',
   GRADUATED = 'GRADUATED',
