@@ -1,5 +1,5 @@
-export interface Files {
+export interface Archive {
   id: string;
-  fileName: string;
+  name: string;
   path: string;
 }
