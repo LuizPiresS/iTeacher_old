@@ -9,7 +9,7 @@
     "build": "tsc",
     "start:api": "node build/api/main.js",
     "start:api:watch": "nodemon -w build build/api/main.js",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "coverage": "jest --coverage",
     "db:migration:create": "typeorm migration:create",
     "db:migration:run": "typeorm migration:run",
