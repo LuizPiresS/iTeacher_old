@@ -1,5 +1,5 @@
 {
-  "name": "Node.js & Postgres",
+  "name": "Iteacher",
   "dockerComposeFile": "docker-compose.yml",
   "service": "application",
   "workspaceFolder": "/workspace",
