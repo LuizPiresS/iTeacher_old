@@ -2,5 +2,5 @@ export enum SubjectRequisit {
   MASTER = 'MASTER',
   DOCTORATE = 'DOCTORATE',
   GRADUATED = 'GRADUATED',
-  SELF_TAUGHT= 'SELF_TAUGHT',
+  SELF_TAUGHT = 'SELF_TAUGHT',
 }
