@@ -1,5 +1,5 @@
 import { Lessons } from '../lessons/lessons';
-import { Archive } from '../storage/files';
+import { Archive } from '../storage/archive';
 
 export interface Exercicies {
   id: string;
