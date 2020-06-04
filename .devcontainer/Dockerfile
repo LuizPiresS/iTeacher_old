@@ -31,10 +31,9 @@ RUN apt-get update && \
 
 USER $USERNAME
 
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)" && \
-    sed -i -r 's/^plugins=\(.*?\)$/plugins=(git git-flow)/' /home/$USERNAME/.zshrc && \
-    npm install -g spaceship-prompt && \
-    echo "zinit light zsh-users/zsh-autosuggestions" >> /home/$USERNAME/.zshrc && \
-    echo "zinit light zdharma/fast-syntax-highlighting" >> /home/$USERNAME/.zshrc && \
-    echo "zinit light zsh-users/zsh-completions" >> /home/$USERNAME/.zshrc && \
-    echo '\n\'
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+RUN sed -i -r 's/^plugins=\(.*?\)$/plugins=(git git-flow)/' ~/.zshrc
+RUN echo "zinit light denysdovhan/spaceship-prompt" >> ~/.zshrc
+RUN echo "zinit light zsh-users/zsh-autosuggestions" >> ~/.zshrc
+RUN echo "zinit light zdharma/fast-syntax-highlighting" >> ~/.zshrc
+RUN echo "zinit light zsh-users/zsh-completions" >> ~/.zshrc
