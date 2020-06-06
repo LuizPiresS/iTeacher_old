@@ -7,13 +7,14 @@
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
   "extensions": [
-	"dbaeumer.vscode-eslint",
-	"prettier.prettier-vscode",
-	"streetsidesoftware.code-spell-checker",
-	"sainnhe.gruvbox-material",
-	"donjayamanne.git-extension-pack",
-	"usernamehw.errorlens",
-	"mikestead.dotenv"
-],
+    "dbaeumer.vscode-eslint",
+    "prettier.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "sainnhe.gruvbox-material",
+    "donjayamanne.git-extension-pack",
+    "usernamehw.errorlens",
+    "mikestead.dotenv",
+    "christian-kohler.path-intellisense"
+  ],
   "remoteUser": "node"
 }
