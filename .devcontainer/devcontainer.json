@@ -2,10 +2,18 @@
   "name": "Iteacher",
   "dockerComposeFile": "docker-compose.yml",
   "service": "application",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/iteacher-api",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
-  "extensions": ["dbaeumer.vscode-eslint", "prettier.prettier-vscode"],
+  "extensions": [
+	"dbaeumer.vscode-eslint",
+	"prettier.prettier-vscode",
+	"streetsidesoftware.code-spell-checker",
+	"sainnhe.gruvbox-material",
+	"donjayamanne.git-extension-pack",
+	"usernamehw.errorlens",
+	"mikestead.dotenv"
+],
   "remoteUser": "node"
 }
