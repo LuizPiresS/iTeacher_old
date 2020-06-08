@@ -1,8 +1,8 @@
-import { Schedule } from '../common/schedule.interface';
+import { Schedule } from '../schedule/schedule';
 import { Student } from '../student/student';
 import { Subject } from '../subject/subject';
 import { Teacher } from '../teacher/teacher';
-import { Exercicies } from './exercicies';
+import { Exercises } from './exercises';
 export interface Lessons {
   id: string;
   name: string;
@@ -11,5 +11,5 @@ export interface Lessons {
   teacher: Teacher;
   student: Student;
   subject: Subject;
-  exercicies: Exercicies;
+  exercises: Exercises;
 }

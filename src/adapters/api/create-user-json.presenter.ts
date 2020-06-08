@@ -10,7 +10,7 @@ export class CreateUserJSONPresenter implements Presenter<CreateUserResponse> {
   constructor(private readonly res: FastifyReply<any>) {}
 
   async reply(data: CreateUserResponse): Promise<void> {
-    // Trasform DTO to Custom Format
+    // Transform DTO to Custom Format
     const responseJSON = { email: data.email };
 
     // Send data
