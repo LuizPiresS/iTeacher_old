@@ -1,4 +1,4 @@
-import { ValidationStatus } from './status/validation-status.enum';
+import { ValidationStatus } from './enums/validation-status.enum';
 import { Teacher } from './teacher';
 
 export interface RegisterValidation {

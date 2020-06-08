@@ -1,5 +1,5 @@
 import { Archive } from '../storage/archive';
-import { DocumentStatus } from './status/document-status.enum';
+import { DocumentStatus } from './enums/document-status.enum';
 import { Teacher } from './teacher';
 
 export interface Documents {

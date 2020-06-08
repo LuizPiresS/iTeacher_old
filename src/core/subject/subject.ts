@@ -1,7 +1,7 @@
-import { Requisits } from './requisits/requisits.enum';
+import { SubjectRequisite } from './requisites/requisites.enum';
 export interface Subject {
   id: string;
   name: string;
   description: string;
-  requisits: Requisits;
+  requisites: SubjectRequisite;
 }
