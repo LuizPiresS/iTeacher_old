@@ -2,7 +2,7 @@
   "name": "Iteacher",
   "dockerComposeFile": "docker-compose.yml",
   "service": "application",
-  "workspaceFolder": "/iteacher-api",
+  "workspaceFolder": "/workspace",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
