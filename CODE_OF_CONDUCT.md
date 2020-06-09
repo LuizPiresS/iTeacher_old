@@ -29,7 +29,7 @@ Exemplos de comportamentos inaceitáveis por parte dos participantes incluem:
 * Publicar informação pessoal de outros sem permissão explícita, como, por exemplo, um endereço eletrônico ou residencial
 * Qualquer outra forma de conduta que pode ser razoavelmente considerada inapropriada num ambiente profissional
 
-## Nossas responsibilidades
+## Nossas responsabilidades
 
 Os administradores do projeto são responsáveis por esclarecer os padrões de
 comportamento e deverão tomar ação corretiva apropriada e justa em resposta
