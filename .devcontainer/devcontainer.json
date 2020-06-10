@@ -2,7 +2,7 @@
   "name": "Iteacher",
   "dockerComposeFile": "docker-compose.yml",
   "service": "application",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/iteacher",
   "settings": {
     "terminal.integrated.shell.linux": "/bin/zsh"
   },
@@ -14,7 +14,11 @@
     "donjayamanne.git-extension-pack",
     "usernamehw.errorlens",
     "mikestead.dotenv",
-    "christian-kohler.path-intellisense"
+    "christian-kohler.path-intellisense",
+    "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+    "ms-azuretools.vscode-docker",
+    "editorconfig.editorconfig",
+    "eamodio.gitlens"
   ],
   "remoteUser": "node"
 }
