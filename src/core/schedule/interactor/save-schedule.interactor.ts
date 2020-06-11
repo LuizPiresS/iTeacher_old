@@ -13,10 +13,10 @@ export class SaveScheduleInteractor {
   async execute(data: ScheduleRequest): Promise<void> {
     try {
       if (data.title === '') {
-        throw new ScheduleTitleInvalidError('Empty field');
+        throw new ScheduleTitleInvalidError('Empty title field');
       }
       if (data.description === '') {
-        throw new ScheduleDescriptionInvalidError('Empty field');
+        throw new ScheduleDescriptionInvalidError('Empty description field');
       }
       // Data persistence
       const {
