@@ -10,7 +10,7 @@ import { ScheduleDescriptionInvalidError } from '../errors/schedule-description.
 import { ScheduleTitleInvalidError } from '../errors/schedule-title.error';
 import { Schedule } from '../schedule';
 import { ScheduleRepository } from '../schedule.repository';
-import { ScheduleInteractor } from './schedule.interactor';
+import { SaveScheduleInteractor } from './save-schedule.interactor';
 
 const presenterMock = {
   reply: jest.fn(),
@@ -50,10 +50,10 @@ const scheduleRepositoryMock = {
 // const securityMock = {};
 
 describe('ScheduleInteractor', () => {
-  let interactor: ScheduleInteractor;
+  let interactor: SaveScheduleInteractor;
 
   beforeAll(() => {
-    interactor = new ScheduleInteractor(
+    interactor = new SaveScheduleInteractor(
       presenterMock as Presenter<ScheduleResponse>,
       scheduleRepositoryMock as ScheduleRepository,
     );
