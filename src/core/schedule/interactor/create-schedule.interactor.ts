@@ -4,7 +4,7 @@ import { ScheduleResponse } from '../dto/schedule.response';
 import { ScheduleDescriptionInvalidError } from '../errors/schedule-description.error';
 import { ScheduleTitleInvalidError } from '../errors/schedule-title.error';
 import { ScheduleRepository } from '../schedule.repository';
-export class SaveScheduleInteractor {
+export class CreateScheduleInteractor {
   constructor(
     private readonly presenter: Presenter<ScheduleResponse>,
     private readonly scheduleRepository: ScheduleRepository,
