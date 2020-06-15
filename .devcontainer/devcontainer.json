@@ -10,21 +10,10 @@
     "dbaeumer.vscode-eslint",
     "prettier.prettier-vscode",
     "streetsidesoftware.code-spell-checker",
-    "sainnhe.gruvbox-material",
-    "donjayamanne.git-extension-pack",
-    "usernamehw.errorlens",
-    "mikestead.dotenv",
-    "christian-kohler.path-intellisense",
     "streetsidesoftware.code-spell-checker-portuguese-brazilian",
-    "ms-azuretools.vscode-docker",
+    "usernamehw.errorlens",
     "editorconfig.editorconfig",
-    "eamodio.gitlens",
-    "yzhang.markdown-all-in-one",
-    "davidanson.vscode-markdownlint",
-    "mutantdino.resourcemonitor",
-    "pmneo.tsimporter",
-    "visualstudioexptteam.vscodeintellicode",
-    "wakatime.vscode-wakatime"
+    "visualstudioexptteam.vscodeintellicode"
   ],
   "remoteUser": "node"
 }
