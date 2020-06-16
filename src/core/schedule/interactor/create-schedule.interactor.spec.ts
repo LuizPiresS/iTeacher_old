@@ -10,7 +10,7 @@ import { ScheduleDescriptionInvalidError } from '../errors/schedule-description.
 import { ScheduleTitleInvalidError } from '../errors/schedule-title.error';
 import { Schedule } from '../schedule';
 import { ScheduleRepository } from '../schedule.repository';
-import { CreateScheduleInteractor } from './save-schedule.interactor';
+import { CreateScheduleInteractor } from './create-schedule.interactor';
 
 const presenterMock = {
   reply: jest.fn(),
