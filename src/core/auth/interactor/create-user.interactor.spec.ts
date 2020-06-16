@@ -156,7 +156,7 @@ describe('CreateUser Interactor', () => {
     );
   });
 
-  test('Testa se o usuario foi cadastrado no sistema', async () => {
+  test('Testa se o usuário foi cadastrado no sistema', async () => {
     defineNow('2020-05-20T00:00:00.000Z');
 
     userRepositoryMock.save.mockImplementation(
