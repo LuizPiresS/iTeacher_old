@@ -1,5 +1,5 @@
 import { Subject } from '../../subject/subject';
-import { WeekDays } from '../enums/days.enum';
+import { WeekDays } from '../enums/week-days.enum';
 
 export interface AvailableTimeRequest {
   day: WeekDays;
