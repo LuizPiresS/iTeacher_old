@@ -1,6 +1,7 @@
-import type { Presenter } from '../../common/presenter';
-import type { Security } from '../../common/security';
-import type { Validator } from '../../common/validator';
+import { defineNow, getNowISO } from '../../../utils/test.util';
+import type { Presenter } from '../../common/presenter.interface';
+import type { Security } from '../../common/security.interface';
+import type { Validator } from '../../common/validator.interface';
 import type { CreateUserRequest } from '../dto/create-user.request';
 import type { CreateUserResponse } from '../dto/create-user.response';
 import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error';
@@ -8,9 +9,9 @@ import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error
 import { UserCPFInvalidError } from '../error/user-cpf-invalid-error';
 import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
-import type { UserRepository } from '../user.repository';
+import { User } from '../user';
+import { UserRepository } from '../user.repository';
 import { CreateUserInteractor } from './create-user.interactor';
-
 const presenterMock = {
   reply: jest.fn(),
   throw: jest.fn(),
@@ -36,6 +37,15 @@ const securityMock = {
   validateToken: jest.fn(),
   encodeToken: jest.fn(),
   decodeToken: jest.fn(),
+};
+
+const emailMock = {
+  sendEmail: jest.fn(),
+  generateEmailMessage: jest.fn(),
+};
+
+const templateMock = {
+  renderHtml: jest.fn(),
 };
 
 describe('CreateUser Interactor', () => {
@@ -77,7 +87,7 @@ describe('CreateUser Interactor', () => {
   test('Espero um throw caso o cpf seja invalido', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
-      cpf: '',
+      cpf: 'invalid_cpf',
       birthdate: 'any_birthdate',
       cellphone: 'any_cellphone',
       email: 'any_mail@mail.com',
@@ -144,5 +154,44 @@ describe('CreateUser Interactor', () => {
     expect(presenterMock.throw).toBeCalledWith(
       expect.any(UserEmailInvalidError),
     );
+  });
+
+  test('Testa se o usuário foi cadastrado no sistema', async () => {
+    defineNow('2020-05-20T00:00:00.000Z');
+
+    userRepositoryMock.save.mockImplementation(
+      (data: DeepPartial<User>): User => {
+        return {
+          ...data,
+          id: 'uuid',
+          name: 'any_name',
+          cpf: 'any_cpf',
+          birthdate: 'any_birthdate',
+          cellphone: 'any_cellphone',
+          email: 'any_mail@mail.com',
+          createdAt: getNowISO(),
+        } as User;
+      },
+    );
+
+    await interactor.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      birthdate: 'any_birthdate',
+      cellphone: 'any_cellphone',
+      email: 'any_mail@mail.com',
+      password: 'any_password',
+    });
+
+    expect(presenterMock.throw).not.toBeCalled();
+    expect(presenterMock.reply).toHaveBeenCalledWith({
+      id: 'uuid',
+      name: 'any_name',
+      cpf: 'any_cpf',
+      birthdate: 'any_birthdate',
+      cellphone: 'any_cellphone',
+      email: 'any_mail@mail.com',
+      createdAt: getNowISO(),
+    });
   });
 });

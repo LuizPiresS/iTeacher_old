@@ -1,14 +1,19 @@
 {
-  "name": "Node.js & Postgres",
+  "name": "Iteacher",
   "dockerComposeFile": "docker-compose.yml",
   "service": "application",
-  "workspaceFolder": "/workspace",
+  "workspaceFolder": "/iteacher",
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.shell.linux": "/bin/zsh"
   },
   "extensions": [
     "dbaeumer.vscode-eslint",
-    "prettier.prettier-vscode"
+    "prettier.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+    "usernamehw.errorlens",
+    "editorconfig.editorconfig",
+    "visualstudioexptteam.vscodeintellicode"
   ],
   "remoteUser": "node"
 }

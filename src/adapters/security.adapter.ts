@@ -1,10 +1,10 @@
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 
-import { Security } from '../core/common/security';
+import { Security } from '../core/common/security.interface';
 
 export class SecurityAdapter implements Security {
-  private TOKEN_SECRET = 'YOUR_TOKEN_SECRET';
+  private TOKEN_SECRET = process.env.TOKEN_SECRET;
 
   encryptPassword(value: string): string {
     const hash = crypto.createHash('sha256');
@@ -15,11 +15,11 @@ export class SecurityAdapter implements Security {
   }
 
   validateToken(token: string): boolean {
-    return !!jwt.verify(token, this.TOKEN_SECRET);
+    return !!jwt.verify(token, String(this.TOKEN_SECRET));
   }
 
   encodeToken<T extends object>(data: T): string {
-    return jwt.sign(data, this.TOKEN_SECRET);
+    return jwt.sign(data, String(this.TOKEN_SECRET));
   }
 
   decodeToken<T extends object>(token: string): T {
