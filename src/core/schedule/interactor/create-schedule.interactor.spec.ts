@@ -45,10 +45,6 @@ const scheduleRepositoryMock = {
   delete: jest.fn(),
 };
 
-// const validationMock = {};
-
-// const securityMock = {};
-
 describe('ScheduleInteractor', () => {
   let interactor: CreateScheduleInteractor;
 
@@ -59,14 +55,13 @@ describe('ScheduleInteractor', () => {
     );
   });
 
-  // beforeEach(() => {});
   test('Espero um throw caso o description seja invalido', async () => {
     const mockDataRequest: ScheduleRequest = {
       title: 'any_title',
       student: studentMock,
       teacher: teacherMock,
       subject: subjectMock,
-      date: 'any_date',
+      date: Date.now(),
       startTime: 'any_start_time',
       endTime: 'any_end_time',
       description: '',
@@ -85,7 +80,7 @@ describe('ScheduleInteractor', () => {
       student: studentMock,
       teacher: teacherMock,
       subject: subjectMock,
-      date: 'any_date',
+      date: Date.now(),
       startTime: 'any_start_time',
       endTime: 'any_end_time',
       description: 'any_description',
@@ -110,7 +105,7 @@ describe('ScheduleInteractor', () => {
           teacher: teacherMock,
           subject: subjectMock,
           title: 'any_title',
-          date: 'any_date',
+          date: Date.now(),
           startTime: 'any_start_time',
           endTime: 'any_end_time',
           description: 'any_description',
@@ -125,7 +120,7 @@ describe('ScheduleInteractor', () => {
       student: studentMock,
       teacher: teacherMock,
       subject: subjectMock,
-      date: 'any_date',
+      date: Date.now(),
       startTime: 'any_start_time',
       endTime: 'any_end_time',
     });
@@ -137,7 +132,7 @@ describe('ScheduleInteractor', () => {
       student: studentMock,
       teacher: teacherMock,
       subject: subjectMock,
-      date: 'any_date',
+      date: Date.now(),
       startTime: 'any_start_time',
       endTime: 'any_end_time',
       description: 'any_description',
