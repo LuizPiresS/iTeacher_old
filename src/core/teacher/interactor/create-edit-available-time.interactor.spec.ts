@@ -9,7 +9,7 @@ import { WeekDays } from '../enums/week-days.enum';
 import { AvailableTimeDescriptionError } from '../error/create-available-time-description.error';
 import { AvailableTimeEndTimeError } from '../error/create-available-time-end-time.error';
 import { AvailableTimeStartTimeError } from '../error/create-available-time-start-time.error';
-import { CreateAvailableTimeInteractor } from './create-available-time.interactor';
+import { CreateEditAvailableTimeInteractor } from './create-edit-available-time.interactor';
 
 const presenterMock = {
   reply: jest.fn(),
@@ -27,10 +27,10 @@ const availableTimeRepositoryMock = {
 };
 
 describe('AvailableTimeInteractor', () => {
-  let interactor: CreateAvailableTimeInteractor;
+  let interactor: CreateEditAvailableTimeInteractor;
 
   beforeAll(() => {
-    interactor = new CreateAvailableTimeInteractor(
+    interactor = new CreateEditAvailableTimeInteractor(
       presenterMock as Presenter<AvailableTimeResponse>,
       availableTimeRepositoryMock as AvailableTimeRepository,
     );

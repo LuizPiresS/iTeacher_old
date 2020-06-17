@@ -6,7 +6,7 @@ import { AvailableTimeDescriptionError } from '../error/create-available-time-de
 import { AvailableTimeEndTimeError } from '../error/create-available-time-end-time.error';
 import { AvailableTimeStartTimeError } from '../error/create-available-time-start-time.error';
 
-export class CreateAvailableTimeInteractor {
+export class CreateEditAvailableTimeInteractor {
   constructor(
     private readonly presenter: Presenter<AvailableTimeResponse>,
     private readonly repository: AvailableTimeRepository,
