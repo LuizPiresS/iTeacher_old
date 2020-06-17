@@ -6,9 +6,9 @@ import { AvailableTimeRepository } from '../available-time.repository';
 import { AvailableTimeRequest } from '../dto/available-time.request';
 import { AvailableTimeResponse } from '../dto/available-time.response';
 import { WeekDays } from '../enums/week-days.enum';
-import { AvailableTimeDescriptionError } from '../error/create-available-time-description.error';
-import { AvailableTimeEndTimeError } from '../error/create-available-time-end-time.error';
-import { AvailableTimeStartTimeError } from '../error/create-available-time-start-time.error';
+import { AvailableTimeDescriptionError } from '../error/create-edit-available-time-description.error';
+import { AvailableTimeEndTimeError } from '../error/create-edit-available-time-end-time.error';
+import { AvailableTimeStartTimeError } from '../error/create-edit-available-time-start-time.error';
 import { CreateEditAvailableTimeInteractor } from './create-edit-available-time.interactor';
 
 const presenterMock = {
