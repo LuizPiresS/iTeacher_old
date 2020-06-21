@@ -1,16 +1,18 @@
 import { defineNow, getNowISO } from '../../../utils/test.util';
 import { User } from '../../auth/user';
+import { DateCalculator } from '../../common/date-calculator.interface';
 import { Presenter } from '../../common/presenter.interface';
 import { Student } from '../../student/student';
 import { Subject } from '../../subject/subject';
 import { Teacher } from '../../teacher/teacher';
 import { ScheduleRequest } from '../dto/schedule.request';
 import { ScheduleResponse } from '../dto/schedule.response';
+import { RescheduleDateError } from '../errors/reschedule-date.error';
 import { ScheduleDescriptionInvalidError } from '../errors/schedule-description.error';
 import { ScheduleTitleInvalidError } from '../errors/schedule-title.error';
 import { Schedule } from '../schedule';
 import { ScheduleRepository } from '../schedule.repository';
-import { CreateScheduleInteractor } from './create-schedule.interactor';
+import { RescheduleInteractor } from './reschedule.interactor';
 
 const presenterMock = {
   reply: jest.fn(),
@@ -44,15 +46,41 @@ const scheduleRepositoryMock = {
   save: jest.fn(),
   delete: jest.fn(),
 };
+const dateCalculatorMock = {
+  lessThanTwentyFourHours: jest.fn(),
+};
 
 describe('ScheduleInteractor', () => {
-  let interactor: CreateScheduleInteractor;
+  let interactor: RescheduleInteractor;
 
   beforeAll(() => {
-    interactor = new CreateScheduleInteractor(
+    interactor = new RescheduleInteractor(
       presenterMock as Presenter<ScheduleResponse>,
       scheduleRepositoryMock as ScheduleRepository,
+      dateCalculatorMock as DateCalculator,
     );
+  });
+
+  beforeEach(() => {
+    dateCalculatorMock.lessThanTwentyFourHours.mockReturnValue(true);
+  });
+  test('Espero um throw caso a data seja inferior a 24h', async () => {
+    const mockDataRequest: ScheduleRequest = {
+      title: 'any_title',
+      student: studentMock,
+      teacher: teacherMock,
+      subject: subjectMock,
+      date: Date.now(),
+      startTime: 'any_start_time',
+      endTime: 'any_end_time',
+      description: '',
+    };
+
+    dateCalculatorMock.lessThanTwentyFourHours.mockReturnValue(false);
+
+    await interactor.execute(mockDataRequest);
+
+    expect(presenterMock.throw).toBeCalledWith(expect.any(RescheduleDateError));
   });
 
   test('Espero um throw caso o description seja invalido', async () => {

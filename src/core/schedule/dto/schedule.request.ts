@@ -8,7 +8,7 @@ export interface ScheduleRequest {
   student: Student;
   teacher: Teacher;
   subject: Subject;
-  date: string;
+  date: number;
   startTime: string;
   endTime: string;
 }

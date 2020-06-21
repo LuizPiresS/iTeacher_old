@@ -8,7 +8,7 @@ export interface Schedule {
   teacher: Teacher;
   subject: Subject;
   title: string;
-  date: string;
+  date: number;
   startTime: string;
   endTime: string;
   description: string;
