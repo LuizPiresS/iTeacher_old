@@ -1,10 +1,12 @@
+import dotenv from 'dotenv';
 import path from 'path';
 import { ConnectionOptions } from 'typeorm';
 
 const DatabaseDataSourceDirectory = path.resolve(__dirname, '..', 'database');
+dotenv.config();
 
 export default {
-  type: 'postgres',
+  type: 'mysql',
   host: process.env.DB_HOST,
   username: process.env.DB_USER,
   password: process.env.DB_PWD,

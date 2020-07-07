@@ -39,15 +39,6 @@ const securityMock = {
   decodeToken: jest.fn(),
 };
 
-const emailMock = {
-  sendEmail: jest.fn(),
-  generateEmailMessage: jest.fn(),
-};
-
-const templateMock = {
-  renderHtml: jest.fn(),
-};
-
 describe('CreateUser Interactor', () => {
   let interactor: CreateUserInteractor;
 
@@ -67,7 +58,7 @@ describe('CreateUser Interactor', () => {
     validationMock.isEmail.mockReturnValue(true);
   });
 
-  test('Espero um throw caso o name seja inválido', async () => {
+  test('Tests invalid name', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: '',
       cpf: 'any_cpf',
@@ -84,7 +75,7 @@ describe('CreateUser Interactor', () => {
     );
   });
 
-  test('Espero um throw caso o cpf seja invalido', async () => {
+  test('Test invalid cpf', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'invalid_cpf',
@@ -101,7 +92,7 @@ describe('CreateUser Interactor', () => {
     expect(presenterMock.throw).toBeCalledWith(expect.any(UserCPFInvalidError));
   });
 
-  test('Espero um throw caso o birthdate seja invalido', async () => {
+  test('Tests invalid birth date', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
@@ -120,7 +111,7 @@ describe('CreateUser Interactor', () => {
     );
   });
 
-  test('Espero um throw caso o cellphone seja invalido', async () => {
+  test('Tests invalid cellphone', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
@@ -138,7 +129,7 @@ describe('CreateUser Interactor', () => {
     );
   });
 
-  test('Espero um throw caso o email seja invalido', async () => {
+  test('Tests invalid e-mail', async () => {
     const mockDataRequest: CreateUserRequest = {
       name: 'any_name',
       cpf: 'any_cpf',
@@ -156,7 +147,7 @@ describe('CreateUser Interactor', () => {
     );
   });
 
-  test('Testa se o usuário foi cadastrado no sistema', async () => {
+  test('Add user', async () => {
     defineNow('2020-05-20T00:00:00.000Z');
 
     userRepositoryMock.save.mockImplementation(
