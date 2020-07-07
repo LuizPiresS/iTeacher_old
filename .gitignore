@@ -16,3 +16,4 @@ coverage
 
 backlog.md
 .idea
+.env
