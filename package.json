@@ -10,6 +10,8 @@
     "start:api": "node build/api/main.js",
     "start:api:watch": "nodemon -w build build/api/main.js",
     "test": "jest --passWithNoTests",
+    "test:unit": "jest --passWithNoTests -c jest-unit-config.js",
+    "test:integration": "jest --passWithNoTests -c jest-integration-config.js",
     "coverage": "jest --coverage",
     "db:migration:create": "typeorm migration:create",
     "db:migration:run": "typeorm migration:run",
@@ -33,6 +35,7 @@
     "@types/jest": "^25.2.2",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.0.5",
+    "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^3.0.0",
     "@typescript-eslint/parser": "^3.0.0",
     "eslint": "^6",
@@ -45,6 +48,7 @@
     "jest": "^26.0.1",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
+    "supertest": "^4.0.2",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.3"
   }

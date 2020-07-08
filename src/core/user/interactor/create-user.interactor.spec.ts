@@ -7,6 +7,8 @@ import type { CreateUserResponse } from '../dto/create-user.response';
 import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error';
 import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error';
 import { UserCPFInvalidError } from '../error/user-cpf-invalid-error';
+import { UserDuplicatedCPFError } from '../error/user-duplicated-cpf.error';
+import { UserDuplicatedEmailError } from '../error/user-duplicated-emaild.error';
 import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
 import { User } from '../user';
@@ -22,6 +24,8 @@ const userRepositoryMock = {
   findOne: jest.fn(),
   save: jest.fn(),
   delete: jest.fn(),
+  findEmail: jest.fn(),
+  findCPF: jest.fn(),
 };
 
 const validationMock = {
@@ -56,6 +60,8 @@ describe('CreateUser Interactor', () => {
     validationMock.isCellphone.mockReturnValue(true);
     validationMock.isDate.mockReturnValue(true);
     validationMock.isEmail.mockReturnValue(true);
+    userRepositoryMock.findEmail.mockReturnValue(false);
+    userRepositoryMock.findCPF.mockReturnValue(false);
   });
 
   test('Tests invalid name', async () => {
@@ -72,6 +78,39 @@ describe('CreateUser Interactor', () => {
 
     expect(presenterMock.throw).toBeCalledWith(
       expect.any(UserNameInvalidError),
+    );
+  });
+
+  test('Tests duplicated CPF', async () => {
+    defineNow('2020-05-20T00:00:00.000Z');
+
+    userRepositoryMock.save.mockImplementation(
+      (data: DeepPartial<User>): User => {
+        return {
+          ...data,
+          id: 'uuid',
+          name: 'any_name',
+          cpf: 'any_cpf',
+          birthdate: 'any_birthdate',
+          cellphone: 'any_cellphone',
+          email: 'any_mail@mail.com',
+          createdAt: getNowISO(),
+        } as User;
+      },
+    );
+
+    userRepositoryMock.findCPF.mockReturnValue(true);
+    await interactor.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      birthdate: 'any_birthdate',
+      cellphone: 'any_cellphone',
+      email: 'any_mail@mail.com',
+      password: 'any_password',
+    });
+
+    expect(presenterMock.throw).toBeCalledWith(
+      expect.any(UserDuplicatedCPFError),
     );
   });
 
@@ -126,6 +165,39 @@ describe('CreateUser Interactor', () => {
 
     expect(presenterMock.throw).toBeCalledWith(
       expect.any(UserCellphoneInvalidError),
+    );
+  });
+
+  test('Tests duplicated e-mail', async () => {
+    defineNow('2020-05-20T00:00:00.000Z');
+
+    userRepositoryMock.save.mockImplementation(
+      (data: DeepPartial<User>): User => {
+        return {
+          ...data,
+          id: 'uuid',
+          name: 'any_name',
+          cpf: 'any_cpf',
+          birthdate: 'any_birthdate',
+          cellphone: 'any_cellphone',
+          email: 'any_mail@mail.com',
+          createdAt: getNowISO(),
+        } as User;
+      },
+    );
+
+    userRepositoryMock.findEmail.mockReturnValue(true);
+    await interactor.execute({
+      name: 'any_name',
+      cpf: 'any_cpf',
+      birthdate: 'any_birthdate',
+      cellphone: 'any_cellphone',
+      email: 'any_mail@mail.com',
+      password: 'any_password',
+    });
+
+    expect(presenterMock.throw).toBeCalledWith(
+      expect.any(UserDuplicatedEmailError),
     );
   });
 

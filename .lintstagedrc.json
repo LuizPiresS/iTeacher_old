@@ -1,3 +1,3 @@
 {
-  "src/**/*.ts": ["npm run format", "npm run test"]
+  "src/**/*.ts": ["npm run format", "npm run test:unit"]
 }
