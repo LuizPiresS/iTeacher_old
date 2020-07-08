@@ -2,6 +2,11 @@ import type { FastifyReply } from 'fastify';
 
 import type { Presenter } from '../../core/common/presenter.interface';
 import type { CreateUserResponse } from '../../core/user/dto/create-user.response';
+import { UserBirthdateInvalidError } from '../../core/user/error/user-birthdate-invalid.error';
+import { UserCellphoneInvalidError } from '../../core/user/error/user-cellphone-invalid.error';
+import { UserCPFInvalidError } from '../../core/user/error/user-cpf-invalid-error';
+import { UserDuplicatedCPFError } from '../../core/user/error/user-duplicated-cpf.error';
+import { UserDuplicatedEmailError } from '../../core/user/error/user-duplicated-emaild.error';
 import { UserEmailInvalidError } from '../../core/user/error/user-email-invalid.error';
 import { UserPasswordInvalidError } from '../../core/user/error/user-password-invalid.error';
 import { isInstanceOf } from '../../utils/instanceof.util';
@@ -19,7 +24,16 @@ export class CreateUserJSONPresenter implements Presenter<CreateUserResponse> {
 
   async throw(error: Error): Promise<void> {
     if (
-      isInstanceOf(error, [UserEmailInvalidError, UserPasswordInvalidError])
+      isInstanceOf(error, [
+        UserEmailInvalidError,
+        UserPasswordInvalidError,
+        UserDuplicatedEmailError,
+        UserDuplicatedCPFError,
+        UserBirthdateInvalidError,
+        UserCellphoneInvalidError,
+        UserCPFInvalidError,
+        UserEmailInvalidError,
+      ])
     ) {
       // Format exception
       const responseJSON = {

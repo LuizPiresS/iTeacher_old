@@ -6,10 +6,11 @@ import type { CreateUserResponse } from '../dto/create-user.response';
 import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error';
 import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error';
 import { UserCPFInvalidError } from '../error/user-cpf-invalid-error';
+import { UserDuplicatedCPFError } from '../error/user-duplicated-cpf.error';
+import { UserDuplicatedEmailError } from '../error/user-duplicated-emaild.error';
 import { UserEmailInvalidError } from '../error/user-email-invalid.error';
 import { UserNameInvalidError } from '../error/user-name-invalid.error';
 import type { UserRepository } from '../user.repository';
-//TODO! Criar validação para os campos repetidos email e o CPF já estão cadastrados no sistema
 export class CreateUserInteractor {
   constructor(
     private readonly userRepository: UserRepository,
@@ -41,7 +42,15 @@ export class CreateUserInteractor {
         throw new UserEmailInvalidError('invalid e-mail');
       }
 
-      data.cpf = data.cpf.replace(/\.|\-/g, '');
+      if (await this.userRepository.findEmail({ email: data.email })) {
+        throw new UserDuplicatedEmailError('duplicated email');
+      }
+
+      if (await this.userRepository.findCPF({ cpf: data.cpf })) {
+        throw new UserDuplicatedCPFError('duplicated CPF');
+      }
+
+      data.cpf = data.cpf.replace(/[.\-]/g, '');
 
       data.password = this.security.encryptPassword(data.password);
 

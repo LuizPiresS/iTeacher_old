@@ -7,6 +7,13 @@ import { UserEntity } from '../entities/user.entity';
 export class UserDataSource implements UserRepository {
   private repository = getRepository(UserEntity);
 
+  async findCPF(conditions?: FindOneOptions<User>): Promise<boolean> {
+    return !!(await this.findOne(conditions));
+  }
+
+  async findEmail(conditions?: FindOneOptions<User>): Promise<boolean> {
+    return !!(await this.findOne(conditions));
+  }
   async find(conditions?: FindManyOptions<User>): Promise<User[]> {
     return this.repository.find(conditions);
   }
