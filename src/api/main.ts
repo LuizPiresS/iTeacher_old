@@ -4,7 +4,7 @@ import { createConnection } from 'typeorm';
 import ormconfig from './ormconfig';
 import { UserRoute } from './route/user.route';
 
-const PORT = parseInt(process.env.PORT || '1313', 10);
+const PORT = parseInt(process.env.PORT || '3333', 10);
 
 async function bootstrap() {
   await createConnection(ormconfig);
