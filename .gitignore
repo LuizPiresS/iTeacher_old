@@ -8,9 +8,6 @@ build
 .jest-cache
 coverage
 
-# IDE & Editors
-.vscode
-
 # Logs
 *.log
 
