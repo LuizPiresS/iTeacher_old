@@ -1,4 +1,4 @@
-import type { FastifyReply } from 'fastify';
+import { Response } from 'express';
 
 import type { Presenter } from '../../core/common/presenter.interface';
 import type { CreateUserResponse } from '../../core/user/dto/create-user.response';
@@ -12,7 +12,7 @@ import { UserPasswordInvalidError } from '../../core/user/error/user-password-in
 import { isInstanceOf } from '../../utils/instanceof.util';
 
 export class CreateUserJSONPresenter implements Presenter<CreateUserResponse> {
-  constructor(private readonly res: FastifyReply<any>) {}
+  constructor(private readonly res: Response) {}
 
   async reply(data: CreateUserResponse): Promise<void> {
     // Transform DTO to Custom Format

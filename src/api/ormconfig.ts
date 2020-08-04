@@ -3,7 +3,8 @@ import { ConnectionOptions } from 'typeorm';
 
 const DatabaseDataSourceDirectory = path.resolve(__dirname, '..', 'database');
 
-export default {
+const connectionOptions: ConnectionOptions = {
+  name: 'default',
   type: 'postgres',
   host: process.env.DB_HOST,
   username: process.env.DB_USER,
@@ -16,4 +17,6 @@ export default {
   ],
   migrations: [path.join(DatabaseDataSourceDirectory, 'migrations', '*.js')],
   subscribers: [path.join(DatabaseDataSourceDirectory, 'subscribers', '*.js')],
-} as ConnectionOptions;
+};
+
+export default connectionOptions;

@@ -1,33 +1,9 @@
-import fastify from 'fastify';
-import { createConnection } from 'typeorm';
+import app from './app';
 
-import ormconfig from './ormconfig';
-import { UserRoute } from './route/user.route';
+import 'reflect-metadata';
 
-const PORT = parseInt(process.env.PORT || '3333', 10);
+const port = 3333;
 
-async function bootstrap() {
-  await createConnection(ormconfig);
-
-  const server = fastify({
-    logger: {
-      level: 'info',
-      prettyPrint: {
-        levelFirst: true,
-        translateTime: true,
-      },
-    },
-  });
-
-  server.register(UserRoute, { prefix: '/user' });
-
-  server.listen(PORT, function (err, address) {
-    if (err) {
-      server.log.error(err);
-      process.exit(1);
-    }
-    server.log.info(`server listening on ${address}`);
-  });
-}
-
-bootstrap().then();
+app.listen(port, () => {
+  console.log(`app listing on port ${port}`);
+});
