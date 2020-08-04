@@ -29,6 +29,7 @@
     "nodemon": "^2.0.4",
     "pg": "^8.3.0",
     "pino-pretty": "^4.0.0",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25"
   },
   "devDependencies": {
