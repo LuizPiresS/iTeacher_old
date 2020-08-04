@@ -6,7 +6,7 @@ import { UserBirthdateInvalidError } from '../../core/user/error/user-birthdate-
 import { UserCellphoneInvalidError } from '../../core/user/error/user-cellphone-invalid.error';
 import { UserCPFInvalidError } from '../../core/user/error/user-cpf-invalid-error';
 import { UserDuplicatedCPFError } from '../../core/user/error/user-duplicated-cpf.error';
-import { UserDuplicatedEmailError } from '../../core/user/error/user-duplicated-emaild.error';
+import { UserDuplicatedEmailError } from '../../core/user/error/user-duplicated-email.error';
 import { UserEmailInvalidError } from '../../core/user/error/user-email-invalid.error';
 import { UserPasswordInvalidError } from '../../core/user/error/user-password-invalid.error';
 import { isInstanceOf } from '../../utils/instanceof.util';
