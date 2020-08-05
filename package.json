@@ -10,8 +10,16 @@
     "packages/*"
   ],
   "scripts": {
-    "test:unit": "jest",
-    "build": "tsc"
+    "lint": "eslint **/*.ts",
+    "format": "prettier --write **/*.{json,ts}",
+    "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests",
+    "test:unit": "jest --passWithNoTests -c ./jest-unit-config.js",
+    "test:unit:watch": "jest --passWithNoTests -c ./jest-unit-config.js",
+    "test:integration": "jest -c --passWithNoTests ./jest-integration-config.js",
+    "preBuild": "rm -rf build",
+    "build": "tsc",
+    "start:api": "yarn workspace @iteacher/api start:api"
   },
   "dependencies": {
     "@iteacher/eslint-config": "*",

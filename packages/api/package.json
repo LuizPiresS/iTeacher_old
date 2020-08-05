@@ -3,16 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "format": "prettier --write **/*.{json,ts}",
-    "lint": "eslint **/*.ts",
-    "prebuild": "rm -rf build",
-    "build": "tsc",
     "start:api": "tsnd --respawn --exit-child --debounce --clear --transpile-only --inspect --no-notify src/api/main.ts",
-    "start:api:watch": "nodemon -w build build/api/main.js",
-    "test": "jest --passWithNoTests",
-    "test:unit": "jest --passWithNoTests -c jest-unit-config.js",
-    "test:integration": "jest --passWithNoTests -c jest-integration-config.js",
-    "coverage": "jest --coverage",
     "db:migration:create": "typeorm migration:create",
     "db:migration:run": "typeorm migration:run",
     "db:migration:revert": "typeorm migration:revert"
