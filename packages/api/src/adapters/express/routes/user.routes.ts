@@ -3,7 +3,7 @@ import { ValidatorAdapter } from '../../validator.adapter'
 import type { CreateUserRequest } from '../../../core/user/dto/create-user.request'
 import { CreateUserInteractor } from '../../../core/user/interactor/create-user.interactor'
 import { UserDataSource } from '../../../database/data-sources/user.data-source'
-import app from '../../../api/app'
+import app from '../../../app'
 import { CreateUserPresenter } from '../presenters/create-user.presenter'
 
 export function UserRoutes(): void {

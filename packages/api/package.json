@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start:api": "tsnd --respawn --exit-child --debounce --clear --transpile-only --inspect --no-notify src/api/main.ts",
+    "start:api": "tsnd --respawn --exit-child --debounce --clear --transpile-only --inspect --no-notify src/main.ts",
     "db:migration:create": "typeorm migration:create",
     "db:migration:run": "typeorm migration:run",
     "db:migration:revert": "typeorm migration:revert"

@@ -1,8 +1,8 @@
 import express from 'express'
 import { createConnection } from 'typeorm'
 
-import connectionOptions from './ormconfig'
-import { UserRoutes } from '../adapters/express/routes/user.routes'
+import connectionOptions from './config/ormconfig'
+import { UserRoutes } from './adapters/express/routes/user.routes'
 
 class App {
   public express: express.Application
