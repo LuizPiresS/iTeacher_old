@@ -1,17 +1,17 @@
 import { Response } from 'express'
 
-import type { Presenter } from '../../core/common/presenter.interface'
-import type { CreateUserResponse } from '../../core/user/dto/create-user.response'
-import { UserBirthdateInvalidError } from '../../core/user/error/user-birthdate-invalid.error'
-import { UserCellphoneInvalidError } from '../../core/user/error/user-cellphone-invalid.error'
-import { UserCPFInvalidError } from '../../core/user/error/user-cpf-invalid-error'
-import { UserDuplicatedCPFError } from '../../core/user/error/user-duplicated-cpf.error'
-import { UserDuplicatedEmailError } from '../../core/user/error/user-duplicated-email.error'
-import { UserEmailInvalidError } from '../../core/user/error/user-email-invalid.error'
-import { UserPasswordInvalidError } from '../../core/user/error/user-password-invalid.error'
-import { isInstanceOf } from '../../utils/instanceof.util'
+import type { Presenter } from '../../../core/common/presenter.interface'
+import type { CreateUserResponse } from '../../../core/user/dto/create-user.response'
+import { UserBirthdateInvalidError } from '../../../core/user/error/user-birthdate-invalid.error'
+import { UserCellphoneInvalidError } from '../../../core/user/error/user-cellphone-invalid.error'
+import { UserCPFInvalidError } from '../../../core/user/error/user-cpf-invalid-error'
+import { UserDuplicatedCPFError } from '../../../core/user/error/user-duplicated-cpf.error'
+import { UserDuplicatedEmailError } from '../../../core/user/error/user-duplicated-email.error'
+import { UserEmailInvalidError } from '../../../core/user/error/user-email-invalid.error'
+import { UserPasswordInvalidError } from '../../../core/user/error/user-password-invalid.error'
+import { isInstanceOf } from '../../../utils/instanceof.util'
 
-export class CreateUserJSONPresenter implements Presenter<CreateUserResponse> {
+export class CreateUserPresenter implements Presenter<CreateUserResponse> {
   constructor(private readonly res: Response) {}
 
   async reply(data: CreateUserResponse): Promise<void> {

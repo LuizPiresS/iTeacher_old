@@ -1,10 +1,10 @@
-import { CreateUserJSONPresenter } from '../../adapters/api/create-user-json.presenter'
-import { SecurityAdapter } from '../../adapters/security.adapter'
-import { ValidatorAdapter } from '../../adapters/validator.adapter'
-import type { CreateUserRequest } from '../../core/user/dto/create-user.request'
-import { CreateUserInteractor } from '../../core/user/interactor/create-user.interactor'
-import { UserDataSource } from '../../database/data-sources/user.data-source'
-import app from '../app'
+import { SecurityAdapter } from '../../security.adapter'
+import { ValidatorAdapter } from '../../validator.adapter'
+import type { CreateUserRequest } from '../../../core/user/dto/create-user.request'
+import { CreateUserInteractor } from '../../../core/user/interactor/create-user.interactor'
+import { UserDataSource } from '../../../database/data-sources/user.data-source'
+import app from '../../../api/app'
+import { CreateUserPresenter } from '../presenters/create-user.presenter'
 
 export function UserRoutes(): void {
   const repository = new UserDataSource()
@@ -14,7 +14,7 @@ export function UserRoutes(): void {
   // app.get('/users', async () => {})
 
   app.post('/users', async (req, res) => {
-    const presenter = new CreateUserJSONPresenter(res)
+    const presenter = new CreateUserPresenter(res)
     const interactor = new CreateUserInteractor(
       repository,
       presenter,
