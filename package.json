@@ -10,7 +10,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "jest",
+    "test:unit": "jest",
     "build": "tsc"
   },
   "dependencies": {

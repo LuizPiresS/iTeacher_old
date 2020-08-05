@@ -1,6 +1,6 @@
 import request from 'supertest'
 
-const url = 'http://127.0.0.1:3333'
+const url = 'http://127.0.0.1:3000'
 const mockRequest = {
   name: 'teste',
   cpf: '17369591077',
