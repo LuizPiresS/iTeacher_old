@@ -15,6 +15,6 @@ module.exports = {
     '/node_modules/',
     '/build/',
     '/coverage/',
-    '/.jest-cache/',
-  ],
-};
+    '/.jest-cache/'
+  ]
+}

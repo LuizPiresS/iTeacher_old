@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig.json",
+  "files": ["./src/env.d.ts"],
+  "exclude": ["node_modules", "build", ".jest-cache"]
+}
