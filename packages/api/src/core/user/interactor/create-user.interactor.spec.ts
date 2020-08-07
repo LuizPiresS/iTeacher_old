@@ -26,7 +26,8 @@ const userRepositoryMock = {
   save: jest.fn(),
   delete: jest.fn(),
   findEmail: jest.fn(),
-  findCPF: jest.fn()
+  findCPF: jest.fn(),
+  updateUser: jest.fn()
 }
 
 const validationMock = {

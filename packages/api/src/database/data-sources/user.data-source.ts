@@ -1,7 +1,9 @@
+import { UpdateUserRequest } from './../../core/user/dto/update-user.request'
 import { User } from '../../core/user/user'
 import { UserRepository } from '../../core/user/user.repository'
 import { UserEntity } from '../entities/user.entity'
 import { getRepository } from 'typeorm'
+import { UpdateUserResponse } from '../../core/user/dto/update-user.response'
 
 export class UserDataSource implements UserRepository {
   private repository = getRepository(UserEntity)
@@ -24,6 +26,14 @@ export class UserDataSource implements UserRepository {
 
   async save(data: DeepPartial<User>): Promise<User> {
     return this.repository.save(data)
+  }
+
+  async updateUser(
+    id: string,
+    data: UpdateUserRequest
+  ): Promise<UpdateUserResponse> {
+    await this.repository.update(id, data)
+    return data
   }
 
   async delete(id: string): Promise<void> {
