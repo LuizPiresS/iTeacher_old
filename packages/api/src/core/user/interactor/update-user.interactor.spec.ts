@@ -12,28 +12,7 @@ import { UserRepository } from '../user.repository'
 import { UpdateUserInteractor } from './update-user.interactor'
 import { DeepPartial } from 'typeorm/common/DeepPartial'
 import { UpdateUserRequest } from '../dto/update-user.request'
-const presenterMock = {
-  reply: jest.fn(),
-  throw: jest.fn()
-}
-
-const userRepositoryMock = {
-  find: jest.fn(),
-  findOne: jest.fn(),
-  save: jest.fn(),
-  updateUser: jest.fn(),
-  delete: jest.fn(),
-  findEmail: jest.fn(),
-  findCPF: jest.fn()
-}
-
-const validationMock = {
-  isEmail: jest.fn(),
-  isCPF: jest.fn(),
-  isPassword: jest.fn(),
-  isDate: jest.fn(),
-  isCellphone: jest.fn()
-}
+import { userRepositoryMock, presenterMock, validationMock } from './mocks'
 
 const mockDataRequest: UpdateUserRequest = {
   id: 'uuid',
@@ -43,7 +22,6 @@ const mockDataRequest: UpdateUserRequest = {
   cellphone: 'any_cellphone',
   email: 'any_mail@mail.com'
 }
-
 describe('UpdateUser Interactor', () => {
   let interactor: UpdateUserInteractor
 
