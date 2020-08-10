@@ -1,0 +1,7 @@
+export * from '../error/user-birthdate-invalid.error'
+export * from '../error/user-cellphone-invalid.error'
+export * from '../error/user-cpf-invalid-error'
+export * from '../error/user-duplicated-cpf.error'
+export * from '../error/user-duplicated-email.error'
+export * from '../error/user-email-invalid.error'
+export * from '../error/user-name-invalid.error'

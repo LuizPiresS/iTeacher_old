@@ -4,45 +4,25 @@ import type { Security } from '../../common/security.interface'
 import type { Validator } from '../../common/validator.interface'
 import type { CreateUserRequest } from '../dto/create-user.request'
 import type { CreateUserResponse } from '../dto/create-user.response'
-import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error'
-import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error'
-import { UserCPFInvalidError } from '../error/user-cpf-invalid-error'
-import { UserDuplicatedCPFError } from '../error/user-duplicated-cpf.error'
-import { UserDuplicatedEmailError } from '../error/user-duplicated-email.error'
-import { UserEmailInvalidError } from '../error/user-email-invalid.error'
-import { UserNameInvalidError } from '../error/user-name-invalid.error'
 import { User } from '../user'
 import { UserRepository } from '../user.repository'
 import { CreateUserInteractor } from './create-user.interactor'
 import { DeepPartial } from 'typeorm/common/DeepPartial'
-const presenterMock = {
-  reply: jest.fn(),
-  throw: jest.fn()
-}
-
-const userRepositoryMock = {
-  find: jest.fn(),
-  findOne: jest.fn(),
-  save: jest.fn(),
-  delete: jest.fn(),
-  findEmail: jest.fn(),
-  findCPF: jest.fn()
-}
-
-const validationMock = {
-  isEmail: jest.fn(),
-  isCPF: jest.fn(),
-  isPassword: jest.fn(),
-  isDate: jest.fn(),
-  isCellphone: jest.fn()
-}
-
-const securityMock = {
-  encryptPassword: jest.fn(),
-  validateToken: jest.fn(),
-  encodeToken: jest.fn(),
-  decodeToken: jest.fn()
-}
+import {
+  userRepositoryMock,
+  presenterMock,
+  validationMock,
+  securityMock
+} from '../mocks/mocks'
+import {
+  UserNameInvalidError,
+  UserDuplicatedCPFError,
+  UserCPFInvalidError,
+  UserBirthdateInvalidError,
+  UserCellphoneInvalidError,
+  UserDuplicatedEmailError,
+  UserEmailInvalidError
+} from '../error'
 
 describe('CreateUser Interactor', () => {
   let interactor: CreateUserInteractor
