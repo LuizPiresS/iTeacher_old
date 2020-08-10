@@ -2,12 +2,15 @@ import { UpdateUserResponse } from '../dto/update-user.response'
 import { UpdateUserRequest } from '../dto/update-user.request'
 import type { Presenter } from '../../common/presenter.interface'
 import type { Validator } from '../../common/validator.interface'
-import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error'
-import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error'
-import { UserCPFInvalidError } from '../error/user-cpf-invalid-error'
-import { UserEmailInvalidError } from '../error/user-email-invalid.error'
-import { UserNameInvalidError } from '../error/user-name-invalid.error'
+
 import type { UserRepository } from '../user.repository'
+import {
+  UserNameInvalidError,
+  UserCPFInvalidError,
+  UserBirthdateInvalidError,
+  UserCellphoneInvalidError,
+  UserEmailInvalidError
+} from '../error'
 export class UpdateUserInteractor {
   constructor(
     private readonly userRepository: UserRepository,

@@ -3,20 +3,22 @@ import type { Security } from '../../common/security.interface'
 import type { Validator } from '../../common/validator.interface'
 import type { CreateUserRequest } from '../dto/create-user.request'
 import type { CreateUserResponse } from '../dto/create-user.response'
-import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error'
-import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error'
-import { UserCPFInvalidError } from '../error/user-cpf-invalid-error'
-import { UserDuplicatedCPFError } from '../error/user-duplicated-cpf.error'
-import { UserDuplicatedEmailError } from '../error/user-duplicated-email.error'
-import { UserEmailInvalidError } from '../error/user-email-invalid.error'
-import { UserNameInvalidError } from '../error/user-name-invalid.error'
 import type { UserRepository } from '../user.repository'
+import {
+  UserNameInvalidError,
+  UserCPFInvalidError,
+  UserBirthdateInvalidError,
+  UserCellphoneInvalidError,
+  UserEmailInvalidError,
+  UserDuplicatedEmailError,
+  UserDuplicatedCPFError
+} from '../error'
 export class CreateUserInteractor {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly presenter: Presenter<CreateUserResponse>,
     private readonly validation: Validator,
-    private readonly security: Security // private readonly email: Email,
+    private readonly security: Security
   ) {}
 
   async execute(data: CreateUserRequest): Promise<void> {

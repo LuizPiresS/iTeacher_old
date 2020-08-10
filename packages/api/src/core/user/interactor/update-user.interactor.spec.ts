@@ -2,17 +2,19 @@ import { UpdateUserResponse } from '../dto/update-user.response'
 import { defineNow } from '../../../utils/test.util'
 import type { Presenter } from '../../common/presenter.interface'
 import type { Validator } from '../../common/validator.interface'
-import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error'
-import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error'
-import { UserCPFInvalidError } from '../error/user-cpf-invalid-error'
-import { UserEmailInvalidError } from '../error/user-email-invalid.error'
-import { UserNameInvalidError } from '../error/user-name-invalid.error'
 import { User } from '../user'
 import { UserRepository } from '../user.repository'
 import { UpdateUserInteractor } from './update-user.interactor'
 import { DeepPartial } from 'typeorm/common/DeepPartial'
 import { UpdateUserRequest } from '../dto/update-user.request'
 import { userRepositoryMock, presenterMock, validationMock } from './mocks'
+import {
+  UserNameInvalidError,
+  UserCPFInvalidError,
+  UserBirthdateInvalidError,
+  UserCellphoneInvalidError,
+  UserEmailInvalidError
+} from '../error'
 
 const mockDataRequest: UpdateUserRequest = {
   id: 'uuid',

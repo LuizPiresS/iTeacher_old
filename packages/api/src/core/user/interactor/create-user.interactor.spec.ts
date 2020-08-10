@@ -4,13 +4,6 @@ import type { Security } from '../../common/security.interface'
 import type { Validator } from '../../common/validator.interface'
 import type { CreateUserRequest } from '../dto/create-user.request'
 import type { CreateUserResponse } from '../dto/create-user.response'
-import { UserBirthdateInvalidError } from '../error/user-birthdate-invalid.error'
-import { UserCellphoneInvalidError } from '../error/user-cellphone-invalid.error'
-import { UserCPFInvalidError } from '../error/user-cpf-invalid-error'
-import { UserDuplicatedCPFError } from '../error/user-duplicated-cpf.error'
-import { UserDuplicatedEmailError } from '../error/user-duplicated-email.error'
-import { UserEmailInvalidError } from '../error/user-email-invalid.error'
-import { UserNameInvalidError } from '../error/user-name-invalid.error'
 import { User } from '../user'
 import { UserRepository } from '../user.repository'
 import { CreateUserInteractor } from './create-user.interactor'
@@ -21,6 +14,15 @@ import {
   validationMock,
   securityMock
 } from './mocks'
+import {
+  UserNameInvalidError,
+  UserDuplicatedCPFError,
+  UserCPFInvalidError,
+  UserBirthdateInvalidError,
+  UserCellphoneInvalidError,
+  UserDuplicatedEmailError,
+  UserEmailInvalidError
+} from '../error'
 
 describe('CreateUser Interactor', () => {
   let interactor: CreateUserInteractor
