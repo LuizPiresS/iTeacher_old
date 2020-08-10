@@ -13,7 +13,7 @@ import {
   presenterMock,
   validationMock,
   securityMock
-} from './mocks'
+} from '../mocks/mocks'
 import {
   UserNameInvalidError,
   UserDuplicatedCPFError,

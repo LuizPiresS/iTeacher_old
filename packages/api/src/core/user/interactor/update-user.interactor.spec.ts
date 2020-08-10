@@ -7,7 +7,11 @@ import { UserRepository } from '../user.repository'
 import { UpdateUserInteractor } from './update-user.interactor'
 import { DeepPartial } from 'typeorm/common/DeepPartial'
 import { UpdateUserRequest } from '../dto/update-user.request'
-import { userRepositoryMock, presenterMock, validationMock } from './mocks'
+import {
+  userRepositoryMock,
+  presenterMock,
+  validationMock
+} from '../mocks/mocks'
 import {
   UserNameInvalidError,
   UserCPFInvalidError,
