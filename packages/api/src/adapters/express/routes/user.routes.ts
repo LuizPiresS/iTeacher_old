@@ -14,7 +14,7 @@ export function UserRoutes(): void {
   const validator = new ValidatorAdapter()
   const security = new SecurityAdapter()
 
-  // app.get('/users', async () => {})
+  // app.get('/users/:id', async () => {})
 
   app.post('/users', async (req, res) => {
     const presenter = new CreateUserPresenter(res)
@@ -40,7 +40,7 @@ export function UserRoutes(): void {
     await interactor.execute(data)
   })
 
-  app.put('/users', async (req, res) => {
+  app.put('/users/:id', async (req, res) => {
     const presenter = new UpdateUserPresenter(res)
     const interactor = new UpdateUserInteractor(
       repository,

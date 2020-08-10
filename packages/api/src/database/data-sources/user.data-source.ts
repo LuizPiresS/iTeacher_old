@@ -37,6 +37,6 @@ export class UserDataSource implements UserRepository {
   }
 
   async delete(id: string): Promise<void> {
-    return this.delete(id)
+    return await this.delete(id)
   }
 }
