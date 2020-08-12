@@ -44,11 +44,11 @@ export class CreateUserInteractor {
         throw new UserEmailInvalidError('invalid e-mail')
       }
 
-      if (await this.userRepository.findEmail({ email: data.email })) {
+      if (await this.userRepository.findEmail(data.email)) {
         throw new UserDuplicatedEmailError('duplicated email')
       }
 
-      if (await this.userRepository.findCPF({ cpf: data.cpf })) {
+      if (await this.userRepository.findCPF(data.cpf)) {
         throw new UserDuplicatedCPFError('duplicated CPF')
       }
 

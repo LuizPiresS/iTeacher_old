@@ -1,9 +1,18 @@
+import { CreateUserRequest } from './dto/create-user.request'
 import { UpdateUserResponse } from './dto/update-user.response'
 import { UpdateUserRequest } from './dto/update-user.request'
-import type { User } from './user'
+import type { UserDetails } from './user'
 
-export interface UserRepository extends Repository<User> {
+export interface UserRepository {
+  findUser(id: string): Promise<UserDetails>
+
+  save(data: CreateUserRequest): Promise<UserDetails>
+
+  delete(id: string): Promise<void>
+
   updateUser(id: string, data: UpdateUserRequest): Promise<UpdateUserResponse>
-  findCPF(conditions?: FindOneOptions<User>): Promise<boolean>
-  findEmail(conditions?: FindOneOptions<User>): Promise<boolean>
+
+  findCPF(cpf: string): Promise<boolean>
+
+  findEmail(email: string): Promise<boolean>
 }
