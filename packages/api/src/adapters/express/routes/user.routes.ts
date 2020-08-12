@@ -16,8 +16,8 @@ export function UserRoutes(): void {
 
   // app.get('/users/:id', async () => {})
 
-  app.post('/users', async (req, res) => {
-    const presenter = new CreateUserPresenter(res)
+  app.post('/users', async (request, response) => {
+    const presenter = new CreateUserPresenter(response)
     const interactor = new CreateUserInteractor(
       repository,
       presenter,
@@ -26,7 +26,7 @@ export function UserRoutes(): void {
     )
 
     // Create a Request DTO
-    const { name, cpf, birthdate, cellphone, email, password } = req.body
+    const { name, cpf, birthdate, cellphone, email, password } = request.body
     const data: CreateUserRequest = {
       name,
       cpf,
