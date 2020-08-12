@@ -1,4 +1,4 @@
-export interface User {
+export interface UserDetails {
   id: string
   name: string
   cpf: string
@@ -9,4 +9,7 @@ export interface User {
   createdAt: string
   updatedAt: string
   deletedAt: string
+}
+export interface User {
+  id: string
 }

@@ -4,14 +4,12 @@ export const presenterMock = {
 }
 
 export const userRepositoryMock = {
-  find: jest.fn(),
-  findOne: jest.fn(),
+  findUser: jest.fn(),
   save: jest.fn(),
   updateUser: jest.fn(),
   delete: jest.fn(),
   findEmail: jest.fn(),
-  findCPF: jest.fn(),
-  deactivateUser: jest.fn()
+  findCPF: jest.fn()
 }
 
 export const validationMock = {

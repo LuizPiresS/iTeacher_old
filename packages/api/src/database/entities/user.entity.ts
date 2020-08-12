@@ -1,49 +1,28 @@
+import { UserDetailsEntity } from './user-details.entity'
 import {
   Entity,
   PrimaryGeneratedColumn,
-  Column,
+  OneToOne,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn
 } from 'typeorm'
-
 import { User } from '../../core/user/user'
 
 @Entity('user')
 export class UserEntity implements User {
   @PrimaryGeneratedColumn('uuid')
-  id!: string
-
-  @Column()
-  name!: string
-
-  @Column({
-    length: 11
-  })
-  cpf!: string
-
-  @Column({
-    type: 'date'
-  })
-  birthdate!: string
-
-  @Column({
-    length: 11
-  })
-  cellphone!: string
-
-  @Column()
-  email!: string
-
-  @Column()
-  password!: string
+  id: string
 
   @CreateDateColumn()
-  createdAt!: string
+  createdAt: string
 
   @UpdateDateColumn()
-  updatedAt!: string
+  updatedAt: string
 
   @DeleteDateColumn()
-  deletedAt!: string
+  deletedAt: string
+
+  @OneToOne(type => UserDetailsEntity, user => UserEntity)
+  userDetails: UserDetailsEntity
 }
