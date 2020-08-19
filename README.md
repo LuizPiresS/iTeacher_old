@@ -1,7 +1,7 @@
 # **ITeacher**
 
 ---
-[![codecov](https://codecov.io/gh/ProgramadorRanzinza/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/ProgramadorRanzinza/ITeacher)
+[![codecov](https://codecov.io/gh/LuizPiresS/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/LuizPiresS/ITeacher)
 ---
 
 Plataforma multilateral que conecta alunos e professores.
