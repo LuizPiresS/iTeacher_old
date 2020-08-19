@@ -49,7 +49,8 @@ export function UserRoutes(): void {
     )
 
     // Create a Request DTO
-    const { id, name, cpf, birthdate, cellphone, email } = req.body
+    const { name, cpf, birthdate, cellphone, email } = req.body
+    const { id } = req.params
     const data: UpdateUserRequest = {
       id,
       name,

@@ -43,7 +43,7 @@ export class UserDataSource implements UserRepository {
     id: string,
     data: UpdateUserRequest
   ): Promise<UpdateUserResponse> {
-    await this.repositoryUser.update(id, data)
+    await this.repositoryUserDetails.update(id, data)
     return data
   }
 
