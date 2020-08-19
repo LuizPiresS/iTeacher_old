@@ -23,7 +23,7 @@ export class SecurityAdapter implements Security {
     return jwt.sign(data, String(this.TOKEN_SECRET))
   }
 
-  decodeToken<T extends object>(token: string): T {
+  decodeToken(token: string): string {
     const value = jwt.decode(token) as any
 
     if (!value) {
