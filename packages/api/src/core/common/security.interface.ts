@@ -3,7 +3,7 @@ export interface Security {
 
   validateToken(token: string): boolean
 
-  encodeToken<T extends object>(data: T): string
+  encodeToken(data: []): string
 
-  decodeToken<T extends object>(token: string): T
+  decodeToken(token: string): string
 }
