@@ -13,19 +13,28 @@ ITeacher tem como foco o mercado local, buscando assim conectar professores aut�
 ## Instalação
 
 - clonar o o repositório
-  - git clone git@github.com:ProgramadorRanzinza/ITeacher.git
+  - git clone git@github.com:LuizPiresS/ITeacher.git
   - yarn install
 
 ### Princípios aplicados
 
 > ### Design Patterns aplicados
 >
-> ### Metodologias/designs utilizados
+> ### Arquiteturas/designs utilizados
 
 - TDD
 - Clean Architecture
 - GitFlow
+- Monorepo
 
 > ### Bibliotecas e ferramentas utilizadas
->
+
+- Express
+- Jest
+- Eslint
+- Husky
+- LintStaged
+- Github Actions
+- Docker Docker-compose & devcontainers vscode
+
 > ### Features
