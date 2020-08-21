@@ -1,8 +1,8 @@
 # **ITeacher**
 
 ---
-[![codecov](https://codecov.io/gh/LuizPiresS/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/LuizPiresS/ITeacher)
----
+
+## [![codecov](https://codecov.io/gh/LuizPiresS/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/LuizPiresS/ITeacher)
 
 Plataforma multilateral que conecta alunos e professores.
 
@@ -10,13 +10,15 @@ ITeacher tem como foco o mercado local, buscando assim conectar professores aut�
 
 ---
 
-## Instalação
+> ## Instalação
 
 - clonar o o repositório
   - git clone git@github.com:LuizPiresS/ITeacher.git
   - yarn install
 
-### Princípios aplicados
+> ### Modelo de negócios
+
+- [Modelo de negócios proposto](https://miro.com/app/board/o9J_kqWCpbw=/)
 
 > ### Design Patterns aplicados
 >
