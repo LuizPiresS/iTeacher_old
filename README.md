@@ -4,6 +4,8 @@
 
 ## [![codecov](https://codecov.io/gh/LuizPiresS/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/LuizPiresS/ITeacher)
 
+[![alt text](./assets/logo.png 'Link para o site')](https://www.iteacher.app)
+
 Plataforma multilateral que conecta alunos e professores.
 
 ITeacher tem como foco o mercado local, buscando assim conectar professores autônomos que desejam ministrar aulas particulares das mais diversas disciplinas.
