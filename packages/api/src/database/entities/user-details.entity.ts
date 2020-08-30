@@ -49,6 +49,7 @@ export class UserDetailsEntity implements UserDetails {
   @DeleteDateColumn()
   deletedAt: string
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @OneToOne(type => UserEntity, userDetail => UserDetailsEntity)
   @JoinColumn() // cria a coluna do relacionamento na tabela
   user: UserEntity
