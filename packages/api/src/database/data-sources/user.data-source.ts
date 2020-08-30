@@ -22,6 +22,7 @@ export class UserDataSource implements UserRepository {
     return this.repositoryUserDetails.findOne({ id: id })
   }
 
+  // TODO: refatorar a atribuição dos campos
   async save(data: UserDetails): Promise<UserDetails> {
     const user = new UserEntity()
     await this.repositoryUser.save(user)
