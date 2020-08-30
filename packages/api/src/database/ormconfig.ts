@@ -1,15 +1,18 @@
 import path from 'path'
 import { ConnectionOptions } from 'typeorm'
+import config, { IConfig } from 'config'
 
 const DatabaseDataSourceDirectory = path.resolve(__dirname, '..', 'database')
+
+const databaseConfig: IConfig = config.get('App.database')
 
 const connectionOptions: ConnectionOptions = {
   name: 'default',
   type: 'postgres',
-  host: process.env.DB_HOST,
-  username: process.env.DB_USER,
-  password: process.env.DB_PWD,
-  database: process.env.DB_NAME,
+  host: databaseConfig.get('dbHost'),
+  username: databaseConfig.get('dbUser'),
+  password: databaseConfig.get('dbPass'),
+  database: databaseConfig.get('dbName'),
   synchronize: true,
   logging: false,
   entities: [
