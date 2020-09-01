@@ -19,17 +19,18 @@
     "test:integration": "jest -c --passWithNoTests ./jest-integration-config.js",
     "preBuild": "rm -rf build",
     "build": "tsc",
-    "start:api": "yarn workspace @iteacher/api start:api"
+    "start:api": "yarn workspace @iteacher/api start:api",
+    "typeorm": "yarn workspace @iteacher/api typeorm"
   },
   "dependencies": {
     "@iteacher/eslint-config": "*",
-    "@types/jest": "24.9.0",
-    "jest": "24.9.0",
+    "jest": "26.4.2",
     "ts-jest": "^26.1.3",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   },
   "devDependencies": {
     "@types/supertest": "^2.0.10",
+    "@types/jest": "26.0.12",
     "supertest": "^4.0.2"
   }
 }
