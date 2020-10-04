@@ -7,18 +7,18 @@ import { UserRoutes } from './adapters/express/routes/user.routes'
 class App {
   public express: express.Application
 
-  public constructor() {
+  public constructor () {
     this.express = express()
     this.middlewares()
     this.routes()
   }
 
-  private middlewares(): void {
+  private middlewares (): void {
     this.express.use(express.json())
     // this.express.use(cors);
   }
 
-  private async routes(): Promise<void> {
+  private async routes (): Promise<void> {
     await createConnection(connectionOptions)
     UserRoutes()
   }

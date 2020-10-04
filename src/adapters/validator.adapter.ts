@@ -7,7 +7,7 @@ import {
 import { Validator } from '../core/common/validator.interface'
 
 export class ValidatorAdapter implements Validator {
-  isUsername(value: string): boolean {
+  isUsername (value: string): boolean {
     if (!value || !value.trim()) {
       return false
     }
@@ -19,15 +19,15 @@ export class ValidatorAdapter implements Validator {
     return true
   }
 
-  isEmail(email: string): boolean {
+  isEmail (email: string): boolean {
     return isValidEmail(email)
   }
 
-  isCPF(cpf: string): boolean {
+  isCPF (cpf: string): boolean {
     return isValidCPF(cpf)
   }
 
-  isPassword(password: string): boolean {
+  isPassword (password: string): boolean {
     if (!password) {
       return false
     }
@@ -39,11 +39,11 @@ export class ValidatorAdapter implements Validator {
     return true
   }
 
-  isDate(date: string): boolean {
+  isDate (date: string): boolean {
     return !Number.isNaN(new Date(date).valueOf())
   }
 
-  isCellphone(cellphone: string): boolean {
+  isCellphone (cellphone: string): boolean {
     return isValidPhone(cellphone)
   }
 }
