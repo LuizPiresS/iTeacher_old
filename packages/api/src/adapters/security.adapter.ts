@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
-
 import { Security } from '../core/common/security.interface'
+
 
 export class SecurityAdapter implements Security {
   private TOKEN_SECRET = process.env.TOKEN_SECRET
