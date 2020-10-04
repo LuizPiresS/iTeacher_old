@@ -5,11 +5,7 @@
   "repository": "https://github.com/ProgramadorRanzinza/ITeacher.git",
   "author": "Luiz Pires <kw13code@gmail.com>",
   "license": "MIT",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
+   "scripts": {
     "lint": "eslint **/*.ts",
     "format": "prettier --write **/*.{json,ts}",
     "test": "jest --passWithNoTests",
