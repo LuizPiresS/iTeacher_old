@@ -9,7 +9,7 @@ import { CreateUserPresenter } from '../presenters/create-user.presenter'
 import { UpdateUserPresenter } from '../presenters/update-user.presenter'
 import { UpdateUserInteractor } from '../../../core/user/interactor/update-user.interactor'
 
-export function UserRoutes(): void {
+export function UserRoutes (): void {
   const repository = new UserDataSource()
   const validator = new ValidatorAdapter()
   const security = new SecurityAdapter()

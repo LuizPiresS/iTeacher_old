@@ -10,20 +10,20 @@ export class UserDataSource implements UserRepository {
   private repositoryUser = getRepository(UserEntity)
   private repositoryUserDetails = getRepository(UserDetailsEntity)
 
-  async findCPF(cpf: string): Promise<boolean> {
+  async findCPF (cpf: string): Promise<boolean> {
     return !!(await this.repositoryUserDetails.findOne({ cpf: cpf }))
   }
 
-  async findEmail(email: string): Promise<boolean> {
+  async findEmail (email: string): Promise<boolean> {
     return !!(await this.repositoryUserDetails.findOne({ email: email }))
   }
 
-  async findUser(id: string): Promise<UserDetails> {
+  async findUser (id: string): Promise<UserDetails> {
     return this.repositoryUserDetails.findOne({ id: id })
   }
 
   // TODO: refatorar a atribuição dos campos
-  async save(data: UserDetails): Promise<UserDetails> {
+  async save (data: UserDetails): Promise<UserDetails> {
     const user = new UserEntity()
     await this.repositoryUser.save(user)
 
@@ -40,7 +40,7 @@ export class UserDataSource implements UserRepository {
     return await this.repositoryUserDetails.save(userDetails)
   }
 
-  async updateUser(
+  async updateUser (
     id: string,
     data: UpdateUserRequest
   ): Promise<UpdateUserResponse> {
@@ -48,7 +48,7 @@ export class UserDataSource implements UserRepository {
     return data
   }
 
-  async delete(id: string): Promise<void> {
+  async delete (id: string): Promise<void> {
     return await this.delete(id)
   }
 }

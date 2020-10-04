@@ -9,9 +9,10 @@ import { isInstanceOf } from '../../../utils/instanceof.util'
 import { UpdateUserResponse } from '../../../core/user/dto/update-user.response'
 
 export class UpdateUserPresenter implements Presenter<UpdateUserResponse> {
-  constructor(private readonly res: Response) {}
+  // eslint-disable-next-line no-useless-constructor
+  constructor (private readonly res: Response) {}
 
-  async reply(data: UpdateUserResponse): Promise<void> {
+  async reply (data: UpdateUserResponse): Promise<void> {
     // Transform DTO to Custom Format
     const responseJSON = { data }
 
@@ -19,7 +20,7 @@ export class UpdateUserPresenter implements Presenter<UpdateUserResponse> {
     this.res.status(201).send(responseJSON)
   }
 
-  async throw(error: Error): Promise<void> {
+  async throw (error: Error): Promise<void> {
     if (
       isInstanceOf(error, [
         UserEmailInvalidError,

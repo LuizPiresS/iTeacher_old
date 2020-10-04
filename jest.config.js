@@ -1,20 +1,8 @@
+const { resolve } = require('path')
+const root = resolve(__dirname)
 module.exports = {
-  cacheDirectory: '.jest-cache',
-
-  clearMocks: true,
-
-  coverageDirectory: 'coverage',
-
-  coveragePathIgnorePatterns: ['test.util.ts', 'custom-error.util.ts'],
-
-  preset: 'ts-jest',
-
+  rootDir: root,
   testEnvironment: 'node',
-
-  testPathIgnorePatterns: [
-    '/node_modules/',
-    '/build/',
-    '/coverage/',
-    '/.jest-cache/'
-  ]
+  clearMocks: true,
+  preset: 'ts-jest'
 }

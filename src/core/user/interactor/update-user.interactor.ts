@@ -1,27 +1,24 @@
+import { UpdateUserResponse } from '../dto/update-user.response'
+import { UpdateUserRequest } from '../dto/update-user.request'
 import type { Presenter } from '../../common/presenter.interface'
-import type { Security } from '../../common/security.interface'
 import type { Validator } from '../../common/validator.interface'
-import type { CreateUserRequest } from '../dto/create-user.request'
-import type { CreateUserResponse } from '../dto/create-user.response'
+
 import type { UserRepository } from '../user.repository'
 import {
   UserNameInvalidError,
   UserCPFInvalidError,
   UserBirthdateInvalidError,
   UserCellphoneInvalidError,
-  UserEmailInvalidError,
-  UserDuplicatedEmailError,
-  UserDuplicatedCPFError
+  UserEmailInvalidError
 } from '../error'
-export class CreateUserInteractor {
-  constructor(
+export class UpdateUserInteractor {
+  constructor (
     private readonly userRepository: UserRepository,
-    private readonly presenter: Presenter<CreateUserResponse>,
-    private readonly validation: Validator,
-    private readonly security: Security
+    private readonly presenter: Presenter<UpdateUserResponse>,
+    private readonly validation: Validator
   ) {}
 
-  async execute(data: CreateUserRequest): Promise<void> {
+  async execute (data: UpdateUserRequest): Promise<void> {
     try {
       // Input data validations
       if (!data.name) {
@@ -44,17 +41,7 @@ export class CreateUserInteractor {
         throw new UserEmailInvalidError('invalid e-mail')
       }
 
-      if (await this.userRepository.findEmail(data.email)) {
-        throw new UserDuplicatedEmailError('duplicated email')
-      }
-
-      if (await this.userRepository.findCPF(data.cpf)) {
-        throw new UserDuplicatedCPFError('duplicated CPF')
-      }
-
       data.cpf = data.cpf.replace(/[.-]/g, '')
-
-      data.password = this.security.encryptPassword(data.password)
 
       // Data persistence
       const {
@@ -63,9 +50,8 @@ export class CreateUserInteractor {
         cpf,
         birthdate,
         cellphone,
-        email,
-        createdAt
-      } = await this.userRepository.save(data)
+        email
+      } = await this.userRepository.updateUser(data.id, data)
 
       // Presenter success response
       await this.presenter.reply({
@@ -74,8 +60,7 @@ export class CreateUserInteractor {
         cpf,
         birthdate,
         cellphone,
-        email,
-        createdAt
+        email
       })
     } catch (error) {
       // Presenter error response
