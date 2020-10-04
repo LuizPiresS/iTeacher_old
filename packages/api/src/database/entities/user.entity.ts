@@ -23,6 +23,7 @@ export class UserEntity implements User {
   @DeleteDateColumn()
   deletedAt: string
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   @OneToOne(type => UserDetailsEntity, user => UserEntity)
   userDetails: UserDetailsEntity
 }
