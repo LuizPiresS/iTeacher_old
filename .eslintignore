@@ -1,9 +1,0 @@
-# Build
-node_modules
-build
-
-# Jest
-.jest-cache
-
-# Coverage
-coverage
