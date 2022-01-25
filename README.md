@@ -1,4 +1,4 @@
-# **ITeacher**
+# **ITeacher - O Conhecimento inclui**
 
 ---
 
@@ -6,39 +6,44 @@
 
 [![alt text](./assets/logogg.png 'Link para o site')](https://www.iteacher.app)
 
-Plataforma multilateral que conecta alunos e professores.
+Caso de estudo - Plataforma multilateral que conecta alunos e professores.
 
-ITeacher tem como foco o mercado local, buscando assim conectar professores autônomos que desejam ministrar aulas particulares das mais diversas disciplinas.
+* Nossos Objetivos:
+
+  * Primeiro objetivo
+
+    Desenvolver uma plataforma multilateral que conecta alunos e professores.
+
+  * Segundo objetivo
+
+    Desenvolver um curso **gratuito** entender as funcionalidades assim como desenvolver novos recursos para a plataforma
+
+* Nossa missão
+
+      Fomentar o empreendedorismo, em áreas de risco social (com a plataforma) e compartilhar conhecimento e tecnologia (curso) para pessoas em risco social que queiram empreender com tecnologia
 
 ---
 
 > ## Instalação
 
-- clonar o o repositório
-  - git clone git@github.com:LuizPiresS/ITeacher.git
-  - yarn install
+* clonar o o repositório
+  * git clone git@github.com:LuizPiresS/ITeacher.git
+  * yarn install
 
 > ### Modelo de negócios
 
-- [Modelo de negócios proposto](https://miro.com/app/board/o9J_kqWCpbw=/)
+* [Modelo de negócios proposto](https://miro.com/app/board/o9J_kqWCpbw=/)
 
 > ### Design Patterns aplicados
 >
 > ### Arquiteturas/designs utilizados
 
-- TDD
-- Clean Architecture
-- GitFlow
-- Monorepo
+* Microsserviços
 
 > ### Bibliotecas e ferramentas utilizadas
 
-- Express
-- Jest
-- Eslint
-- Husky
-- LintStaged
-- Github Actions
-- Docker Docker-compose & devcontainers vscode
-
-> ### Features
+* NestJS
+* Husky
+* Lint-staged
+* Github Actions
+* Docker ### Features
