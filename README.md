@@ -2,11 +2,11 @@
 
 ---
 
-## [![codecov](https://codecov.io/gh/LuizPiresS/ITeacher/branch/development/graph/badge.svg)](https://codecov.io/gh/LuizPiresS/ITeacher)
-
 [![alt text](./assets/logogg.png 'Link para o site')](https://www.iteacher.app)
 
-Caso de estudo - Plataforma multilateral que conecta alunos e professores.
+[![wakatime](https://wakatime.com/badge/user/60189f1f-b917-40d9-bb35-216f3e824223/project/53b2bcbb-6fe7-4e0c-bb2c-5343e53d30fb.svg)](https://wakatime.com/badge/user/60189f1f-b917-40d9-bb35-216f3e824223/project/53b2bcbb-6fe7-4e0c-bb2c-5343e53d30fb)
+
+>Caso de estudo - Plataforma multilateral que conecta alunos e professores.
 
 * Nossos Objetivos:
 
@@ -46,4 +46,6 @@ Caso de estudo - Plataforma multilateral que conecta alunos e professores.
 * Husky
 * Lint-staged
 * Github Actions
-* Docker ### Features
+* Docker
+
+>### Features
