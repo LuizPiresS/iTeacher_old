@@ -1,0 +1,44 @@
+{
+  "name": "iTeacher",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "application",
+  "workspaceFolder": "/iteacher",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/zsh"
+  },
+  "extensions": [
+    "2gua.rainbow-brackets",
+    "roerohan.mongo-snippets-for-node-js",
+    "ckolkman.vscode-postgres",
+    "stringham.move-ts",
+    "mongodb.mongodb-vscode",
+    "dbaeumer.vscode-eslint",
+    "prettier.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+    "usernamehw.errorlens",
+    "editorconfig.editorconfig",
+    "visualstudioexptteam.vscodeintellicode",
+    "fatih.baba-flow",
+    "kisstkondoros.vscode-codemetrics",
+    "ryanluker.vscode-coverage-gutters",
+    "editorconfig.editorconfig",
+    "irongeek.vscode-env",
+    "github.vscode-pull-request-github",
+    "codezombiech.gitignore",
+    "eamodio.gitlens",
+    "orta.vscode-jest",
+    "kavod-io.vscode-jest-test-adapter",
+    "prashaantt.node-tdd",
+    "christian-kohler.path-intellisense",
+    "meganrogge.template-string-converter",
+    "ms-vscode.test-adapter-converter",
+    "hbenl.vscode-test-explorer",
+    "wakatime.vscode-wakatime",
+    "redhat.vscode-yaml",
+    "marp-team.marp-vscode",
+    "kisstkondoros.typelens"
+
+  ],
+  "remoteUser": "node"
+}

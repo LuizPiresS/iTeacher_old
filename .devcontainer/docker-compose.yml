@@ -1,0 +1,24 @@
+version: '3'
+services:
+  application:
+    user: node
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VARIANT: 16
+    command: sleep infinity
+    env_file: .env.development
+    ports:
+      - 3000:3000
+    volumes:
+      - ..:/iteacher
+    links:
+      - database
+
+  database:
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    env_file: .env.development
