@@ -20,11 +20,11 @@ Caso de estudo - Plataforma multilateral que conecta alunos e professores.
 
 * Nossa missão
 
-      Fomentar o empreendedorismo, em áreas de risco social (com a plataforma) e compartilhar conhecimento e tecnologia (curso) para pessoas em risco social que queiram empreender com tecnologia
+  * Fomentar o empreendedorismo, em áreas de risco social (com a plataforma) e compartilhar conhecimento e tecnologia (curso) para pessoas em risco social que queiram empreender com tecnologia
 
 ---
 
-> ## Instalação
+> ### Instalação
 
 * clonar o o repositório
   * git clone git@github.com:LuizPiresS/ITeacher.git
@@ -35,7 +35,7 @@ Caso de estudo - Plataforma multilateral que conecta alunos e professores.
 * [Modelo de negócios proposto](https://miro.com/app/board/o9J_kqWCpbw=/)
 
 > ### Design Patterns aplicados
->
+
 > ### Arquiteturas/designs utilizados
 
 * Microsserviços
