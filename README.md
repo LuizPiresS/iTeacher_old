@@ -1,8 +1,7 @@
-# **ITeacher - O Conhecimento inclui**
+# **iTeacher - O Conhecimento inclui**
 
 ---
 
-[![alt text](./assets/logogg.png 'Link para o site')](https://www.iteacher.app)
 
 [![wakatime](https://wakatime.com/badge/user/60189f1f-b917-40d9-bb35-216f3e824223/project/53b2bcbb-6fe7-4e0c-bb2c-5343e53d30fb.svg)](https://wakatime.com/badge/user/60189f1f-b917-40d9-bb35-216f3e824223/project/53b2bcbb-6fe7-4e0c-bb2c-5343e53d30fb)
 
@@ -23,7 +22,6 @@
   * Fomentar o empreendedorismo, em áreas de risco social (com a plataforma) e compartilhar conhecimento e tecnologia (curso) para pessoas em risco social que queiram empreender com tecnologia
 
 ---
-
 > ### Instalação
 
 * clonar o o repositório
@@ -34,18 +32,18 @@
 
 * [Modelo de negócios proposto](https://miro.com/app/board/o9J_kqWCpbw=/)
 
-> ### Design Patterns aplicados
-
 > ### Arquiteturas/designs utilizados
 
 * Microsserviços
 
 > ### Bibliotecas e ferramentas utilizadas
 
-* NestJS
-* Husky
-* Lint-staged
-* Github Actions
-* Docker
+* [devcontainer](https://code.visualstudio.com/docs/remote/containers)
+* [Husky](https://github.com/typicode/husky)
+* [Lint-staged](https://github.com/okonet/lint-staged)
+* [Github Actions](https://github.com/features/actions)
+* [Docker](https://www.docker.com/)
+* [NestJS](https://nestjs.com/)
+* [Jest](https://jestjs.io/)
 
 >### Features
