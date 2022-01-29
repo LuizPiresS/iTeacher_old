@@ -37,8 +37,8 @@
     "wakatime.vscode-wakatime",
     "redhat.vscode-yaml",
     "marp-team.marp-vscode",
-    "kisstkondoros.typelens"
-
+    "kisstkondoros.typelens",
+    "github.copilot"
   ],
   "remoteUser": "node"
 }
