@@ -1,0 +1,3 @@
+[submodule "iteacher-api-gateway"]
+	path = iteacher-api-gateway
+	url = git@github.com:LuizPiresS/iteacher-api-gateway.git
